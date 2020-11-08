@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str = "xinngtiannlunn";
+        var str2 = str.search(/lun/i);// 检索
+        console.log(str2,str);
+        var str3 = str.replace(/lun/i,"yun");// 替换
+        console.log(str3,str);
+        // /i 执行对大小写不敏感的匹配
+        // /g 执行全局匹配
+        // /m 执行多行匹配 什么是多行匹配呢？就是匹配换行符两端的潜在匹配。影响正则中的^$符号
+        var num = /[a]/.exec(str);
+        console.log(num);
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#wrap {
+			width: 600px;
+			margin: 100px auto;
+		}
+		#wrap ul li{
+			height: 35px;
+			line-height: 35px;
+			border-bottom: 1px solid #fff;
+		}
+		#wrap i {
+			display: inline-block;
+			vertical-align: middle;
+			width: 20px;
+			height: 20px;
+			margin: 0 20px 0 10px;
+			background: url(img/unchecked.jpg) no-repeat 0 0/cover;
+		}
+		#wrap i.checked{
+			background-image: url(img/checked.jpg)
+		}
+		#wrap .ctrl {
+			overflow: hidden;
+			background: #000;
+			color: #fff;
+		}
+		#wrap .ctrl div {
+			float: left;
+			height: 40px;
+			line-height: 40px;
+		}
+		#wrap .ctrl div.select_all {
+			margin-right: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="ul">
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+		</ul>
+		<div class="ctrl">
+			<div class="select_all">
+				<i id="select_all_icon"></i>
+				<span>全选</span>
+			</div>
+			<div id="select_reverse">反选</div>
+		</div>
+	</div>
+	<script>
+		// 隔行变色
+		var liList = document.getElementsByTagName("li");
+		for(var i = 0; i < liList.length; i++) {
+			if(i % 3 === 0) {// 0 3 6 9
+				liList[i].style.background = '#969696';
+			}else if(i % 3 === 1) {
+				liList[i].style.background = '#b0b0b0';
+			}else {
+				liList[i].style.background = '#c8c8c8';
+			}
+		}
+
+
+		// 1.获取元素
+		var icons = document.getElementById("ul").getElementsByTagName("i");
+		var iconSelectAll = document.getElementById("select_all_icon");
+		var selectReverse = document.getElementById("select_reverse");
+
+
+
+		// 2. 单击每个i标签实现自身在选中与不选中之间切换，默认不选中
+
+
+
+		// 2.2 遍历icons，给每个i添加单击事件
+		for(var i = 0; i < icons.length; i++) {
+			icons[i].onclick = function() {
+				/*
+					原理：当前i如果有checked，就表示选中，否则就不选中
+				*/
+
+				// if(this.className === 'checked') {
+				// 	this.className = '';
+				// }else {
+				// 	this.className = 'checked';
+				// }
+
+
+				// 2.3 单击每个i标签实现自身在选中与不选中之间切换，默认不选中
+				this.className = this.className === 'checked' ? '' : 'checked';
+
+				// 2.4  当上面所有的i都被选中了之后，下面的i需要选中，否则就不选
+
+
+				// 检测当上面所有的i是否都被选中了
+
+				/*
+					我们知道，i是否被选中了，是通过一个叫checked这个类控制的，
+					问题变成了如何去检测所有上面所有的i是否都有checked这个类
+				*/
+
+				// 2.5 遍历icons
+				var flag = true;
+				for(i = 0; i < icons.length; i++) {
+					if(icons[i].className !== 'checked') {
+						flag = false;
+						break;
+					}
+				}
+				if(flag) {
+					iconSelectAll.className = 'checked';
+				}else {
+					iconSelectAll.className = '';
+				}
+
+
+			};
+		}
+
+
+		// 3. 给全选按钮添加单击事件
+		iconSelectAll.onclick = function() {
+			// 做两件事
+			/*
+				1. 自身的选中
+				2. 上面所有的i都被选中
+			*/
+			// 3.1 自身的选中
+			this.className = 'checked';
+
+			// 3.2 上面所有的i都被选中
+			for(i = 0; i < icons.length; i++) {
+				icons[i].className = 'checked';
+			}
+
+		};
+
+
+		// 4.反选
+		/*
+			做的事：选中的不选，不选的选中
+		*/
+
+		selectReverse.onclick = function() {
+			// 做的事：选中的不选，不选的选中
+			/*
+				原理：
+					遍历icons，判断当前的i标签是否有checked的这个class，
+					如果有去掉，没有就添加
+			*/
+			for(i = 0; i < icons.length; i++) {
+				// if(icons[i].className === "checked") {
+				// 	icons[i].className = '';
+				// }else {
+				// 	icons[i].className = "checked";
+				// }
+				icons[i].className = icons[i].className === "checked" ? '' : 'checked';
+
+			}
+		};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

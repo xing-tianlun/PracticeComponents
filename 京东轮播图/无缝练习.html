@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+ 
+    ul, li, ol {
+        list-style: none;
+    }
+ 
+    .slider {
+        width: 590px;
+        height: 470px;
+        border: 1px solid #eee;
+        margin: 33px auto;
+        padding: 5px;
+        position: relative;
+    }
+ 
+    .inner {
+        width: 100%;
+        height: 100%;
+        background: pink;
+        position: relative;
+        overflow: hidden;
+    }
+ 
+    .inner img {
+        display: block;
+    }
+ 
+    .inner ul {
+        width: 800%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+ 
+    .inner li {
+        float: left;
+    }
+ 
+    .slider ol {
+        position: absolute;
+        left: 50%;
+        margin-left: -80px;
+        bottom: 10px;
+    }
+ 
+    .slider ol li {
+        float: left;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+        margin-right: 10px;
+        text-align: center;
+        line-height: 18px;
+    }
+    .slider ol li.current {
+        background: coral;
+        cursor: pointer;
+    }
+    .slider .inner .left {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(125,125,125,.8);
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+    }
+    .slider .inner .right {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(125,125,125,.8);
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+	<div class="slider" id="slider">
+	    <div class="inner">
+	        <ul>
+	            <li><a href="#"><img src="img/1.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="img/2.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="img/3.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="img/4.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="img/5.jpg" alt=""></a></li>
+	            <li><a href="#"><img src="img/6.jpg" alt=""></a></li>
+	        </ul>
+            <a href="javascript:;" class="left">&lt;</a>
+            <a href="javascript:;" class="right">&gt;</a>
+	    </div>
+	</div>
+	<script>
+        var slider = document.getElementById('slider'),
+            oleft = document.querySelector('.left'),
+            oright = document.querySelector('.right'),
+            ul = slider.children[0].children[0],
+            ullist = ul.children;
+        ul.appendChild(ullist[0].cloneNode(true));
+        console.log(ul,oleft,oright);
+        var ol = document.createElement('ol');
+        slider.appendChild(ol);
+        for(var i = 0;i < ullist.length - 1;i++) {
+            var li = document.createElement('li');
+            // li.innerText = i + 1;
+            ol.appendChild(li);
+        }
+        ol.children[0].className = 'current';
+
+        var ollist = ol.children;
+        for(var i = 0;i < ollist.length;i++) {
+            ollist[i].index = i;
+            ollist[i].onmouseenter = function() {
+                for(var j = 0;j < ollist.length;j++) {
+                    ollist[j].className = '';
+                }
+                this.className = 'current';
+                animent(ul,-this.index * ullist[0].offsetWidth);
+                key = point = this.index;
+            }
+        }
+
+        // 缓动动画函数
+        var leader= 0;//缓动动画变量
+        function animent(obj,target) {
+            clearInterval(obj.timer);// 清除定时器
+            obj.timer = setInterval(function() {
+                leader = leader + (target - leader) / 10;//缓动动画公式
+                obj.style.left = leader + 'px';
+            },10)
+        }
+
+        // 轮播图定时器
+        var timer = null;
+        timer = setInterval(autoplay,3000);
+        var key = 0,point = 0;
+        function autoplay() {
+            key++;
+            if(key > ullist.length - 1) {
+                leader = 0;
+                key = 1;
+            }
+            animent(ul,-key * ullist[0].offsetWidth);
+
+            point++;
+            if(point > ollist.length - 1) {
+                point = 0;
+            }
+            for(var i = 0;i < ollist.length;i++) {
+                ollist[i].className = '';
+            }
+            ollist[point].className = 'current';
+        }
+
+        // 左按钮
+        oleft.onclick = function() {
+            autoplay();
+        }
+        // 右按钮
+        oright.onclick = function() {
+            key--;
+            if(key < 0) {
+                leader = -(ullist.length - 1) * ullist[0].offsetWidth;
+                key = ullist.length - 2;
+            }
+            animent(ul,-key * ullist[0].offsetWidth);
+
+            point--;
+            if(point < 0) {
+                point = ullist.length - 2;
+            }
+            for(var i = 0;i < ollist.length;i++) {
+                ollist[i].className = '';
+            }
+            ollist[point].className = 'current';
+        }
+
+        // 鼠标移入关闭轮播定时器
+        slider.onmouseenter = function() {
+            clearInterval(timer);
+        }
+        // 鼠标移入开启轮播定时器
+        slider.onmouseleave = function() {
+            timer = setInterval(autoplay,3000);
+        }
+    </script>
+</body>
+</html>

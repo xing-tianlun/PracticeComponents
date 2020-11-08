@@ -1,0 +1,139 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#main {
+			width:210px;
+			padding:15px;
+			background: #d0d0d0;
+			margin:100px auto;
+			
+		}
+		#main #mon {
+			overflow: hidden;
+		}
+		#main #mon div {
+			width:56px;
+			height:54px;
+			border:1px solid #000;
+			text-align:center;
+			margin:6px;
+			background: #4b4b4b;
+			float:left;
+		}
+		#main #mon div p {
+			font-size:15px;
+			font-weight: bold;
+			color:#fff;
+			line-height: 25px
+		}
+		#main #mon div.active {
+			background: #dfdfdf;
+		}
+		#main #mon div.active p {
+			color:#ff53a7;
+		}
+		#main #activity {
+			width:178px;
+			height:73px;
+			border:1px solid #fff;
+			margin:6px;
+			padding:10px;
+			background: #d5d5d5;
+		}
+		#main #activity #p3 {
+			font-size:15px;
+			line-height: 30px;
+			font-weight:bold;
+		}
+		#main #activity #p4 {
+			font-size:12px;
+			line-height: 12px
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="mon">
+			<div class="active">
+				<p class="p1">1</p>
+				<p class="p2">JAN</p>
+			</div>
+			<div>
+				<p class="p1">2</p>
+				<p class="p2">FER</p>
+			</div>
+			<div>
+				<p class="p1">3</p>
+				<p class="p2">MAR</p>
+			</div>
+			<div>
+				<p class="p1">4</p>
+				<p class="p2">APR</p>
+			</div>
+			<div>
+				<p class="p1">5</p>
+				<p class="p2">MAY</p>
+			</div>
+			<div>
+				<p class="p1">6</p>
+				<p class="p2">JUN</p>
+			</div>
+			<div>
+				<p class="p1">7</p>
+				<p class="p2">JUL</p>
+			</div>
+			<div>
+				<p class="p1">8</p>
+				<p class="p2">AUG</p>
+			</div>
+			<div>
+				<p class="p1">9</p>
+				<p class="p2">SEP</p>
+			</div>
+			<div>
+				<p class="p1">10</p>
+				<p class="p2">OCT</p>
+			</div>
+			<div>
+				<p class="p1">11</p>
+				<p class="p2">NOV</p>
+			</div>
+			<div>
+				<p class="p1">12</p>
+				<p class="p2">DEC</p>
+			</div>
+		</div>
+		<div id="activity">
+			<p id="p3">1月活动</p>
+			<p id="p4">快过年了，大家可以商量着去哪玩吧</p>
+		</div>
+	</div>
+	<script>
+		var months = document.getElementById('mon').getElementsByTagName('div'),
+			p3 = document.getElementById('p3'),
+			p4 = document.getElementById('p4'),
+			activity = ["快过年了，大家可以商量着去哪玩吧","精造JavaScript:开发课程-结调标准有十条标准可让大家修练成JS高手......","HTML5开发课程，让你熟练掌握移动应用开发技术","精通各种DOM类应用，熟练掌握面向对象编程思想(OOP)、熟悉JS面向对像开发方式","熟练掌握AJAX技术及相关应用(例如:新浪微博级应用)","可以独立写出类似Ouery的小型库(支持各类选择符、事件类、DOM、自定义动而animate、AJAX","精通JS运动特效技术，能完整实现各类网站所有动画特效段","掌握JS调试及优化技术、能兼容所有浏览器","精通JS事件对象及事件的工作机制，井能完成各类跨平台应用模块的开发","能独立开发表现和性能都很优秀的RIA应用","了解后台编程的相关知识，能够和后台工程师配合完成大型交互应用","熟悉正则表达式的编写，应用及高级表单验证技术"]
+		for(var i = 0;i < months.length;i++) {
+			months[i].index = i;
+			months[i].onmouseenter = function() {
+				for(var j = 0;j < months.length;j++) {
+					months[j].className = "";
+				}
+				this.className = "active";
+				p3.innerText = (this.index + 1) + "月活动";
+				p4.innerText = activity[this.index];
+			}
+			months[i].onmouseleave = function() {
+				this.className = "active";	
+			}	
+		}
+	</script>
+</body>
+</html>

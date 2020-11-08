@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#mian {
+			width:500px;
+			margin:20px auto;
+		}
+		#mian ul li {
+			width:100%;
+			height:30px;
+			line-height: 30px
+		}
+		#mian ul li img {
+			margin-left:10px;
+			margin-right:10px;
+
+		}
+		#mian #choice {
+			overflow: hidden;
+		}
+
+	</style>
+</head>
+<body> 
+	<div id="mian">
+		<ul id="ul1">
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>空空如也</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>北京北京</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>爱拼才会赢</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>私奔</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>刚好遇见你</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>爱要有你才完美</span></li>
+			<li><img src="img/1.jpg" alt="" class="img1" /> <span>我是认真的</span></li>
+		</ul>
+		<ul id="choice">
+			<li><img src="img/1.jpg" alt="" class="img" id="all" /> <span>全选</span> <span id="invert">反选</span></li>
+		</ul>
+	</div>
+	<script>
+		var liList = document.getElementsByTagName('li');
+		var all = document.getElementById("all");
+		var invert = document.getElementById("invert");
+		for(var i = 0;i < liList.length;i++) {
+			if(i % 1 === 0 && i % 2 !== 0 && i % 3 !== 0) {
+				liList[i].style.background = "#b0b0b0";
+			}else if(i % 2 === 0 && i % 3 !== 0) {
+				liList[i].style.background = "#c8c8c8";
+			}else {
+				liList[i].style.background = "#969696";	
+			}
+		}
+		var oImg = document.getElementsByClassName("img1");
+		var src;
+		for(var i = 0;i < oImg.length;i++) {
+			oImg[i].onclick = function() { 
+				if(this.src === src) {
+					console.log(this.src);
+					this.src = "img/1.jpg";
+				}else {
+					this.src = "img/2.jpg";
+					console.log(this.src);
+					src = this.src;
+				}
+				
+			}
+		}
+		all.onclick = function() {
+			if(this.src === src) {
+				this.src = "img/1.jpg";
+				for(var i = 0;i < oImg.length;i++) {
+					oImg[i].src = "img/1.jpg";
+				}
+			}else {
+				this.src = "img/2.jpg";
+				src = this.src;
+				for(var i = 0;i < oImg.length;i++) {
+					oImg[i].src = "img/2.jpg";
+				}
+			}
+		}
+		invert.onclick = function() {
+			console.log(1);
+			for(var i = 0;i < oImg.length;i++) {
+			 	if(oImg[i].src === "file:///C:/Users/%E8%A1%8C%E5%A4%A9%E4%BC%A6/Desktop/%E7%BB%83%E4%B9%A0/%E5%85%A8%E9%80%89%E5%8F%8D%E9%80%89/img/2.jpg") {
+			 		oImg[i].src = "img/1.jpg";
+			 	}else {
+			 		oImg[i].src = "img/2.jpg";
+			 	}
+			 }
+		}
+	</script>
+</body>
+</html>

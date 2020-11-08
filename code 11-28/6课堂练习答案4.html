@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div id="box">
+		<select id="select">
+			<option>请选择颜色:</option>
+			<option value="red">红色</option>
+			<option value="green">绿色</option>
+			<option value="yellow">黄色</option>
+			<option value="blue">蓝色</option>
+		</select>
+		<p id="text">2019,达到人生巅峰,迎娶白富美</p>
+	</div>	
+	<script>
+		var oSelect = document.getElementById("select");
+		var oText = document.getElementById("text");
+
+		// onchange事件 当select值发生变化，就会触发改事件
+		// 把当前选择的颜色赋值给p标签的字体颜色样式
+		oSelect.onchange = function() {
+			console.log(this.value);
+			oText.style.color = this.value;
+		};
+
+
+
+	</script>
+</html>

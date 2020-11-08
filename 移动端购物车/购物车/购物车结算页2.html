@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		#car {
+			width: 566px;
+			height: 1000px;
+			float: left;
+		}
+		#car h3 {
+			height: 100px;
+			background: #000;
+			color: #fff;
+			font-size: 40px;
+			font-weight: 500;
+			text-align: center;
+			line-height: 100px;
+		}
+		#car #car_list {
+			width: 100%;
+			padding: 65px 40px;
+		}
+		#car #car_list dl {
+			width: 450px;
+			height: 135px;
+			overflow: hidden;
+			margin-bottom: 5px;
+		}
+		#car #car_list dl dt {
+			width: 135px;
+			height: 135px;
+			margin-right: 10px;
+			float: left;
+		}
+		#car #car_list dl dt img {
+			width: 135px;
+			height: 135px;
+		}
+		#car #car_list dl dd {
+			width: 265px;
+			height: 135px;
+			float: left;
+		}
+		#car #car_list dl dd .p1{
+			width: 300px;
+			height: 18px;
+			font-size: 18px;
+			line-height: 18px;
+			margin-top: 10px;
+			margin-bottom: 80px;
+		}
+		#car #car_list dl dd .p2 {
+			width: 300px;
+			height: 18px;
+			font-size: 18px;
+			line-height: 18px;
+			font-weight: bold;
+		}
+		#car #car_list dl dd .p2 .sp1 {
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div id='car'>
+		<h3>商品列表</h3>
+		<div id="car_list">
+			<!-- <dl>
+				<dt><img src="img/img1.png" alt=""></dt>
+				<dd>
+					<p class='p1'>宝宝玩具0-3周岁婴幼儿益智早教</p>
+					<p class='p2'>￥50 <span class='sp1'>数量： 0</span></p>
+				</dd>
+			</dl> -->
+		</div>
+	</div>
+	<script>
+		var car_list_pr = document.getElementById('car_list');
+		
+            
+		var str = location.search;
+		var str1 = str.substring(1);
+		var arr = str1.split('&');
+		var obj = {};
+		for(var i=0;i<arr.length;i++){
+			var arr2 = arr[i].split('=')
+			// [username,jack]  
+			obj[arr2[0]] = arr2[1];
+		}
+		// var user = document.getElementById('user');
+		// user.innerText = obj.username;  
+		console.log(obj); 
+		car_list_pr.innerHTML += '<dl><dt><img src=' + obj.src + '></dt><dd><p class="p1">' + decodeURI(obj.mytitle) + '</p><p class="p2">' + decodeURI(obj.price) + '</p></dd></dl>';
+	</script>
+</body>
+</html>

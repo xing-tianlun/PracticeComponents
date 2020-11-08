@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#main {
+			width: 500px;
+			height: 800px;
+			margin: 0 auto;
+			position: relative;
+		}
+		span {
+			display: inline-block;
+			width: 65px;
+		}
+		#span3 {
+			vertical-align: top;
+		}
+		input {
+			width: 200px;
+			height: 30px;
+			border-radius: 3px;
+			outline: none;
+			margin-bottom: 5px;
+			text-indent: 5px
+		}
+		#code {
+			display: inline-block;
+			width: 200px;
+			height: 100px;
+			background: url(yanzheng1.png);
+			position: relative;
+			overflow: hidden;
+		}
+		#code #img {
+			width: 25px;
+			height: 20px;
+			position: absolute;
+			top: 32px;
+			cursor: pointer;
+		}
+		#chunk {
+			width: 200px;
+			height: 20px;
+			border: 1px solid #666;
+			position: absolute;
+			top: 185px;
+			left: 69px;
+			border-radius: 3px;
+		}
+		#chunk #schunk {
+			width: 25px;
+			height: 20px;
+			background: #f60;
+			border-radius: 3px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: pointer;
+		}
+		#chunk #schedule {
+			width: 0;
+			height: 20px;
+			background: rgba(0,255,255,.5);
+			float: left;
+		}
+		#main #chunk #span {
+			display: block;
+			width: 200px;
+			text-align: center;
+			font-size: 14px;
+			line-height: 20px;
+			color: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<form action="#">
+			<span>用户名：</span>
+			<input type="text" placeholder="小墩"><br/>
+			<span>密码：</span>
+			<input type="password" placeholder="输入密码"><br/>
+			<span id='span3'>验证码: </span>
+			<div id="code">
+				<div id='img'><img src="yanzheng2.png" alt="" ></div>
+			</div>
+			<div id="chunk">
+				<div id="schedule"></div>
+				<span id='span'>请 向 右 拖 动</span>
+				<div id="schunk"></div>
+			</div>
+		</form>
+	</div>
+	<script>
+		var code = document.getElementById('code'),
+			img = document.getElementById('img'),
+			chunk = document.getElementById('chunk'),
+			schunk = document.getElementById('schunk'),
+			schedule = document.getElementById('schedule');
+		img.onmousedown = function(e) {
+			var imgleft = e.clientX - this.offsetLeft;
+			code.onmousemove = function(e) {
+				var distance = e.clientX - imgleft;
+				if(distance < 0) {
+					distance = 0;
+				}else if(distance > 175) {
+					distance = 175;
+				}
+				if(distance > 90 && distance < 110) {
+					distance = 100;
+				}
+				schunk.style.left = distance + 'px';
+				img.style.left = distance + 'px';
+				schedule.style.width = distance + 'px';
+				return false;
+			}
+			document.onmouseup = function() {
+				if(schunk.style.left === "100px"){
+					alert("验证成功");
+				}
+				code.onmousemove = null;
+				document.onmouseup = null;
+			}
+			return false;
+		}
+		schunk.onmousedown = function(e) {
+			var schleft = e.clientX - this.offsetLeft;
+			chunk.onmousemove = function(e) {
+				var distance = e.clientX - schleft;
+				if(distance < 0) {
+					distance = 0;
+				}else if(distance > 175) {
+					distance = 175;
+				}
+				if(distance > 90 && distance < 110) {
+					distance = 100;
+				}
+				schunk.style.left = distance + 'px';
+				img.style.left = distance + 'px';
+				schedule.style.width = distance + 'px';
+				return false;
+			}
+			document.onmouseup = function() {
+				if(schunk.style.left === "100px"){
+					alert("验证成功");
+				}
+				chunk.onmousemove = null;
+				document.onmouseup = null;
+			}
+			return false;
+		}
+	</script>
+</body>
+</html>

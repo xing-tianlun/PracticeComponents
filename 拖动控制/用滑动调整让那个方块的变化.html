@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#main {
+			width: 300px;
+			height: 500px;
+			margin: 0 auto;
+		}
+		#box {
+			width: 300px;
+			height: 300px;
+			border: 1px solid #000;
+			margin-bottom: 5px;
+		}
+		#sbox {
+			border: 1px solid #000;
+			margin: auto;
+		}
+		.sp {
+			display: inline-block;
+			width: 50px;
+			float: left;
+		}
+		.box1 {
+			width: 280px;
+			height: 20px;
+			border: 1px solid #000;
+			margin-bottom: 5px;
+			border-radius: 3px;
+			float: left;
+			position: relative;
+		}
+		.box2 {
+			width: 25px;
+			height: 20px;
+			background: #f60;
+			border-radius: 3px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id='main'>	
+		<div id="box">
+			<div id="sbox"></div>
+		</div>
+		<span class="sp">宽度</span>
+		<div id="sizeWight" class='box1'>
+			<div id="sizeW" class='box2'></div>
+		</div>
+		<span class="sp">高度</span>
+		<div id="sizeHeight" class='box1'>
+			<div id="sizeH" class='box2'></div>
+		</div>
+		<span class="sp">R</span>
+		<div id="colorR" class='box1'>
+			<div id="cR" class='box2'></div>
+		</div>
+		<span class="sp">G</span>
+		<div id="colorG" class='box1'>
+			<div id="cG" class='box2'></div>
+		</div>
+		<span class="sp">B</span>
+		<div id="colorB" class='box1'>
+			<div id="cB" class='box2'></div>
+		</div>
+		<span class="sp">A</span>
+		<div id="colorA" class='box1'>
+			<div id="cA" class='box2'></div>
+		</div>
+	</div>
+	<script>
+		var box2 = document.getElementsByClassName('box2'),
+			box1 = document.getElementsByClassName('box1'),
+			sbox = document.getElementById('sbox'),
+			r = 0,
+			g = 0,
+			b = 0,
+			a = 0;
+			for(var i = 0;i < box1.length;i++) {
+				box2[i].index = i;
+				box2[i].parentNode.index = i;
+				box2[i].onmousedown = function(e) {
+					var oleft = e.clientX - this.offsetLeft;
+					box1[this.index].onmousemove = function(e) {
+						var distance = e.clientX - oleft;
+						if(distance <= 0) {
+							distance = 0;
+						}else if(distance >= 255) {
+							distance = 255;
+						}
+						switch(this.index) {
+							case 0:
+								box2[this.index].style.left = distance + 'px';
+								sbox.style.width = distance + 'px';
+							break;
+							case 1:
+								box2[this.index].style.left = distance + 'px';
+								sbox.style.height = distance + 'px';
+							break;
+							case 2:
+								box2[this.index].style.left = distance + 'px';
+								r = 0 || distance;
+							break;
+							case 3:
+								box2[this.index].style.left = distance + 'px';
+								g = 0 || distance;
+							break;
+							case 4:
+								box2[this.index].style.left = distance + 'px';
+								b = 0 || distance;
+							break;
+							case 5:
+								box2[this.index].style.left = distance + 'px';
+								a = 0 || (parseInt(distance / 255 * 10)) / 10;
+								console.log(a);
+							break;
+						}
+						sbox.style.backgroundColor = "rgba(" + r + "," + g + "," + b + "," + a + ")";
+						return false;
+					}
+					document.onmouseup = function() {
+						for(var i = 0;i < box1.length;i++) {
+							box1[i].onmousemove = null;
+						}
+						document.onmouseup = null;
+					}
+				}
+			} 
+	</script>
+</body>
+</html>

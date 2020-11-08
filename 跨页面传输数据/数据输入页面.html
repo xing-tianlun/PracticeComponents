@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form action="跨页面数据获取、分离.html">
+		<p>用户名：<input type="text" name='username'></p>
+		<p>密码：<input type="password" name='psw'></p>
+		<button>提交</button>
+	</form>
+	<!-- <input type="button" id='btn'> -->
+<!-- 	<form action=""> -->
+		<!-- <button id="btn">跳转</button> -->
+	<!-- </form> -->
+	<script>
+		var btn = document.getElementById('btn');
+		btn.onclick = function() {
+			// 方法一
+			// open('跨页面数据获取、分离.html?username=123&psw=1234','_self');
+			// 方法二
+			// location.href = '跨页面数据获取、分离.html?username=123&psw=1234';
+		}
+	</script>
+</body>
+</html>

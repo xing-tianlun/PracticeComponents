@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		a {
+			text-decoration: none;
+		}
+		ul,ol {
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#wrap {
+			width: 1227px;
+			height: 200px;
+			background: #565657;
+			margin: 33px auto;
+			position: relative;
+		}
+		#wrap>a {
+			float: left;
+			margin: 10px 40px 0 10px;
+		}
+		#wrap #tab {
+			float: left;
+			margin-top: 15px;
+		}
+		#wrap #tab li {
+			float: left;
+			font-size: 16px;
+			padding: 12px 14px;
+			cursor: pointer;
+			transition: .1s;
+		}
+		#wrap #tab li.active {
+			background: #fff;
+			border-top-right-radius: 3px;
+			border-top-left-radius: 3px;
+		}
+		#wrap #tab li.active a {
+			font-weight: bold;
+			color: #393737;
+		}
+		#wrap #tab li a {
+			color: #fff;
+		}
+		#wrap #tab .first a {
+			color: #ff5256;
+		}
+		#wrap #con {
+			position: absolute;
+			top: 60px;
+			left: 0;
+		}
+		#wrap #con li {
+			display: none;
+			transition: .1s;
+		}
+		#wrap #con li.active {
+			display: block;
+		}
+		#wrap #search {
+			float: left;
+			margin-top: 18px;
+			margin-left: 50px;
+		}
+		#wrap #search input {
+			width: 170px;
+			height: 36px;
+			background: #3f3e3b;
+			color: #5c5c5b;
+			border: none;
+			border-radius: 3px;
+			text-indent: 5px;
+		}
+		#wrap #search [src="img/glass.png"] {
+			position: absolute;
+			top:30px;
+			left: 966px;
+		}
+		#wrap #search button {
+			width: 120px;
+			height: 36px;
+			background: #4b4b4d;
+			border: 1px solid #fff;
+			color: #fff;
+			vertical-align: top;
+			border-radius: 3px;
+			line-height: 35px
+
+		}
+		#wrap #search button [src="img/account.png"] {
+			margin-right: 5px;
+		}
+		#wrap #search button [src="img/enter.png"] {
+			margin-left: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<a href=""><img src="img/logo.png" alt=""/></a>
+		<ul id="tab">
+			<li class="first"><a href="#">·首页</a></li>
+			<li><a href="#">财富</a></li>
+			<li><a href="#">众筹</a></li>
+			<li><a href="#">保险</a></li>
+			<li><a href="#">白条</a></li>
+			<li><a href="#">股票</a></li>
+			<li><a href="#">东家财富</a></li>
+			<li><a href="#">京东支付</a></li>
+		</ul>
+		<ol id="con">
+			<li><img src="img/img1.png" alt=""></li>
+			<li><img src="img/img2.png" alt=""></li>
+			<li><img src="img/img3.png" alt=""></li>
+			<li><img src="img/img4.png" alt=""></li>
+			<li><img src="img/img5.png" alt=""></li>
+			<li><img src="img/img6.png" alt=""></li>
+		</ol>
+		<div id="search">
+			<input type="text" placeholder="小白基金">
+			<img src="img/glass.png" alt="">
+			<button><img src="img/account.png"> 我的资产 <img src="img/enter.png"></button>
+		</div>
+	</div>
+	<script>
+		var ul = document.getElementById('tab'),
+			ol = document.getElementById('con'),
+			tabs = ul.getElementsByTagName('li'),
+			cons = ol.getElementsByTagName('li');
+		for(var i = 1;i < tabs.length - 1;i++) {
+			tabs[i].index = i;
+			tabs[i].onmouseenter = function() {
+				for(var j = 1;j < tabs.length - 1;j++) {
+					tabs[j].className = "";
+					cons[j - 1].className = "";
+				}
+				this.className = "active";
+				cons[this.index - 1].className = "active";
+			}
+			tabs[i].onmouseleave = function() {
+				for(var j = 1;j < tabs.length - 1;j++) {
+					tabs[j].className = "";
+					cons[j - 1].className = "";
+				}
+			}
+		}
+		for(var k = 0;k < cons.length;k++) {
+			cons[k].index = k;
+			cons[k].onmouseenter = function() {
+				this.className = "active";
+				tabs[this.index + 1].className = "active";
+			}
+			cons[k].onmouseleave = function() {
+				this.className = "";
+				tabs[this.index + 1].className = "";
+			}
+		}
+	</script>
+</body>
+</html>

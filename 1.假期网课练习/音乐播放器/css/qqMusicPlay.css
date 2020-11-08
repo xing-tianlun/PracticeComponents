@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+ul,ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+#main {
+  width: 1125px;
+  height: 2292px;
+  margin: 0 auto;
+  background-size:100% 100%;
+  position: relative;
+}
+#main::before{    
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width: 1125px;
+  height: 2292px;
+  background:url(../img/bg.jpg);
+  background-size:100% 100%;
+  filter:blur(10px);
+  z-index:-1;
+}
+#main .head {
+  height: 107px;
+  overflow: hidden;
+}
+#main .head [src="img/img1.png"] {
+  float: left;
+  margin: 20px 154px 0 60px;
+}
+#main .head .songname {
+  float: left;
+  margin: 0;
+  width: 600px;
+  text-align: center;
+}
+#main .head .songname .name {
+  font-size: 47px;
+  line-height: 71px;
+  line-height: 71px;
+  color: #fff;
+}
+#main .head .songname .singer {
+  font-size: 35px;
+  line-height: 35px;
+  line-height: 35px;
+  color: #e2e0da;
+}
+#main .head [src="img/img2.png"] {
+  float: left;
+  margin: 9px 60px 0 0;
+}
+#main .head [src="img/img3.png"] {
+  float: left;
+  margin: 23px 0 0 0;
+}
+
+#main .con {
+  width: 1125px;
+  height: 1500px;
+  position: relative;
+  overflow: hidden;
+}
+#main .con [src="img/line.png"] {
+  position: absolute;
+  top: 55px;
+  left: 517px;
+  transition: 1s linear;
+  transform-origin: 45px 45px;
+  z-index: 1;
+}
+#main .con [src="img/line.png"].active {
+  transform: rotate(30deg);
+  transform-origin: 45px 45px;
+}
+#main .con .pan {
+  width: 920px;
+  height: 920px;
+  background: rgba(0,0,0,.9);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin: 382px auto 0;
+}
+#main .con .pan.active {
+  animation: rot 30s linear infinite 1s forwards;
+}
+@keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+#main .con .pan [src="img/pan.png"] {
+  margin: 30px;
+}
+
+#main .list1 {
+  width: 1125px;
+  height: 184px;
+  overflow: hidden;
+}
+#main .list1 ul {
+  width: 1125px;
+  height: 184px;
+  overflow: hidden;
+}
+#main .list1 ul li {
+  float: left;
+  width: 70px;
+  text-align: center;
+  padding: 60px 0 0 0;
+  margin: 0 77px;
+}
+
+#main .progressBar {
+  width: 1125px;
+  height: 175px;
+  overflow: hidden;
+}
+#main .progressBar .playtime {
+  float: left;
+  margin: 77px 27px 0 47px;
+  font-size: 20px;
+  line-height: 20px;
+  color: #e2e0da;
+}
+#main .progressBar .line {
+  float: left;
+  width: 895px;
+  height: 6px;
+  margin: 85px 0 0 0;
+  border-radius: 3px;
+  background: rgba(0,0,0,.7);
+  position: relative;
+}
+#main .progressBar .line .lineCon {
+  width: 0px;
+  height: 6px;
+  border-radius: 3px;
+  background: #fff;
+}
+#main .progressBar .line .point {
+  position: relative;
+  top: -16px;
+  left: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+}
+#main .progressBar .alltime {
+  float: right;
+  margin: 77px 47px 0 27px;
+  font-size: 20px;
+  line-height: 20px;
+  color: #e2e0da;
+}
+
+#main .list3 {
+  width: 1125px;
+  height: 285px;
+  overflow: hidden;
+}
+#main .list3 ul {
+  width: 1125px;
+  height: 285px;
+  overflow: hidden;
+}
+#main .list3 ul li {
+  float: left;
+  width: 180px;
+  text-align: center;
+  padding: 60px 0 0 0;
+  margin: 0 22px;
+}
+#main .list3 ul li:nth-child(3) {
+  padding: 0;
+}
+
+
+

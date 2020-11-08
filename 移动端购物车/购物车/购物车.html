@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding:0;
+			margin:0;
+		}
+		h1 {
+			background:#000;
+			color:#fff;
+			line-height:60px;
+			text-align:center;
+			margin:0 auto;
+		}
+		div {
+			width:600px;
+			height:auto;
+			margin:0 auto;
+		}
+		div dl {
+			width:225px;
+			height:auto;
+			float:left;
+			margin-left:10px;
+		}
+		div dl dt {
+			width:225px;
+			height:230px;
+		}
+		div dl dd {
+			width:225px;
+			height:30px;
+			font-size:18px;
+		}
+		div dl .mytitle {
+			font-size:10px;
+			color:#666;
+		} 
+		div dl .pri {
+			font-size:16px;
+			color:red;
+		}
+		div dl .pri span {
+			font-size:12px;
+			color:#999;
+			padding-left:90px;
+		}
+	</style>
+</head>
+<body>
+	<h1>商品列表</h1>
+	<div id='goods_list'>
+		<dl>
+			<dt><img src="img/1.png" class="img"></dt>
+			<dd class="title">宝宝玩具</dd>
+			<dd class="text">暂无商品描述</dd>
+			<dd><b class="pri">￥50</b><span class="news">0人付款</span></dd>
+		</dl>
+		<dl>
+			<dt><img src="img/2.png" class="img"></dt>
+			<dd class="title">宝宝玩具</dd>
+			<dd class="text">暂无商品描述</dd>
+			<dd><b class="pri">￥50</b><span class="news">0人付款</span></dd>
+		</dl>
+		<dl>
+			<dt><img src="img/1.png" class="img"></dt>
+			<dd class="title">宝宝玩具</dd>
+			<dd class="text">暂无商品描述</dd>
+			<dd><b class="pri">￥50</b><span class="news">0人付款</span></dd>
+		</dl>
+		<dl>
+			<dt><img src="img/2.png" class="img"></dt>
+			<dd class="title">宝宝玩具</dd>
+			<dd class="text">暂无商品描述</dd>
+			<dd><b class="pri">￥50</b><span class="news">0人付款</span></dd>
+		</dl>
+	</div>
+	<script>
+		var img = document.querySelectorAll(".img");
+		var title = document.querySelectorAll(".title");
+		var text = document.querySelectorAll(".text");
+		var pri = document.querySelectorAll(".pri");
+		var news = document.querySelectorAll(".news");
+		var dl = document.querySelectorAll('dl');
+		
+		// console.log(img.getAttribute('src'));
+		console.log(dl.length);
+		for(var i = 0; i < dl.length;i++) {
+			dl[i].index = i;
+			dl[i].onclick = function() {
+				location.href = "购物车结算页2.html?" + 'src=' + img[this.index].getAttribute('src') + '&mytitle=' + title[this.index].innerText + '&text=' + text[this.index].innerText + '&price=' + pri[this.index].innerText + '&news=' + news[this.index].innerText;
+			}
+		}
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html {
+			background: #000;
+		}
+		div {
+			width: 30px;
+			height: 30px;
+			color: #fff;
+			line-height: 30px;
+			text-align: center;
+			background: #f00;
+			border-radius: 50%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+	<div>6</div>
+	<div>7</div>
+	<div>8</div>
+	<div>9</div>
+	<script>
+		var div = document.getElementsByTagName('div');
+		document.onmousemove = function(e) {
+			var mouseX = e.clientX;
+			var mouseY = e.clientY;
+			div[0].style.left = mouseX + 'px';
+			div[0].style.top = mouseY + 'px';
+			for(var i = div.length - 1;i > 0;i--) {
+				div[i].style.top = div[i - 1].style.top;
+				div[i].style.left = div[i - 1].style.left;
+				div[i].style.backgroundColor = 'rgb('+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
+			}
+		}
+	</script>
+</body>
+</html> 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			width: 0px;
+			height: 0px;
+			background: #f00;
+		}
+		.hk {
+			width: 300px;
+			height: 30px;
+			background: #000;
+			position: relative;
+		}
+		.hk .hk_btn {
+			width: 30px;
+			height: 30px;
+			background: #06f;
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.hk1 {
+			width: 300px;
+			height: 30px;
+			background: #000;
+			position: relative;
+		}
+		.hk1 .hk_btn1 {
+			width: 30px;
+			height: 30px;
+			background: #06f;
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.hk2 {
+			width: 300px;
+			height: 30px;
+			background: #000;
+			position: relative;
+		}
+		.hk2 .hk_btn2 {
+			width: 30px;
+			height: 30px;
+			background: #06f;
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="hk">
+		<div class="hk_btn"></div>
+	</div>
+	<div class="hk1">
+		<div class="hk_btn1"></div>
+	</div>
+	<div class="hk2">
+		<div class="hk_btn2"></div>
+	</div>
+	<div id="box">
+
+	</div>
+	
+	<script>
+		var box = document.getElementById('box'),
+			hk = document.querySelector('.hk'),
+			hk_btn = document.querySelector('.hk_btn'),
+			hk1 = document.querySelector('.hk1'),
+			hk_btn1 = document.querySelector('.hk_btn1'),
+			hk2 = document.querySelector('.hk2'),
+			hk_btn2 = document.querySelector('.hk_btn2');
+		hkfn(box,'width',hk,hk_btn);
+		hkfn(box,'height',hk1,hk_btn1);
+		hkfn(box,'borderRadius',hk2,hk_btn2);
+		function hkfn(el,attr,hk,hk_btn) {
+			hk_btn.onmousedown = function(e) {
+				var oleft = e.clientX - this.offsetLeft;
+				hk.onmousemove = function(e) {
+					var num = e.clientX - oleft;
+					if(num <= 0) {
+						num = 0;
+					}else if(num >= 270) {
+						num = 270;
+					}
+					hk_btn.style.left = num + 'px';
+					// box.style.width = num + 'px';
+					el.style[attr] = num + 'px';	
+				}
+				document.onmouseup = function() {
+					hk.onmousemove = null;
+					document.onmouseup - null;
+				}
+			}
+		}
+		
+	</script>
+</body>
+</html>

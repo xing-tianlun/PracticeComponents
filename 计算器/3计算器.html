@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		table{
+			width: 400px;
+			margin: 200px auto;
+			border: 1px solid gray;
+		}
+		table td{ border: 1px solid gray; }
+		button[name="btnclick"]{
+			width: 100px;
+			height: 60px;
+			font-size: 25px;
+		}
+		button[name="btnall"]{
+			width: 100%;
+			height: 60px;
+			font-size: 25px;
+		}
+		.txt{
+			width: 100%;
+			height: 75px;
+			font-size: 25px;
+			outline: none;
+			text-align: right;
+			border-style: none;
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td colspan="4">
+				<input type="text" 
+				       class="txt" 
+				       value="0" 
+				       id="ipt" 
+				       readonly></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button class="btn" name="btnall">AC</button></td>
+			<td colspan="2"><button class="btn" name="btnall">del</button></td>
+		</tr>
+		<tr>
+			<td><button class="btn goudan" name="btnclick">7</button></td>
+			<td><button class="btn goudan" name="btnclick">8</button></td>
+			<td><button class="btn goudan" name="btnclick">9</button></td>
+			<td><button class="btn oper" name="btnclick">*</button></td>
+		</tr>
+		<tr>
+			<td><button class="btn goudan" name="btnclick">4</button></td>
+			<td><button class="btn goudan" name="btnclick">5</button></td>
+			<td><button class="btn goudan" name="btnclick">6</button></td>
+			<td><button class="btn oper" name="btnclick">/</button></td>
+		</tr>
+		<tr>
+			<td><button class="btn goudan" name="btnclick">1</button></td>
+			<td><button class="btn goudan" name="btnclick">2</button></td>
+			<td><button class="btn goudan" name="btnclick">3</button></td>
+			<td><button class="btn oper" name="btnclick">-</button></td>
+		</tr>
+		<tr>
+			<td><button class="btn goudan" name="btnclick">0</button></td>
+			<td><button class="btn goudan" name="btnclick">.</button></td>
+			<td><button class="btn oper" name="btnclick">+</button></td>
+			<td><button class="btn" name="btnclick">=</button></td>
+		</tr>
+	</table>
+
+	<script>
+		var nums = document.getElementsByClassName('goudan'),
+			opers = document.getElementsByClassName('oper'),
+			ipt = document.getElementById('ipt');
+		/*
+			1. 第一次 
+
+				选哪个数字显示哪个数字，需要把零替换掉
+				如果选中的是点，
+			2. 第二次 选数字，在原来数字的基础上拼接，
+		*/
+		for(var i = 0; i < nums.length; i++) {
+			nums[i].onclick = function() {	
+				// 小数点 
+				if(ipt.value === '0'){
+					if(this.innerText !== '.') {
+						ipt.value = this.innerText;
+					}else {
+						ipt.value += this.innerText;
+					}
+				}else if(ipt.value.indexOf('.') === -1){
+					// 如果没有小数点 可以添加小数点 否则不可以 
+						ipt.value += this.innerText;
+				}else {
+					// 需要检测你点的是不是点 ，是点，啥事不做
+					if(this.innerText === '.') {
+						return;
+					}
+					// 不是点，拼接上  
+					ipt.value += this.innerText;
+				}
+			}
+		}		
+
+
+
+
+		for(i = 0; i < opers.length; i++) {
+			opers[i].onclick = function() {
+				switch(this.innerText) {
+					case '+':
+							
+						break;
+					case '-':
+							
+						break;
+					case '*':
+							
+						break;
+					case '/':
+							
+						break;
+
+				}
+			};
+		}
+
+
+
+
+	</script>
+</body>
+</html>

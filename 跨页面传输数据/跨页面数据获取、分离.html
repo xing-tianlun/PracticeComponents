@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>接收数据</title>
+	<style>
+      h1{
+      	 height:60px;
+      	 line-height:60px;
+      	 background: #000;
+      	 text-align:center;
+      	 color:#fff;
+      }
+      span{
+      	color:red;
+      	font-size:26px;
+      }
+	</style>
+</head>
+<body>
+      <h1>欢迎<span id="user"></span>用户回来！</h1>
+  <script>
+        //获取的是完整的网址信息
+        // alert(location.href);
+        //获取?后面的，并且包含？的所有数据【表单提交的数据】?username=jack&password=123456
+        //alert(location.search);
+
+        // var str = location.search;
+        // var str1 = str.substring(1);
+        // var arr = str1.split('&');
+        // var obj = {};
+        // for(var i=0;i<arr.length;i++){
+        //     var arr2 = arr[i].split('=')
+        //     // [username,jack]  
+        //     obj[arr2[0]] = arr2[1];
+        // }
+        // var user = document.getElementById('user');
+        // user.innerText = obj.username;  
+        // console.log(obj); 
+         function getQueryString(name) {
+                var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) {
+                    // return unescape(r[2]);
+                    return decodeURI(r[2]); //解决中文乱码问题
+                }
+            }
+            //调用参数
+            var Name=getQueryString("username");
+            var ID=getQueryString("psw");
+            console.log(Name);
+            console.log(ID);
+            user.innerText = Name;  
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#main {
+			width: 600px;
+			height: 360px;
+			/*margin: 33px auto;*/
+		}
+		#top {
+			width: 600px;
+			height: 300px;
+			background: #000;
+			border-radius: 5px;
+			overflow: hidden;
+			position: relative;
+		}
+		#ma {
+			width: 100px;
+			height: 100px;
+			margin: 33px auto;
+			position: relative;
+			/*border: 1px solid black;*/
+			transition: .1s;
+		}
+		#ma div {
+			width: 100px;
+			height: 50px;
+			background: #000;
+			border-top-left-radius: 50px;
+			border-top-right-radius: 50px;
+		}
+		#ma #box1 {
+			position: absolute;
+			top: 50px;
+			left: 0px;
+		}
+		#ma #box2 {
+			position: absolute;
+			top: 25px;
+			left: -25px;
+		}
+		#ma #box3 {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+		#ma #box4 {
+			position: absolute;
+			top: 25px;
+			left: 25px;
+		}
+		#bottom {
+			width: 600px;
+			height: 60px;
+			background: #333;
+			border-radius: 5px;
+			position: relative;
+		}
+		#bottom .drag {
+			width: 30px;
+			height: 20px;
+			text-align: center;
+			line-height: 20px;
+			color: #fff;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		#bottom .red {
+			background: #f00;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#bottom .green {
+			background: #0f0;
+			position: absolute;
+			left: 0;
+			top: 20px;
+		}
+		#bottom .blue {
+			background: #00f;
+			position: absolute;
+			left: 0;
+			top: 40px;
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="top">
+			<div id="ma">
+				<div id='box1'></div>
+				<div id='box2'></div>
+				<div id='box3'></div>
+				<div id='box4'></div>
+			</div>
+		</div>
+		<div id="bottom">
+			<div class="drag red">0</div>
+			<div class="drag green">0</div>
+			<div class="drag blue">0</div>
+		</div>
+	</div>
+	<script>
+		
+	</script>
+	<script>
+		var ma = document.getElementById('ma'),
+			boxs = ma.getElementsByTagName('div'),
+			box1 = document.getElementById('box1'),
+			box2 = document.getElementById('box2'),
+			box3 = document.getElementById('box3'),
+			box4 = document.getElementById('box4'),
+			num = 0;
+		box1.style.transform = 'rotate(90deg)';
+		box2.style.transform = "rotate(180deg)";
+		box3.style.transform = "rotate(270deg)";
+		box4.style.transform = "rotate(360deg)";
+		setInterval(function() {
+			num++;
+			ma.style.transform = 'rotate(' + num + 'deg)';
+		},1);
+		var otop = document.getElementById('top'),
+			bottom = document.querySelector('#bottom'),
+			drag = document.querySelectorAll('.drag'),
+			oLeftArr = [],
+			leftArr = [],
+			rgbarr = [];
+		for(var i = 0;i < drag.length;i++) {
+			rgbarr.push(0);
+			drag[i].index = i;
+			drag[i].onmousedown = function(e) {
+				oLeftArr[this.index] = e.clientX - this.offsetLeft;
+				// console.log(oLeftArr);
+				document.onmousemove = function(e) {
+					// 获取各自滑块移动的距离
+					var left = e.clientX - oLeftArr[this.index];
+					var maxleft = bottom.offsetWidth - this.offsetWidth;
+					if(left <= 0) {
+						left = 0;
+					}else if(left >= maxleft) {
+						left = maxleft;
+					}
+					leftArr[this.index] = left;
+					drag[this.index].style.left = leftArr[this.index] + 'px';
+					drag[this.index].innerText = parseInt(255 / maxleft * leftArr[this.index]);
+					rgbarr[this.index] = parseInt(255 / maxleft * leftArr[this.index]);
+					// otop.style.background = "rgb(" + rgbarr[0] + ","+ rgbarr[1] + "," + rgbarr[2] + ")";
+					for(var j = 0;j < boxs.length;j++) {
+						boxs[j].style.background = "rgb(" + rgbarr[0] + ","+ rgbarr[1] + "," + rgbarr[2] + ")";
+					}
+					return false;
+				}.bind(this);
+				document.onmouseup = function() {
+					document.onmousemove = null;
+					document.onmouseup = null;
+				}
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>

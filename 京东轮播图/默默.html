@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		#main {
+			width: 590px;
+			height: 470px;
+			position: relative;
+			margin: 30px auto;
+			/*overflow: hidden;*/
+			border: 1px solid #000;
+		}
+		#main #img li {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			transition: .5s;
+		}
+		#main #img li.active {
+			opacity: 1;
+		}
+		#main #tab {
+			position: absolute;
+			bottom: 30px;
+			left: 30px;
+		}
+		#main #tab li {
+			width: 10px;
+			height: 10px;
+			padding: 3px;
+			background: rgba(255,255,255,.3);
+			float: left;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+		#main #tab li span {
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+		}
+		#main #tab li.active span {
+			background: rgba(255,255,255,.8);
+		}
+		#main #left {
+			display: block;
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			background: rgba(0,0,0,.5);
+			border-top-right-radius: 50%;
+			border-bottom-right-radius: 50%;
+			color: #fff;
+		}
+		#main #right {
+			display: block;
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			top: 50%;
+			right: 0;
+			margin-top: -15px;
+			text-align: center;
+			line-height: 30px;
+			background: rgba(0,0,0,.5);
+			border-top-left-radius: 50%;
+			border-bottom-left-radius: 50%;
+			color: #fff;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id='img'>
+			<li class="active"><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+			<li><img src="img/6.jpg" alt=""></li>
+			<li><img src="img/7.jpg" alt=""></li>
+			<li><img src="img/8.jpg" alt=""></li>
+		</ul>
+		<a href="javascript:;" id='left'>&lt;</a>
+		<a href="javascript:;" id='right'>&gt;</a>
+		<ol id='tab'>
+			<li class="active"><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+		</ol>
+	</div>
+	<script>
+		var main = document.getElementById('main'),
+			img_list = document.getElementById('img'),
+			imgs = img_list.getElementsByTagName('li'),
+			tab_list = document.getElementById('tab'),
+			tabs = tab_list.getElementsByTagName('li'),
+			left = document.getElementById('left'),
+			right = document.getElementById('right'),
+			index = 0;
+		for(var i = 0;len = tabs.length,i < len;i++) {
+			tabs[i].index = i;
+			tabs[i].onmouseenter = function() {
+				for(var j = 0;j < len;j++) {
+					tabs[j].className = imgs[j].className = '';
+				}
+				this.className = imgs[this.index].className = 'active';
+				index = this.index;
+			}
+		}
+		function play() {
+			index++;
+			if(index > len - 1) {
+				index = 0;
+			}
+			for(var j = 0;j < len;j++) {
+				tabs[j].className = imgs[j].className = '';
+			}
+			tabs[index].className = imgs[index].className = 'active';
+		}
+		right.onclick = function() {
+			play();
+		}
+		left.onclick = function() {
+			index--;
+			if(index < 0) {
+				index = len - 1;
+			}
+			for(var j = 0;j < len;j++) {
+				tabs[j].className = imgs[j].className = '';
+			}
+			tabs[index].className = imgs[index].className = 'active';
+		}
+		var timer = setInterval(function() {
+			play();
+		},2000);
+		main.onmouseenter = function() {
+			clearInterval(timer);
+		}
+		main.onmouseleave = function() {
+			timer = setInterval(function() {
+				play();
+			},2000);
+		}
+	</script>
+</body>
+</html>

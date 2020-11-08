@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = "1.js"></script>
+	<style>
+		#view {
+			width: 300px;
+			height: 150px;
+			border: 1px solid red;
+			overflow: hidden;
+			position: relative;
+		}
+		#banner {
+			width: 1200px;
+			height: 150px;
+		}
+		#banner div {
+			float: left;
+			width: 300px;
+			height: 150px;
+			font-size: 50px;
+			line-height: 150px;
+			text-align: center;
+			background: cyan;
+			color: white;
+		}
+		#ul {
+			list-style: none;
+			position: absolute;
+			bottom: 5px;
+			left: 30px;
+		}
+		#ul li {
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
+			float: left;
+			margin-right: 10px;
+			background: pink;
+		}
+		#ul li.active{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="view">
+		<div id="banner">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<ul id="ul">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<button id="prev">上一张</button>
+	<button id="next">下一张</button>
+	<script>
+		var List_  = document.getElementById("banner").children,
+			banner = document.getElementById("banner"),
+			prev = document.querySelector("#prev"),
+			view = document.getElementById("view"),
+			next = document.querySelector("#next"),
+			x = 0,v;
+		var lis = document.querySelectorAll("#ul li");
+		var clone = List_[0].cloneNode(true);
+		banner.appendChild(clone);
+		var k = 0;
+
+		// 轮播
+		function Timer() {
+			v = setInterval(function() {
+				x++;
+				if(x > 3) {
+					x = 1;
+					banner.style.marginLeft = 0;
+				}
+				ani(banner,"marginLeft",-x * 300);
+				k = x;
+				if(k == 3) {
+					k = 0;
+				}
+				for(var i = 0;i < lis.length;i++) {
+					lis[i].className = ""
+				}
+				lis[k].className = "active";
+			},2000)
+		}
+		Timer();
+
+		// 右按钮
+		next.onmouseenter = function() {
+			clearInterval(v);
+			next.onclick = function() {
+				x++;
+				if(x > 3) {
+					x = 1;
+					banner.style.marginLeft = 0;
+				}
+				ani(banner,"marginLeft",-x * 300);
+				k = x;
+				if(k == 3) {
+					k = 0;
+				}
+				for(var i = 0;i < lis.length;i++) {
+					lis[i].className = ""
+				}
+				lis[k].className = "active";
+			}
+		}
+		next.onmouseleave = function() {
+			if(v) clearInterval(v);
+			Timer();
+		}	
+
+		// 左按钮
+		prev.onmouseenter = function() {
+			clearInterval(v);
+			prev.onclick = function() {
+				x--;
+				if(x < 0) {
+					x = 2;
+					banner.style.marginLeft = -900 + "px";
+				}
+				ani(banner,"marginLeft",-x * 300);
+				k = x;
+				if(k == 3) {
+					k = 0;
+				}
+				for(var i = 0;i < lis.length;i++) {
+					lis[i].className = ""
+				}
+				lis[k].className = "active";
+			}
+		}
+		prev.onmouseleave = function() {
+			if(v) clearInterval(v);
+			Timer();
+		}		
+
+		// 选项卡
+		for(var j = 0;j < lis.length;j++) {
+			lis[j].world = j;
+			lis[j].onclick = function() {
+				ani(banner,"marginLeft",-this.world * 300);
+				for(var m = 0;m < lis.length;m++) lis[m].className = "";
+				lis[this.world].className = "active";
+				x = this.world;
+			}
+		}
+
+		
+		view.onmouseenter = function() {
+			clearInterval(v);
+		}
+		view.onmouseleave = function() {
+			Timer();
+		}
+	</script>
+</body>
+</html>

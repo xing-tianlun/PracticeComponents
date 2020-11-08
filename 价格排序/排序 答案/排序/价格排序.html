@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+			width:180px;
+			height:180px;
+		}
+		[src="img/10.jpg"] {
+			width:52px;
+			height:52px; 
+		}
+		#main {
+			width:1270px;
+			height:688px;
+			margin:0 auto;
+			background: #dfdfdf;
+			overflow:hidden;
+		}
+		#main #ul1 {
+			width:1000px;
+			height:40px;
+			border:1px solid gray;
+			background:#dadada;
+			margin-top:22px;
+			margin-left:77px;
+		}
+		#main #ul1>li {
+			float:left;
+			width:110px;
+			height:40px;
+			font-size:16px;
+			line-height:40px;
+			text-align:center;
+		}
+		#main #ul1 #pr {
+			position: relative;
+		}
+		#main #ul1 #pr #subul {
+			border:1px solid #000;
+			border-top:none;
+			position:absolute;
+			top:0;
+			left:0;
+			z-index: 1;
+		}
+		#main #ul1 #pr #subul li {
+			display: none;
+			padding: 3px 5px;
+			cursor: pointer;
+		}
+		#main #ul1 #pr:hover #subul li {
+			display: block;
+
+			background: #dfdfdf;
+		}
+		#main #ul1 #pr #subul li:hover {
+			display: block;
+			background: #dfdfdf;
+		}
+		#ul2 {
+			margin-left:77px;
+		}
+		#ul2 li {
+			width:220px;
+			height:250px;
+			border:1px solid #cec6c4;
+			margin:14px;
+			float:left;
+			position: relative;
+		}
+		#ul2 li .img {
+			margin:18px;
+		}
+		#ul2 li [src="img/10.jpg"] {
+			position: absolute;
+			right:0;
+			bottom:0;
+		}
+		#ul2 li .price {
+			position: absolute;
+			right:9px;
+			bottom:20px;
+			color:#f0cd19;
+			font-size:12px;
+			font-weight:bold;
+		}
+		#ul2 li .sp {
+			font-size:12px;
+			line-height:20px;
+			text-indent: 5px;
+			display: inline-block;
+			margin-bottom:10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id="ul1">
+			<li>流行</li>
+			<li>热销</li>
+			<li>上新</li>
+			<li id="pr">价格
+				<ul id="subul">
+					<li type="up">价格从低到高</li>
+					<li type="down">价格从高到低</li>
+					<li type="random">随机排序</li>
+				</ul>
+			</li>
+		</ul>
+		<ul id="ul2">
+			<li>
+				<img src="img/1.jpg" alt="" class="img" /> 
+				<span class="sp">粉色玫瑰浪漫系列</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥500</span>
+			</li>
+			<li>
+				<img src="img/2.jpg" alt="" class="img" /> 
+				<span class="sp">深红色经典玫瑰</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥100</span>
+			</li>
+			<li>
+				<img src="img/3.jpg" alt="" class="img" /> 
+				<span class="sp">清淡优雅百年百合</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥300</span>
+			</li>
+			<li>
+				<img src="img/4.jpg" alt="" class="img" /> 
+				<span class="sp">紫色冷艳系列系列</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥700</span>
+			</li>
+			<li>
+				<img src="img/5.jpg" alt="" class="img" /> 
+				<span class="sp">经典红色我的最爱</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥130</span>
+			</li>
+			<li>
+				<img src="img/6.jpg" alt="" class="img" /> 
+				<span class="sp">甜美七分袖荷叶边条纹</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥215</span>
+			</li>
+			<li>
+				<img src="img/7.jpg" alt="" class="img" /> 
+				<span class="sp">甜美七分袖荷叶边条纹</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥97</span>
+			</li>
+			<li>
+				<img src="img/8.jpg" alt="" class="img" /> 
+				<span class="sp"> 甜美七分袖荷叶边条纹</span>
+				<img src="img/10.jpg" alt="">
+				<span class="price">￥99.5</span>
+			</li>
+		</ul>
+	</div>
+	<script>
+		var sorts = document.getElementById("subul").getElementsByTagName("li");
+		var ul = document.getElementById("ul2");
+		var lis = ul.getElementsByTagName("li");
+		var flowers = [];
+
+		for(var i = 0,len = lis.length; i < len; i++) {
+			var imgUrl = lis[i].getElementsByTagName('img')[0].getAttribute('src');
+			var desc =  lis[i].getElementsByTagName('span')[0].innerText;
+			var price = Number(lis[i].getElementsByTagName('span')[1].innerText.slice(1));
+			flowers.push({
+				imgUrl: imgUrl,
+				desc: desc,
+				price: price
+			})
+		}
+		for(i = 0; i < sorts.length; i++) {
+			sorts[i].onclick = function() {
+				switch(this.getAttribute('type')) {
+					case 'up':
+						// 低  -> 高
+						flowers.sort(function(f1,f2){
+							return f1.price - f2.price;
+						});
+						break;
+					case 'down':
+						// 高  -> 低
+						flowers.sort(function(f1,f2){
+							return f2.price - f1.price;
+						});
+						break;
+					case 'random':
+						// 随机
+						flowers.sort(function(){
+							return Math.random() - 0.5;
+						});
+						break;
+				}
+				var html = '';
+				for(var i = 0; i < len; i++) {
+					html += '<li><img src="'+flowers[i].imgUrl+'" alt="" class="img" /><span class="sp"> '+flowers[i].desc+'</span><img src="img/10.jpg" alt=""><span class="price">￥'+flowers[i].price+'</span></li>';
+				}
+				ul.innerHTML = html;
+			};	
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+		<!-- /*[{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},{
+			imgUrl: 'img/1.jpg',
+			desc: '',
+			price: 
+		},]*/ -->
+
+
+
+
+
+
+
+
+

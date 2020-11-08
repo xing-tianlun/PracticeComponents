@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--设置图片的拖拽事件 不可用-->
+<html lang="en" ondragstart="return false">
+<head>
+    <meta charset="UTF-8">
+    <title>3D效果</title>
+    <style>
+        * {
+            background-color: #000;
+            user-select: none;
+        }
+ 
+        .container {
+            border: 1px solid yellow;
+            perspective: 800px;
+            overflow: hidden;
+        }
+ 
+        .box {
+            position: relative;
+            border: 1px solid #f00;
+            width: 133px;
+            height: 200px;
+            margin: 300px auto;
+            transform-style: preserve-3d;
+            transform:rotateX(-20deg) rotateY(0deg);
+        }
+ 
+        img {
+            width: 133px;
+            height: 200px;
+            position: absolute;
+            /*设置图片倒影效果*/
+            -webkit-box-reflect:below 5px -webkit-gradient(linear,left top, left bottom,from( transparent),color-stop(40%,transparent),to(rgba(250,250,250,0.4)));
+        }
+ 
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <img src="img/12-1.jpg" alt="">
+        <img src="img/12-2.jpg" alt="">
+        <img src="img/12-3.jpg" alt="">
+        <img src="img/12-4.jpg" alt="">
+        <img src="img/12-5.jpg" alt="">
+        <img src="img/12-6.jpg" alt="">
+        <img src="img/12-7.jpg" alt="">
+        <img src="img/12-8.jpg" alt="">
+        <img src="img/12-9.jpg" alt="">
+        <img src="img/12-10.jpg" alt="">
+        <img src="img/12-11.jpg" alt="">
+    </div>
+</div>
+ 
+<script>
+    // a 获取所有 img 元素
+     var mimg = document.querySelectorAll("img");
+     var mlength = mimg.length;
+    // 动态获取 图片的旋转角度
+    var mdeg = 360/mlength;
+ 
+    //获取box 容器
+    var mbox = document.querySelector(".box");
+ 
+ 
+    /*页面加载后执行。。效果*/
+     window.onload= function () {
+           // 1 图片旋转动画
+         for(var i = 0;i<mlength;i++){
+             // console.log(mimg);
+             //每张图片   1 60    2 120  3 180    4 240     60为图片的平分角
+             mimg[i].style.transform = "rotateY("+(mdeg*i)+"deg)  translateZ(350px)";
+         //   添加过渡效果     动画执行多长时间    多久后开始执行动画   此时的效果  从最后一张开始动画
+         //       console.log(mlength-i);
+             mimg[i].style.transition = "1s  "+(mlength-i)*0.1+"s";  //     0.1  动画调节
+             //从第一张开始动画
+             // mimg[i].style.transition = "1s  "+i+"s";
+         }
+ 
+ 
+     //    获取鼠标点的位置  获取 差值    改变 转换的rotate：  x y
+         var newX,newY,lastX,lastY,cvalueX,cvalueY, rotX=-20,rotY=0;
+     //    鼠标滑动后改变效果   (使用鼠标 按下 替换点击事件)
+         document.onmousedown = function (e) {
+         //    鼠标点击
+         //     console.log("点击");
+             lastX = e.clientX;
+             lastY = e.clientY;
+         //    鼠标移动
+             this.onmousemove = function (e) {
+                 // console.log("移动");
+                newX = e.clientX;
+                newY = e.clientY;
+                 console.log(newX +"   "+newY);
+ 
+                 //获取移动的差值
+                 cvalueX = newX-lastX;
+                 cvalueY = newY-lastY;
+ 
+                 //获取旋转的角度
+                 rotX -= cvalueY;  /*因为要向前运动所以是负值*/
+                 rotY += cvalueX;
+ 
+             //   将角度添加上  img容器
+                 mbox.style.transform = "rotateX("+rotX*0.1+"deg) rotateY("+rotY*0.1+"deg)"
+             //    差值太大（转动太快） 调节每次的差值是和上一次差  而不是之前差（初始值的差）
+                 lastX = newX;
+                 lastY = newY;
+ 
+             }
+         //    鼠标抬起
+             this.onmouseup = function () {
+                 // console.log("抬起");
+             //    要停止移动的方法
+                 this.onmousemove = null;
+             }
+ 
+         }
+     }
+ 
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html onselectstart='return false'>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		#cart {
+			width: 1200px;
+			margin: 100px auto;
+		}
+		table {
+			width: 100%;
+		}
+		table tr td {
+			width: 20%;
+		}
+		table thead tr {
+			width: 100%;
+			height: 50px;
+			background: #cd0064;
+			color: #fff;
+		}
+		table tbody tr td {
+			height: 120px;
+			text-align: center;
+		}
+		table tbody tr td img {
+			width: 100px;
+		}
+
+		table tbody tr td i {
+			display: inline-block;
+			width: 25px;
+			height: 25px;
+			background: url(img/unchecked.jpg) no-repeat 0 0/contain;
+		}
+		table tbody tr td i.checked {
+			background-image: url(img/checked.jpg)
+		}
+		table tbody tr td:nth-child(4) {
+			font-size: 0;
+		}
+		table tbody tr td span {
+			display: inline-block;
+			width: 30px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			background: #c8c8c8;
+			font-size: 16px;
+		}
+		table tbody tr td input {
+			width: 50px;
+			height: 28px;
+			font-size: 16px;
+			text-align: center;
+		}
+
+		.total {
+			height: 50px;
+			line-height: 50px;
+			margin-top: 20px;
+			background: #cd0064;
+			color: #fff;
+		}
+		.total .content {
+			float: right;
+		}
+		.total .content div {
+			float: left;
+		}
+
+		.total .content div.price {
+			margin: 0 100px;
+		}
+		.total .content div span{
+			margin: 0 3px;
+			font-weight: bold;
+			color: orange;
+
+		} 
+	</style>
+</head>
+<body>
+	<div id="cart">
+		<table border="1" cellspacing="0">
+			<caption><h2>我的购物车</h2></caption>
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>商品</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>小计</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods1.jpg">
+					</td>
+					<td>
+						8
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="1">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods2.jpg">
+					</td>
+					<td>
+						10
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="1">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods3.jpg">
+					</td>
+					<td>
+						12.5
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="1">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods4.jpg">
+					</td>
+					<td>
+						23
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="1">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+		<div class="total">
+			<div class="content">
+				<div class="num">已选中商品件数: <span id="count">0</span>件</div>
+				<div class="price">总价格: <span id="price">0</span></div>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		var incs = document.getElementsByClassName('increase'),
+			decs = document.getElementsByClassName('decrease'),
+			ipts = document.getElementsByTagName('input'),
+			subs = document.getElementsByClassName('subtotal'),
+			oCount = document.getElementById('count'),
+			oPrice = document.getElementById('price'),
+			// 获取图标i标签
+			icons = document.getElementsByTagName('i'),
+			nums = [1,1,1,1],
+			units = [8,10,12.5,23];
+
+		for(var i = 0; i < incs.length; i++) {
+			incs[i].index = i;
+			decs[i].index = i;
+			
+			incs[i].onclick = function() {
+				nums[this.index]++;
+				pay(this.index);
+			};
+
+			decs[i].onclick = function() {
+				nums[this.index]--;
+				if(nums[this.index] < 1) {
+					nums[this.index] = 1;
+				}
+				pay(this.index);
+			}
+		}
+
+		function pay(index) {
+			ipts[index].value =  nums[index];
+			subs[index].innerText = units[index] * nums[index];
+
+
+			var count = 0,
+				price = 0;
+
+
+			// 只有当前被选中了，才参与总价格、总数量的计算 
+
+			for(i = 0; i < nums.length; i++) {
+				if(icons[i].className) {
+					count += nums[i];
+					price += units[i] * nums[i]
+				}
+				
+			}
+			oCount.innerText = count;
+			oPrice.innerText = price;
+		}
+
+		// 给每个i标签 添加单击事件 切换状态
+		for(i = 0; i < icons.length; i++) {
+			subs[i].innerText = units[i] * nums[i];
+			icons[i].onclick = function() {
+				this.className = this.className === 'checked'? '' : 'checked';
+				var count = 0,
+					price = 0;
+				for(var j = 0; j < icons.length; j++) {
+					if(icons[j].className) {
+						count += nums[j];
+						price += units[j] * nums[j];
+					}
+				}
+				oCount.innerText = count;
+				oPrice.innerText = price;
+			}
+		}
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

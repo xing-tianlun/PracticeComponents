@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+ 
+<body>
+    <div style="height: 100px;"></div>
+    <opup-info img="img/alt1.png" text="提示信息">
+</body>
+<script>
+    class opUpInfo extends HTMLElement {
+        constructor() {
+            super();
+            // 创建文本框
+            var info = document.createElement('span');
+            info.setAttribute('class', 'info');
+            // 获取自定义标签的text属性
+            var text = this.getAttribute('text');
+            info.textContent = text;
+ 
+            // 创建图片元素
+            var imgUrl;
+            if (this.hasAttribute('img')) {
+                imgUrl = this.getAttribute('img');
+            } else {
+                imgUrl = 'img/default.png';
+            }
+            var img = document.createElement('img');
+            img.src = imgUrl;
+ 
+            var icon = document.createElement('span');
+            icon.setAttribute('class', 'icon');
+            icon.appendChild(img);
+ 
+            // 创建css样式
+            var style = document.createElement('style');
+            style.textContent = 
+            `
+                .wrapper {
+                    position: relative;
+                }
+                .info {
+                    font-size: 0.8rem;
+                    width: 200px;
+                    display: inline-block;
+                    border: 1px solid black;
+                    padding: 10px;
+                    background: white;
+                    border-radius: 10px;
+                    opacity: 0;
+                    transition: 0.6s all;
+                    position: absolute;
+                    bottom: 20px;
+                    left: 10px;
+                    z-index: 3;
+                }
+                img {
+                    width: 1.2rem;
+                }
+                .icon:hover + .info, .icon:focus + .info {
+                    opacity: 1;
+                }
+            `
+ 
+            // 创建根元素，作用其实是将分离的css和html聚合起来
+            var shadow = this.attachShadow({ mode: 'open' });
+            // 创建一个span标签包裹内容
+            var wrapper = document.createElement('span');
+            wrapper.setAttribute('class', 'wrapper');
+ 
+            // 将创建的style节点追加到影子节点中
+            shadow.appendChild(style);
+            // 依次将html按照层级关系添加
+            shadow.appendChild(wrapper);
+            wrapper.appendChild(icon);
+            wrapper.appendChild(info);
+        }
+    }
+ 
+    // 定义组件
+    customElements.define('opup-info', opUpInfo);
+ 
+</script>
+ 
+</html>

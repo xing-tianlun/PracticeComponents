@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#main {
+			width: 316px;
+			height: 350px;
+			margin: 50px auto;
+			background: #d0ccc6;
+		}
+		#main input {
+			width: 312px;
+			height: 70px;
+			outline: none;
+			font-size:50px;
+		}
+		#main #key li {
+			width: 77px;
+			height: 53px;
+			background: #f5f4f3;
+			font-size: 13px
+			line-height:53px;
+			text-align: center;
+			margin:1px;
+			float:left;
+			border-radius: 3px;
+		}
+		#main #key li span  {
+				line-height:53px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<input type="text" id="put" value="">
+		<ul id="key">
+			<li id="kce"><span>CE</span></li>
+			<li id="kc"><span>C</span></li>
+			<li id="kdel"><span>删除</span></li>
+			<li id="kdiv"><span>÷</span></li>
+			<li id="k7"><span>7</span></li>
+			<li id="k8"><span>8</span></li>
+			<li id="k9"><span>9</span></li>
+			<li id="krid"><span>×</span></li>
+			<li id="k4"><span>4</span></li>
+			<li id="k5"><span>5</span></li>
+			<li id="k6"><span>6</span></li>
+			<li id="ksub"><span>-</span></li>
+			<li id="k1"><span>1</span></li>
+			<li id="k2"><span>2</span></li>
+			<li id="k3"><span>3</span></li>
+			<li id="kadd"><span>+</span></li>
+			<li id="kmin"><span>+/-</span></li>
+			<li id="k0"><span>0</span></li>
+			<li id="kdot"><span>.</span></li>
+			<li id="kequ"><span>=</span></li>
+		</ul>
+	</div>
+	<script>
+		var put = document.getElementById('put'),
+			kce = document.getElementById('kce'),
+			kc = document.getElementById('kc'),
+			kdel = document.getElementById('kdel'),
+			kdiv = document.getElementById('kdiv');
+			kdiv.onclick = function() {
+				put.value = "÷";
+			}
+	</script>
+</body>
+</html>

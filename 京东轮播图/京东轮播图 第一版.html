@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#main {
+			width: 590px;
+			height: 470px;
+			border:1px solid #000;
+			margin:50px auto;
+			position: relative;
+		}
+		#main #ul li {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity:0;
+			transition: .5s;
+		}
+		#main #ul li.active {
+			opacity:1;
+		}
+		#main #left {
+			width:50px;
+			height:50px;
+			font-size:50px;
+			line-height: 50px;
+			position: absolute;
+			top:200px;
+			left:10px;
+			background: rgba(255,255,255,.5);
+			border-radius: 50%;
+		}
+		#main #right {
+			width:50px;
+			height:50px;
+			font-size:50px;
+			line-height: 50px;
+			position: absolute;
+			top:200px;
+			right:10px;
+			background: rgba(255,255,255,.5);
+			border-radius: 50%;
+		}
+		#main #ol {
+			position: absolute;
+			top: 400px;
+			left: 50px;
+		}
+		#main #ol li {
+			width:10px;
+			height:10px;
+			float: left;
+			margin-right: 10px;
+			border-radius: 50%;
+			background: rgba(0,0,0,.4);
+			transition: .5;
+		}
+		#main #ol li.active {
+			background:rgba(255,255,255,.6)
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id="ul">
+			<li class="active"><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+			<li><img src="img/6.jpg" alt=""></li>
+			<li><img src="img/7.jpg" alt=""></li>
+			<li><img src="img/8.jpg" alt=""></li>
+		</ul>
+		<div id="left"><</div>
+		<div id="right">></div>
+		<ol id="ol">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+	</div>
+	<script>	
+		var ul = document.getElementById('ul'),
+			ol = document.getElementById('ol'),
+			imglist = ul.getElementsByTagName('li'),
+			catbtn = ol.getElementsByTagName('li'),
+			oLeft = document.getElementById('left'),
+			oRight = document.getElementById('right');
+		var index = 0;		  
+		var timer = setInterval(function() {
+			for(var i = 0;i < imglist.length;i++) {
+				imglist[i].className = "";
+				catbtn[i].className = "";
+			}
+			if(index <=7) {
+				catbtn[index].className = "active";
+				imglist[index++].className = "active";
+			}else if(index = 7){
+				index = 1;
+				imglist[0].className = "active";
+				catbtn[0].className = "active";
+			}
+		},2000);
+		oLeft.onmouseenter =function() {
+			clearInterval(timer);
+		}
+		oLeft.onclick = function() {
+			index--;
+			for(var i = 0;i < imglist.length;i++) {
+				imglist[i].className = "";
+				catbtn[i].className = "";
+			}
+			if(index >=0 ) {
+				catbtn[index].className = "active";
+				imglist[index].className = "active";
+			}else if(index < 0){
+				index = 7;
+				imglist[7].className = "active";
+				catbtn[7].className = "active";
+			}
+		}
+		oRight.onmouseenter =function() {
+			clearInterval(timer);
+		}
+		oRight.onclick = function() {
+			index++;
+			for(var i = 0;i < imglist.length;i++) {
+				imglist[i].className = "";
+				catbtn[i].className = "";
+			}
+			if(index <=7) {
+				catbtn[index].className = "active";
+				imglist[index].className = "active";
+			}else if(index = 7){
+				index = 1;
+				imglist[0].className = "active";
+				catbtn[0].className = "active";
+			}
+		}
+		ul.onmouseenter = function() {
+			clearInterval(timer);
+		}
+		ul.onmouseout = function () {
+			timer = setInterval(function() {
+				for(var i = 0;i < imglist.length;i++) {
+					imglist[i].className = "";
+					catbtn[i].className = "";
+				}
+				if(index <=7) {
+					catbtn[index].className = "active";
+					imglist[index++].className = "active";
+					
+				}else if(index = 7){
+					index = 1;
+					imglist[0].className = "active";
+					catbtn[0].className = "active";
+				}
+			},2000);
+		}
+		for(var i = 0;i < catbtn.length;i++) {
+			// imglist[i].dex = i;
+			catbtn[i].setAttribute("dex",i);
+			catbtn[i].onmouseenter = function() {
+				clearInterval(timer);
+				for(var j = 0;j < imglist.length;j++) {
+					imglist[j].className = "";
+					catbtn[j].className = "";
+				}
+				this.className = "active";
+				catdex = this.getAttribute('dex');
+				console.log(catdex);
+				imglist[catdex].className = "active";
+			}
+		}
+	</script>
+</body>
+</html>

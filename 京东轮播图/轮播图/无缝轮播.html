@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无缝轮播</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.banner {
+			width: 500px;
+			height: 313px;
+			position: relative;
+			margin: 20px auto;
+			overflow: hidden;
+		}
+		.banner ul {
+			height: 313px;
+			width: 3000px;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.banner ul li {
+			float: left;
+			width: 500px;
+			height: 313px;
+		}
+		.banner ol {
+			position: absolute;
+			bottom: 30px;
+			left: 50%;
+			margin-left: -35px;
+			width: 80px;
+			z-index: 2;
+		}
+		.banner ol li {
+			width: 10px;
+			height: 10px;
+			padding: 3px;
+			background: rgba(255,255,255,.3);
+			margin: 0 2px;
+			float: left;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.banner ol li span {
+			width: 10px;
+			height: 10px;
+			display: block;
+			background: rgba(255,255,255,.5);
+			border-radius: 50%;
+		}
+		.banner ol li.active span {
+			background: #fff;
+		}
+		.ctrls a {
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+			width: 30px;
+			height: 30px;
+			background: rgba(0,0,0,.5);
+			color: #fff;
+			font-family: simsun;
+			user-select: none;
+			text-decoration: none;
+			text-align: center;
+			line-height: 30px;
+			font-weight: bold;
+		}
+		.ctrls a.prev {
+			left: 0;
+			border-radius: 0 50% 50% 0;
+		}
+		.ctrls a.next {
+			right: 0;
+			border-radius: 50% 0 0 50% ;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<ul class="wrap">
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/1.jpg" alt=""></li>
+		</ul>
+		<ol class="dots">
+		</ol>
+		<div class="ctrls">
+			<a href="javascript:void(0)" class="prev">&lt;</a>
+			<a href="javascript:void(0)" class="next">&gt;</a>
+		</div>
+	</div>
+	<script>
+		(function(){
+			var banner = document.getElementsByClassName("banner")[0],
+				wrap = document.getElementsByClassName("wrap")[0],
+				dots = document.getElementsByClassName("dots")[0],
+				prev = document.getElementsByClassName("prev")[0],
+				next = document.getElementsByClassName("next")[0],
+				imgWidth = wrap.children[0].offsetWidth,
+				wrapIndex = 0,
+				len = wrap.children.length,
+				timer = null;
+
+			function createLi() {
+				for(let i = 0; i < len-1; i++) {
+					let li = document.createElement("li");
+					let span = document.createElement("span");
+					dots.appendChild(li);
+					li.appendChild(span);
+				}
+				dots.children[0].className = "active";
+			}
+			createLi();
+
+			function cirAction(wrapIndex) {
+				for(let i = 0; i < dots.children.length; i++) {
+					dots.children[i].classList.remove("active");
+				}
+				if(wrapIndex === len - 1) {
+					dots.children[0].className = "active";
+				}else {
+					dots.children[wrapIndex].className = "active";
+				}
+			}
+
+			function cirMouse() {
+				for(let i = 0; i < dots.children.length; i++) {
+					dots.children[i].onmouseenter = function() {
+						clearInterval(timer);
+						animate(wrap, -i*imgWidth);
+						wrapIndex = i;
+						cirAction(wrapIndex);
+					}
+				}
+			}
+			cirMouse();
+
+
+			function animate(element,target) {
+				if(element.timerId) {
+					clearInterval(element.timerId);
+					element.timerId = null;
+				}
+				element.timerId = setInterval(function() {
+					let step = 10;
+					let current = element.offsetLeft;
+					if(current > target) {
+						step = -Math.abs(step);
+					}
+					if(Math.abs(current - target) < Math.abs(step)) {
+						clearInterval(element.timerId);
+						element.style.left = target + "px";
+						return;
+					}
+					current += step;
+					element.style.left = current + "px";
+				},16)
+			}
+
+			next.onclick = function() {
+				if(wrapIndex === wrap.children.length - 1) {
+					wrapIndex = 0;
+					wrap.style.left = 0 + "px";
+				}
+				wrapIndex++;
+				animate(wrap,-wrapIndex * imgWidth);
+				cirAction(wrapIndex);
+			}
+			prev.onclick = function() {
+				if(wrapIndex === 0) {
+					wrapIndex = wrap.children.length - 1;
+					wrap.style.left = -wrapIndex * imgWidth + "px";
+				}
+				wrapIndex--;
+				animate(wrap,-wrapIndex * imgWidth);
+				cirAction(wrapIndex);
+			}
+
+			timer = setInterval(function() {
+				next.onclick();
+			},3500)
+
+
+			banner.onmouseenter = function() {
+				clearInterval(timer);
+			}
+			banner.onmouseleave = function() {
+				timer = setInterval(function(){
+                	next.onclick()
+            	},3500)
+			}
+
+		})()
+		
+	</script>
+</body>
+</html>

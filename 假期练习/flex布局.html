@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* #f {
+            height: 300px;
+            width: 100px;
+        } */
+        #main {
+            width: 1000px;
+            height: 200px;
+            border: 1px dashed #000;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: baseline;
+        }
+        #main div {
+            width: 98px;
+            height: 98px;
+            background: plum;
+            border: 1px dashed #f00;
+            font-size: 50px;
+            line-height: 100px;
+            text-align: center;
+            flex: 0 0 auto;
+        }
+        #main div:nth-child(2) {
+            flex: 2 1 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="f"></div> -->
+    <div id="main">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <!-- <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+        <div>13</div>
+        <div>14</div>
+        <div>15</div> -->
+    </div>
+    
+</body>
+</html>

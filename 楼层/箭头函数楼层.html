@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+        * {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.floor>div {
+    height: 900px;
+    line-height: 900px;
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+}
+
+.floorNav {
+    width: 40px;
+    height: 200px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #ddd;
+}
+
+.floorNav>li {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+}
+
+.active {
+    background: #e4393c;
+    color: #fff;
+}
+  </style>
+</head>
+<body>
+    <div class="floor">
+        <div style="background: #ffb6b9">壹</div>
+        <div style="background: #fae3d9">贰</div>
+        <div style="background: #bbded6">叁</div>
+        <div style="background: #8ac6d1">肆</div>
+        <div style="background: #fff1ac">伍</div>
+    </div>
+    <ul class="floorNav">
+        <li>壹</li>
+        <li>贰</li>
+        <li>叁</li>
+        <li>肆</li>
+        <li>伍</li>
+    </ul>
+    <script>
+        let floors = document.querySelectorAll(".floor>div");
+//获取楼层导航
+let floorNavs = document.querySelectorAll(".floorNav>li");
+//滚动监听
+window.onscroll = function () {
+  //获取滚动条高度，兼容ie
+  let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  //符合点亮条件的楼层索引
+  let activeIndex;
+  //楼层导航图标点亮控制
+  floors.forEach((floor, index) => {
+      //检查各楼层顶端距离视窗顶端距离，如果满足条件则修改楼层图标
+      floor.offsetTop - 100 <= scrollTop ? activeIndex = index : null;
+  });
+  //根据索引数设置楼层样式
+  floorNavs.forEach((nav, index) => {
+      index === activeIndex ? nav.classList.add('active') : nav.classList.remove('active');
+  });
+};
+    </script>
+</body>
+</html>

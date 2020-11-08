@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.banner {
+			width: 500px;
+			height: 313px;
+			position: relative;
+			margin: 20px auto;
+		}
+		.banner ul {
+			width: 500px;
+			height: 313px;
+		}
+		.banner ul li {
+			position: absolute;
+			left: 0;
+			top: 0;
+			transition: .5s;
+			opacity: 0;
+		}
+		.banner ul li.active {
+			opacity: 1;
+		}
+		.banner ol {
+			position: absolute;
+			bottom: 30px;
+			left: 50%;
+			margin-left: -35px;
+			width: 80px;
+			z-index: 2;
+		}
+		.banner ol li {
+			width: 10px;
+			height: 10px;
+			padding: 3px;
+			background: rgba(255,255,255,.3);
+			margin: 0 2px;
+			float: left;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.banner ol li span {
+			width: 10px;
+			height: 10px;
+			display: block;
+			background: rgba(255,255,255,.5);
+			border-radius: 50%;
+		}
+		.banner ol li.active span {
+			background: #fff;
+		}
+		.ctrls a {
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+			width: 30px;
+			height: 30px;
+			background: rgba(0,0,0,.5);
+			color: #fff;
+			font-family: simsun;
+			user-select: none;
+			text-decoration: none;
+			text-align: center;
+			line-height: 30px;
+			font-weight: bold;
+		}
+		.ctrls a.prev {
+			left: 0;
+			border-radius: 0 50% 50% 0;
+		}
+		.ctrls a.next {
+			right: 0;
+			border-radius: 50% 0 0 50% ;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<ul class="pics">
+			<li class="active"><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+		</ul>
+		<ol class="dots">
+			<li class="active"><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+		</ol>
+		<div class="ctrls">
+			<a href="javascript:void(0)" class="prev">&lt;</a>
+			<a href="javascript:void(0)" class="next">&gt;</a>
+		</div>
+	</div>
+	<script>
+		(function(){
+			var banner = document.getElementsByClassName("banner")[0];
+				pics = document.querySelectorAll(".pics li"),
+				dots = document.querySelectorAll(".dots li"),
+				prev = document.querySelector(".prev"),
+				next = document.querySelector(".next"),
+				len = dots.length,
+				timer = null,
+				index = 0;
+			function autoPlay() {
+				timer = setInterval(function() {
+					index++;
+					if(index >= len) index = 0;
+					changeImg();
+			  	},3000)
+			}
+			function changeImg() {
+				for(var i = 0; i < len; i++)
+					dots[i].className = pics[i].className = ""; 
+					dots[index].className = pics[index].className = "active";
+			}
+			banner.onmouseenter = function() {
+				if(timer) clearInterval(timer);
+			}
+			banner.onmouseleave = function() {
+				autoPlay();
+			}
+			// banner.onmouseleave();
+			autoPlay();
+			for(var i = 0; i < len; i++) {
+				dots[i].title = i;
+				dots[i].onclick = function() {
+					index = this.title;
+					changeImg();
+				}
+			}
+			 next.onclick = function(){
+		       index++;
+		       if(index >= len) index = 0;
+		       changeImg();
+		    }
+		    prev.onclick = function(){
+		       index--;
+		       if(index < 0) index = len-1;
+		       changeImg();
+		    }
+		})()
+		
+	</script>
+</body>
+</html>

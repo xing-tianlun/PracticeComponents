@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#main {
+			width: 333px;
+			height: 333px; 
+			position: relative;
+			margin: 33px auto;
+			border: 1px solid #000;
+		}
+		#box {
+			width: 33px;
+			height: 33px;
+			background: #f00;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="box">
+		</div>
+	</div>
+	
+	<script>
+		var box = document.getElementById('box'),
+			main = document.getElementById('main');
+		box.onmousedown = function(e) {
+			var boxleft = e.clientX - this.offsetLeft;
+			var boxtop = e.clientY - this.offsetTop;
+			main.onmousemove = function(e) {
+				// 获取鼠标坐标
+				// var mouseX = e.clientX;
+				// var mouseY = e.clientY;
+				var nleft = e.clientX - boxleft;
+				var ntop = e.clientY - boxtop;
+				if(nleft <= 0) {
+					nleft = 0;
+				}else if(nleft >= 300) {
+					nleft = 300;
+				}
+				if(ntop <= 0) {
+					ntop = 0;
+				}else if(ntop >= 300) {
+					ntop = 300;
+				}
+				box.style.left = nleft + "px";
+				box.style.top = ntop + "px";
+			}
+			document.onmouseup = function() {
+				main.onmousemove = null;
+				main.onmouseup = null;
+			}
+		}
+	</script>
+</body>
+</html>

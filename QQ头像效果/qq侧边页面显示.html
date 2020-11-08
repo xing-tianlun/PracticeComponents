@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#main {
+			width:500px;
+			margin: 100px auto;
+			position: relative;
+		}
+		#main #home {
+			overflow: hidden;
+		}
+		#main #headImg {
+			width:54px;
+			height:54px;
+			border-radius: 50%;
+			position: absolute;
+			top:43px;
+			left:13px;
+		}
+		#main #sub {
+			overflow: hidden;
+			position: absolute;
+			top:34px;
+			left: 277px;
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="home">
+			<img src="img/qqzhuye.png" alt="" />
+			<div id="headImg"></div>
+		</div>
+		<div id="sub">
+			<img src="img/subimg.png" alt="">
+		</div>
+	</div>
+	<script>
+		var headImg = document.getElementById('headImg'),
+			sub = document.getElementById('sub');
+
+		headImg.onmouseover  = function() {
+			sub.style.display = "block";
+		}
+		var time = null;
+		headImg.onmouseout = function() {
+			time = setTimeout(function() {
+				sub.style.display = "none";
+			},500);
+		}
+		sub.onmouseover = function() {
+			clearTimeout(time);
+		}
+		sub.onmouseout = function() {
+			setTimeout(function() {
+				sub.style.display = "none";
+			},500);
+		}
+	</script> 
+</body>
+</html>

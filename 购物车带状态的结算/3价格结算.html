@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html onselectstart='return false'>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		#cart {
+			width: 1200px;
+			margin: 100px auto;
+		}
+		table {
+			width: 100%;
+		}
+		table tr td {
+			width: 20%;
+		}
+		table thead tr {
+			width: 100%;
+			height: 50px;
+			background: #cd0064;
+			color: #fff;
+		}
+		table tbody tr td {
+			height: 120px;
+			text-align: center;
+		}
+		table tbody tr td img {
+			width: 100px;
+		}
+
+		table tbody tr td i {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			background: url(img/unchecked.jpg) no-repeat 0 0/contain;
+		}
+		table tbody tr td i.checked {
+			background-image: url(img/checked.jpg)
+		}
+		table tbody tr td:nth-child(4) {
+			font-size: 0;
+		}
+		table tbody tr td span {
+			display: inline-block;
+			width: 30px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			background: #c8c8c8;
+			font-size: 16px;
+		}
+		table tbody tr td input {
+			width: 50px;
+			height: 28px;
+			font-size: 16px;
+			text-align: center;
+		}
+
+		.total {
+			height: 50px;
+			line-height: 50px;
+			margin-top: 20px;
+			background: #cd0064;
+			color: #fff;
+		}
+		.total .content {
+			float: right;
+		}
+		.total .content div {
+			float: left;
+		}
+
+		.total .content div.price {
+			margin: 0 100px;
+		}
+		.total .content div span{
+			margin: 0 3px;
+			font-weight: bold;
+			color: orange;
+
+		} 
+	</style>
+</head>
+<body>
+	<div id="cart">
+		<table border="1" cellspacing="0">
+			<caption><h2>我的购物车</h2></caption>
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>商品</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>小计</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods1.jpg">
+					</td>
+					<td>
+						8
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="0">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods2.jpg">
+					</td>
+					<td>
+						10
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="0">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods3.jpg">
+					</td>
+					<td>
+						12.5
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="0">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+				<tr>
+					<td><i></i></td>
+					<td>
+						<img src="img/goods4.jpg">
+					</td>
+					<td>
+						23
+					</td>
+					<td>
+						<span class="decrease">-</span>
+						<input type="text" value="0">
+						<span class="increase">+</span>
+					</td>
+					<td class="subtotal">
+						
+					</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+		<div class="total">
+			<div class="content">
+				<div class="num">已选中商品件数: <span id="count">0</span>件</div>
+				<div class="price">总价格: <span id="price">0</span></div>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		// 1. 找到加减控制按钮
+
+			// 加
+		var incs = document.getElementsByClassName('increase'),
+			// 减
+			decs = document.getElementsByClassName('decrease'),
+			// input
+			ipts = document.getElementsByTagName('input'),
+			// 小计
+			subs = document.getElementsByClassName('subtotal'),
+
+			oCount = document.getElementById('count'),
+
+			oPrice = document.getElementById('price'),
+
+			// 商品的数量，初始值都是零
+			nums = [0,0,0,0],
+			// 商品的单价，初始值都是零
+			units = [8,10,12.5,23];
+		// 2. 给加减控制按钮 添加单击事件 
+		for(var i = 0; i < incs.length; i++) {
+			// 自定义属性
+			incs[i].index = i;
+			decs[i].index = i;
+			// 加按钮
+			incs[i].onclick = function() {
+
+
+
+
+				// 
+				// 单击了加按钮 做什么？
+
+				/*
+					1. input的值要变
+					2. 小计要变
+					3. 总价、总数量要变 
+				*/
+				// 1. input的值要变
+				// 当前加按钮的下标
+				nums[this.index]++;
+				ipts[this.index].value =  nums[this.index];
+
+
+				// 2. 小计要变
+				subs[this.index].innerText = units[this.index] * nums[this.index];
+
+
+				// 3. 总价、总数量要变 
+
+				// 求出总价、总数量
+
+				var count = 0,
+					price = 0;
+				for(i = 0; i < nums.length; i++) {
+					count += nums[i];
+					price += units[i] * nums[i]
+				}
+
+				oCount.innerText = count;
+				oPrice.innerText = price;
+
+
+
+
+
+				// 网页上的数据不能直接获取  极其不靠谱的，用户为所欲为的更改 
+
+
+
+
+
+				// 
+			};
+
+			// 减按钮
+			decs[i].onclick = function() {
+				nums[this.index]--;
+				if(nums[this.index] < 0) {
+					nums[this.index] = 0;
+				}
+
+				ipts[this.index].value =  nums[this.index];
+
+
+				// 2. 小计要变
+				subs[this.index].innerText = units[this.index] * nums[this.index];
+
+
+				// 3. 总价、总数量要变 
+
+				// 求出总价、总数量
+
+				var count = 0,
+					price = 0;
+				for(i = 0; i < nums.length; i++) {
+					count += nums[i];
+					price += units[i] * nums[i]
+				}
+
+				oCount.innerText = count;
+				oPrice.innerText = price;
+
+			};
+
+		}
+
+
+
+
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

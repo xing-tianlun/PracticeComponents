@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.lc {
+			width: 100%;
+			height: 800px;
+			text-align: center;
+			line-height: 500px;
+			font-size: 50px;
+		}
+		.one {
+			background: #f00;
+		}
+		.two {
+			background: yellow;
+		}
+		.three {
+			background: blue;
+		}
+		.four {
+			background: pink;
+		}
+		.five {
+			background: purple;
+		}
+		.six {
+			background: orange;
+		}
+		.wrap {
+			width: 50px;
+			height: 300px;
+			background: #00ace7;
+			position: fixed;
+			top: 50%;
+			left: 0;
+			margin-top: -150px;
+		}
+		.wrap div {
+			width: 50px;
+			height: 49px;
+			line-height: 49px;
+			text-align: center;
+			color: white;
+			border-bottom: 1px solid #fff;
+			cursor: pointer;
+		}
+		.wrap div:last-child {
+			border: none;
+		}
+		.wrap .active {
+			background: #000;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="one lc">一层</div>
+	<div class="two lc">二层</div>
+	<div class="three lc">三层</div>
+	<div class="four lc">四层</div>
+	<div class="five lc">五层</div>
+	<div class="six lc">六层</div>
+	<div class="wrap">
+		<div class="lc_btn active">F一</div>
+		<div class="lc_btn">F二</div>
+		<div class="lc_btn">F三</div>
+		<div class="lc_btn">F四</div>
+		<div class="lc_btn">F五</div>
+		<div class="lc_btn">F六</div>
+	</div>
+	<script>
+		var btn = document.getElementsByClassName("lc_btn"),
+			lc = document.getElementsByClassName("lc"),
+			arr = [],v;
+		for(var k = 0;k < btn.length;k++) {
+			arr.push(lc[i].offsetTop);
+			btn[k].index = k;
+			btn[k].onclick = function() {
+				for(var j = 0;j < arr.length;j++) {
+					document.documentElement.scrollTop = arr[this.index];
+					btn[j].style.background = "#00ace7";
+				}
+				btn[this.index].style.background = "#000";
+			}
+		}
+		document.onscroll = function() {
+			v = document.documentElement.scrollTop || document.body.scrollTop;
+			for(var l = 0;l < arr.length;l++) {
+				btn[l].style.background = "#00ace7"
+			}
+			for(var s = 0;s < arr.length;s++) {
+				if(v >= arr[s] && v < arr[s + 1]) {
+					btn[s].style.background = "#000"
+				}else if(v >= arr[arr.length - 1]) {
+					btn[btn.length - 1].style.background = "#000"
+				}
+			}
+		}
+	</script>
+</body>
+</html>

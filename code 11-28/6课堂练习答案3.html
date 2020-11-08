@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#outer {
+			position: relative;
+			width: 300px;
+			height: 300px;
+			margin: 100px auto;
+			background: red;
+		}
+		#inner {
+			display: none;
+			position: absolute;
+			right: 330px;
+			top: 0;
+			width: 150px;
+			height: 150px;
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div id="outer">
+		
+	</div>
+	<div id="inner">
+			
+	</div>
+	<script>
+		var outer = document.getElementById("outer");
+		var inner = document.getElementById("inner");
+		var timeoutId = null;
+
+
+		outer.onmouseenter = function() {
+			inner.style.display = 'block';
+		};
+		outer.onmouseleave = function() {
+			// 延时一会隐藏
+			timeoutId = setTimeout(function() {
+				inner.style.display = 'none';
+			},500);
+		};
+
+
+		inner.onmouseenter = function() {
+			// 关闭延时器
+			clearTimeout(timeoutId);
+		};
+
+
+		
+		inner.onmouseleave= function() {
+			// 关闭延时器
+			setTimeout(function() {
+				inner.style.display = 'none';
+			},500);;
+		};
+
+
+
+
+
+	</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

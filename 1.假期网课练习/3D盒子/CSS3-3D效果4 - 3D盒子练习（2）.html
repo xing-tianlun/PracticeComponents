@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: #000;
+  }
+    .main{
+       width:400px;
+       height:400px;
+       background: transparent;
+       margin:100px auto;
+       position:relative;
+
+       transition:all 3s ease;
+       transform:perspective(700px) rotateX(0) rotateY(0);
+       transform-style:preserve-3d;
+       /*
+       设定子元素可以脱离父元素的限定，实现3D空间的运动
+       transform-style:preserve-3d;
+       */
+       }
+    .main:active{
+      /*transform:perspective(700px) rotateX(360deg) rotateY(60deg);*/
+    }
+    .main>div{
+       width:398px;
+       height:398px;
+       border: 2px solid red;
+       text-align: center;
+       background: transparent;
+       position:absolute;
+       top:0;
+       left:0;
+       box-shadow: 30px 30px 50px red,-30px -30px 50px red;
+    }
+    .main>#main2{
+       width:200px;
+       height:200px;
+       background: transparent;
+       box-shadow: 0px 0px 0px transparent,0px 0px 0px transparent;
+       border: none;
+       position:absolute;
+       top: 100px;
+       left: 100px;
+       transition:all 3s ease;
+       transform:perspective(10000px) rotateX(0) rotateY(0);
+       transform-style:preserve-3d;
+       }
+    .main>#main2>.item2 {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    .front{
+       transform:translateZ(200px);
+    }
+    .back{
+       transform:translateZ(-200px) rotateY(180deg);
+    }
+    .top{
+       transform:translateY(-200px) rotateX(90deg);
+       
+    }
+    .bottom{
+       transform:translateY(200px) rotateX(90deg);
+       
+    }
+    .left{
+       transform:translateX(-200px) rotateY(90deg);
+       
+    }
+    .right{
+       transform:translateX(200px) rotateY(90deg);
+       
+    }
+    .front2{
+       transform:translateZ(100px);
+       background: url(img/5-1.jpg);
+    }
+    .back2{
+       transform:translateZ(-100px) rotateY(180deg);
+       background: url(img/5-7.jpg);
+    }
+    .top2{
+       transform:translateY(-100px) rotateX(90deg);
+       background: url(img/5-8.jpg);
+    }
+    .bottom2{
+       transform:translateY(100px) rotateX(90deg);
+       background: url(img/5-2.jpg);
+    }
+    .left2{
+       transform:translateX(-100px) rotateY(90deg);
+       background: url(img/5-4.jpg);
+       border-radius: 
+    }
+    .right2{
+       transform:translateX(100px) rotateY(90deg);
+       background: url(img/5-6.jpg);
+    }
+    .item {
+       background-size: 200px 400px;
+       opacity: .7;
+    }
+    .item2 {
+       background-size: 200px 400px;
+       opacity: .5;
+    }
+</style>	
+
+<div class="main" id="main">
+  <div class="top item"></div>
+  <div class="bottom item"></div>
+  <div class="front item"></div>
+  <div class="back item"></div>
+  <div class="left item"></div>
+  <div class="right item"></div>
+  <div class="main2" id="main2">
+    <div class="top2 item2"></div>
+    <div class="bottom2 item2"></div>
+    <div class="front2 item2"></div>
+    <div class="back2 item2"></div>
+    <div class="left2 item2"></div>
+    <div class="right2 item2"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const main = document.getElementById('main');
+  const item = document.getElementsByClassName('item');
+  const main2 = document.getElementById('main2');
+  let deg = 0;
+  let deg2 = 0;
+  let num = 0;
+  let flag = 1;
+  const timer = setInterval(function() {
+    deg++;
+    main.style.transform = 'perspective(700px) rotateX('+ deg +'deg) rotateY(' +deg+ 'deg)';
+    num += flag;
+    if(num === 400) {
+      flag = -4;
+    }else if(num === 0) {
+      flag = 4
+    }
+    for(let i of item) {
+      i.style.borderRadius = num + 'px';
+    }
+  },10)
+  const timer2 = setInterval(function() {
+    deg2++;
+    main2.style.transform = 'perspective(700px) rotateX('+ deg2 +'deg) rotateY(' +0+ 'deg)';
+  },5)
+</script>
+</body>
+</html>

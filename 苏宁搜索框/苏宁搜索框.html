@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#main {
+			width:600px;
+			margin:50px auto;
+		}
+		#main #serch {
+			width:540px;
+			font-size:0;
+		}
+		#main #serch [type="text"] {
+			width:418px;
+			height:36px;
+			border:2px solid #ff9900;
+			text-indent: 5px;
+			outline: none;
+		}
+		/* 给placeholder设置样式 */
+		::-webkit-input-placeholder {
+			font-size: 16px;
+		}
+		#main #serch [type="button"] {
+			width:118px;
+			height:40px;
+			background: #ff9900;
+			color:white;
+			border:none;
+			font-size:16px;
+			vertical-align: top;
+		}
+		#box {
+			width:540px;
+			height:271px;
+			background-image:url(suning.png);
+			display: none;
+		}
+		#main .active {
+			width:540px;
+			height:271px;
+			background-image:url(suning.png);
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div id="serch">
+			<input type="text" id="ipt" placeholder="感恩节全民秒杀" />
+			<input type="button" value="搜索" />
+		</div>
+		<div id="box"></div>
+	</div>
+	<script >
+		var oIpt = document.getElementById("ipt"),
+			box = document.getElementById("box");
+		oIpt.onfocus = function() {
+			box.className = "active";
+		}
+		oIpt.onblur = function() {
+			box.className = "";
+		}
+	</script>
+</body>
+</html>

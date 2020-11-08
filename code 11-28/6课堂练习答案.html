@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			outline: none;
+		
+		}
+		#wrap {
+			position: relative;
+			width: 538px;
+			margin: 100px auto;
+			font-size: 0;
+		}
+		form {
+			height: 42px;
+		}
+		form input {
+			width: 418px;
+			height: 40px;
+			vertical-align: middle;
+			text-indent: 10px;
+			border-color: #aaa;
+		}
+		/* 给placeholder设置样式 */
+		::-webkit-input-placeholder {
+			font-size: 16px;
+		}
+		form button {
+			width: 118px;
+			height: 44px;
+			margin-left: -2px;
+			border: none;
+			vertical-align: middle;
+			background: #f90;
+			font-size: 22px;
+			color: #fff;
+		}
+		#wrap .hot_search {
+			display: none;
+			/*visibility: hidden;*/
+			position: absolute;
+			top: 42px;
+			left: 0;
+			width: 100%;
+			height: 300px;
+			background: #aaa;
+		}</style>
+</head>
+<body>
+	<div id="wrap">
+		<form>
+			<input type="text" placeholder="请输入你要检索的关键字" id="ipt">
+			<button type="submit">搜索</button>
+		</form>
+		<div class="hot_search" id="hot_search"></div>
+	</div>
+
+	<script>
+		// 找人
+		var oIpt = document.getElementById("ipt"),
+			oHot = document.getElementById("hot_search");
+		// 干事 
+		// 聚焦   显示 
+		oIpt.onfocus = function() {
+			oHot.style.display = 'block';
+			// oHot.style.visibility = 'visible';
+		};
+		// 失焦   隐藏 
+		oIpt.onblur = function() {
+			oHot.style.display = 'none';
+			// oHot.style.visibility = 'hidden';
+		};
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

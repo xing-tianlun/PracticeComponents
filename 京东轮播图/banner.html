@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			text-decoration: none;
+			color: #000;
+		}
+		#banner {
+			width: 590px;
+			height: 470px;
+			background: #000;
+			margin: 10px auto;
+			overflow: hidden;
+			position: relative;
+		}
+		#banner .img_list img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			transition: .5s;
+		}
+		#banner .img_list img.active {
+			opacity: 1;
+		}
+		#tab {
+			position: absolute;
+			bottom: 20px;
+			left: 40px;
+		}
+		#tab span {
+			width: 10px;
+			height: 10px;
+			background: rgba(255,255,255,.3);
+			display: block;
+			padding: 3px;
+			float: left;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+		#tab span.active i {
+			background: rgba(255,255,255,.9);
+
+		}
+		#tab span i {
+			width: 10px;
+			height: 10px;
+			background: rgba(255,255,255,.3);
+			display: block;
+			line-height: 10px;
+			text-align: center;
+			border-radius: 50%;
+		}
+		#banner #left {
+			width: 30px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+			background: #000;
+			color: #fff;
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			left: 0;
+			margin-top: -25px;
+		}
+		#banner #right {
+			width: 30px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+			background: #000;
+			color: #fff;
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			right: 0;
+			margin-top: -25px;
+		}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<div class="img_list">
+			<img src="img/1.jpg" alt="" class='active'>
+			<img src="img/2.jpg" alt="">
+			<img src="img/3.jpg" alt="">
+			<img src="img/4.jpg" alt="">
+			<img src="img/5.jpg" alt="">
+			<img src="img/7.jpg" alt="">
+		</div>
+		<div id='tab'>
+			<span class='active'><i></i></span>
+			<span><i></i></span>
+			<span><i></i></span>
+			<span><i></i></span>
+			<span><i></i></span>
+			<span><i></i></span>
+		</div>
+		<div id="left"><</div>
+		<div id="right">></div>
+	</div>
+	<script>
+		var img = document.querySelectorAll('.img_list>img'),
+			tab = document.querySelectorAll('#tab>span'),
+			oleft = document.getElementById('left'),
+			oright = document.getElementById('right'),
+			banner = document.getElementById('banner'),
+			index = 0;
+		for(var i = 0;i < tab.length;i++) {
+			tab[i].index = i;
+			tab[i].onmouseenter = function() {
+				for(var j = 0;j < tab.length;j++) tab[j].className = img[j].className = '';
+				this.className = img[this.index].className = 'active';
+			}
+		}
+		function play() {
+			index++;
+			if(index > img.length - 1 ) index = 0;
+			for(var j = 0;j < tab.length;j++) tab[j].className = img[j].className = '';
+			tab[index].className = img[index].className = 'active';
+		}
+		right.onclick = function() {
+			play();
+		}
+		left.onclick = function() {
+			index--;
+			if(index < 0) index = tab.length - 1;
+			for(var j = 0;j < tab.length;j++) tab[j].className = img[j].className = '';
+			tab[index].className = img[index].className = 'active';
+		}
+		var timer = setInterval(function() {
+			play();
+		},3000);
+		banner.onmouseenter = function() {
+			clearInterval(timer);
+		}
+		banner.onmouseleave = function() {
+			timer = setInterval(function() {
+				play();
+			},3000);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#wrap {
+			width: 600px;
+			height: 500px;
+			margin:0 auto;
+		}
+		#wrap ul li {
+			width:100%;
+			height:30px;
+			line-height: 30px;
+		}
+		#wrap i {
+			display: inline-block;
+			width:20px;
+			height:20px;
+			background: url(img/1.jpg) no-repeat 0 0/cover;
+			vertical-align: middle;
+			margin:0px 20px 0 10px;
+		}
+		#wrap i.checked {
+			background-image:url(img/2.jpg);
+		}
+		#wrap #bottom {
+			width:600px;
+			height:30px;
+			background: #000;
+			color: #fff;
+		}
+		#wrap #check {
+			height:30px;
+			float:left;
+			margin-right: 30px;
+			line-height: 30px;
+		}
+		#wrap #bottom #reverse {
+			float:left;
+			line-height: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="ul">
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+			<li>
+				<i></i>
+				<span>空空如也</span>
+			</li>
+		</ul>
+		<div id="bottom">
+			<div id="check">
+				<i id="all"></i>
+				<span>全选</span>
+			</div>
+			<div id="reverse">反选</div>
+		</div>
+	</div>
+	<script>
+		var liList = document.getElementById('ul').getElementsByTagName('li');
+		for(var i = 0;i < liList.length;i++) {
+			if(i % 3 === 0) {
+				liList[i].style.background = "#969696";
+			}else if(i % 3 === 1) {
+				liList[i].style.background = "#b0b0b0";
+			}else {
+				liList[i].style.background = "#8c8c8c";
+			}
+		}
+		var icon = document.getElementById('ul').getElementsByTagName('i'),
+			all = document.getElementById('all'),
+			reverse = document.getElementById('reverse');
+		for(var i = 0;i < icon.length;i++) {
+			icon[i].onclick = function() {
+				// if(this.className === "checked") {
+				// 	this.className = ""
+				// }else {
+				// 	this.className = "checked";
+				// }
+				this.className = this.className === "checked" ? "" : "checked";
+				var flag = true;
+				for(i = 0;i < icon.length;i++) {
+					if(icon[i].className !== "checked") {
+						flag = false;
+						break;
+					}
+				}
+				if(flag) {
+					all.className = "checked";
+				}else {
+					all.className = "";
+				}
+			}
+		}
+		all.onclick = function() {
+			this.className = "checked";
+			for(var i = 0;i < icon.length;i++) {
+				icon[i].className = "checked";
+			}
+		}
+		reverse.onclick = function() {
+			for(var i = 0;i < icon.length;i++) {
+				if(icon[i].className === "checked") {
+					icon[i].className = "";
+				}else {
+					icon[i].className = "checked";
+				}
+			}
+			var flag = true;
+			for(i = 0;i < icon.length;i++) {
+				if(icon[i].className !== "checked") {
+					flag = false;
+					break;
+				}
+			}
+			if(flag) {
+				all.className = "checked";
+			}else {
+				all.className = "";
+			}
+		}
+	</script>
+</body>
+</html>

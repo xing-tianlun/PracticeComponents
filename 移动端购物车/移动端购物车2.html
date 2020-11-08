@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		img {
+			vertical-align: middle;
+		}
+		a {
+			text-decoration: none;
+		}
+		#main {
+			width: 566px;
+			height: 1000px;
+			margin-right: 10px;
+			float: left;
+		}
+		#main h3 {
+			height: 100px;
+			background: #000;
+			color: #fff;
+			font-size: 40px;
+			font-weight: 500;
+			text-align: center;
+			line-height: 100px;
+		}
+		#main #goods_list {
+			width: 100%;
+			padding: 65px 40px;
+		}
+		#main #goods_list dl {
+			width: 220px;
+			height: 360px;
+			margin: 0 5px;
+			float: left;
+			overflow: hidden;
+		}
+		#main #goods_list dl dt {
+			margin-bottom: 15px;
+		}
+		#main #goods_list dl .dd1 {
+			font-size: 16px;
+			text-indent: 12px;
+			line-height: 16px;
+			margin-bottom: 16px;
+		}
+		#main #goods_list dl .dd2 {
+			font-size: 12px;
+			text-indent: 12px;
+			color: #a9a9a9;
+			line-height: 12px;
+			margin-bottom: 24px;
+		}
+		#main #goods_list dl .dd3 .sp1{
+			font-size: 16px;
+			color: #e83c62;
+			float: left;
+			margin-left: 10px;
+		}
+		#main #goods_list dl .dd3 .sp2{
+			font-size: 12px;
+			color: #a9a9a9;
+			float: right;
+			margin-right: 10px;
+		}
+		/*#car {
+			width: 566px;
+			height: 1000px;
+			float: left;
+		}
+		#car h3 {
+			height: 100px;
+			background: #000;
+			color: #fff;
+			font-size: 40px;
+			font-weight: 500;
+			text-align: center;
+			line-height: 100px;
+		}
+		#car #car_list {
+			width: 100%;
+			padding: 65px 40px;
+		}
+		#car #car_list dl {
+			width: 450px;
+			height: 135px;
+			overflow: hidden;
+			margin-bottom: 5px;
+		}
+		#car #car_list dl dt {
+			width: 135px;
+			height: 135px;
+			margin-right: 10px;
+			float: left;
+		}
+		#car #car_list dl dt img {
+			width: 135px;
+			height: 135px;
+		}
+		#car #car_list dl dd {
+			width: 300px;
+			height: 135px;
+			float: left;
+		}
+		#car #car_list dl dd .p1{
+			width: 300px;
+			height: 18px;
+			font-size: 18px;
+			line-height: 18px;
+			margin-top: 10px;
+			margin-bottom: 80px;
+		}
+		#car #car_list dl dd .p2 {
+			width: 300px;
+			height: 18px;
+			font-size: 18px;
+			line-height: 18px;
+			font-weight: bold;
+		}
+		#car #car_list dl dd .p2 .sp1 {
+			float: right;
+		}*/
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h3>商品列表</h3>
+		<div id="goods_list">
+			<dl>
+				<dt><img src="img/img1.png" alt=""></dt>
+				<dd class='dd1'><span>宝宝玩具0-3周岁婴幼儿...</span></dd>
+				<dd class='dd2'><span>暂无商品描述</span></dd>
+				<dd class='dd3'><span class='sp1'>￥50</span><span class='sp2'>0人付款</span></dd>
+			</dl>
+			<dl>
+				<dt><img src="img/img2.png" alt=""></dt>
+				<dd class='dd1'><span>米兔智能故事机0-6岁</span></dd>
+				<dd class='dd2'><span>暂无商品描述</span></dd>
+				<dd class='dd3'><span class='sp1'>￥149</span><span class='sp2'>0人付款</span></dd>
+			</dl>
+			<dl>
+				<dt><img src="img/img1.png" alt=""></dt>
+				<dd class='dd1'><span>宝宝玩具0-3周岁婴幼儿...</span></dd>
+				<dd class='dd2'><span>暂无商品描述</span></dd>
+				<dd class='dd3'><span class='sp1'>￥50</span><span class='sp2'>0人付款</span></dd>
+			</dl>
+			<dl>
+				<dt><img src="img/img2.png" alt=""></dt>
+				<dd class='dd1'><span>米兔智能故事机0-6岁</span></dd>
+				<dd class='dd2'><span>暂无商品描述</span></dd>
+				<dd class='dd3'><span class='sp1'>￥149</span><span class='sp2'>0人付款</span></dd>
+			</dl>
+		</div>
+	</div>
+	<!-- <div id='car'>
+		<h3>商品列表</h3>
+		<div id="car_list">
+			<dl>
+				<dt><img src="img/img1.png" alt=""></dt>
+				<dd>
+					<p class='p1'>宝宝玩具0-3周岁婴幼儿益智早教</p>
+					<p class='p2'>￥50 <span class='sp1'>数量： 0</span></p>
+				</dd>
+			</dl>
+		</div>
+	</div> -->
+	<script>
+		var goods_list = document.getElementById('goods_list').getElementsByTagName('dl');
+		var car_list_pr = document.getElementById('car_list');
+		for(var i = 0;i < goods_list.length;i++) {
+			goods_list[i].index = i;
+			goods_list[i].onclick = function() {
+				var dt = this.getElementsByTagName('dt');
+				var img = dt[0].firstChild.src;
+				// var num = img.lastIndexOf('/');
+				// var srcimg = 'img' + img.substring(num);
+				var dd = this.getElementsByTagName('dd');
+				var p1 = dd[0].firstChild.innerText;
+				var price = dd[2].firstChild.innerText;
+				// car_list_pr.innerHTML += '<dl><dt><img src=' + img + '></dt><dd><p class="p1">' + p1 + '</p><p class="p2">' + price + '</p></dd></dl>';
+				// location.href = 
+				open('购物车结算页.html?userimg='+ img + '&userp1=' + p1 + '&userprice='+ price ,'_black');
+			}
+		}
+	</script>
+</body>
+</html>

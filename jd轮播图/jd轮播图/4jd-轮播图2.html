@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+			color: #000;
+		}
+
+		#banner {
+			overflow: hidden;
+			position: relative;
+			width: 590px;
+			height: 470px;
+			margin: 100px auto;
+		}
+		#banner ul li {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 0;
+			/* 过渡属性 做动画的 */
+			transition: .5s;
+		}
+		#banner ul li.active {
+			opacity: 1;
+		}
+
+		#banner ol {
+			position: absolute;
+			bottom: 30px;
+			left: 20px;
+			font-size: 0;
+		}
+		#banner ol li {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			padding: 3px;
+			margin: 0 2px;
+			border-radius: 50%;
+			background: rgba(255,255,255,.3);
+		}
+
+		#banner ol li span {
+			display: block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: rgba(255,255,255,.5);
+		}
+		#banner ol li.active span {
+			background: rgb(255,255,255);
+		}
+		#banner .ctrls a {
+			position: absolute;
+			top: 50%;
+			width: 60px;
+			height: 30px;
+			line-height: 30px;
+			margin-top: -15px;
+			border-radius: 30px;
+			background: rgba(0,0,0,.5);
+			font-size: 14px;
+			color: #fff;
+		}
+		#banner .ctrls a.prev {
+			left: -30px;
+			text-indent: 40px;
+		}
+		#banner .ctrls a.next {
+			right: -30px;
+			text-indent: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<ul id="ul">
+			<li class="active"><a href="#"><img src="img/1.webp"></a></li>
+			<li><a href="#"><img src="img/2.webp"></a></li>
+			<li><a href="#"><img src="img/3.webp"></a></li>
+			<li><a href="#"><img src="img/4.webp"></a></li>
+			<li><a href="#"><img src="img/5.webp"></a></li>
+			<li><a href="#"><img src="img/6.webp"></a></li>
+			<li><a href="#"><img src="img/7.webp"></a></li>
+			<li><a href="#"><img src="img/8.jpg"></a></li>
+		</ul>
+		<ol id="ol">
+			<li class="active"><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+		</ol>
+		<div class="ctrls" id="ctrls">
+			<a href="javascript:;" class="prev">&lt;</a>
+			<a href="javascript:;" class="next">&gt;</a>
+		</div>
+	</div>
+	<script>
+		var banner = document.getElementById('banner'),
+			dots = document.getElementById("ol").getElementsByTagName("li"),
+			imgs = document.getElementById("ul").getElementsByTagName("li"),
+			ctrls = document.getElementById("ctrls").getElementsByTagName("a"),
+			index = 0,// 记录当前播放到哪一张图片的下标了  默认值值是零
+			timer = null;
+		for(var i = 0,len = dots.length; i < len; i++) {
+			dots[i].dachui = i;
+			dots[i].onmouseenter = function() {
+				// 让当前指示器高亮（其它的不高亮），淡入对应的图片（其它图片淡出） 
+				for(var j = 0; j < len; j++)
+					dots[j].className = imgs[j].className = '';
+				this.className = imgs[this.dachui].className = 'active';
+
+				index = this.dachui;
+			};
+		}
+		for(i = 0; i < 2; i++) {
+			ctrls[i].goudan = i;
+			ctrls[i].onclick = function() {
+				// 
+				switch(this.goudan) {
+					case 0: // 左
+						for(var j = 0; j < len; j++)
+								dots[j].className = imgs[j].className = '';
+						index--;
+						if(index < 0) {
+							index = len - 1;
+						}
+						dots[index].className =  imgs[index].className = 'active';
+						break;
+					case 1: // 右	
+							for(var j = 0; j < len; j++)
+								dots[j].className = imgs[j].className = '';
+							index++;
+							if(index >= len) {
+								index = 0;
+							}
+							dots[index].className =  imgs[index].className = 'active';
+						break;
+				}
+			};
+		}
+		autoPlay();
+		banner.onmouseenter = function() {
+			clearInterval(timer);
+		};
+		banner.onmouseleave = function() {
+			autoPlay();
+		};
+		function autoPlay() {
+			timer = setInterval(function() {
+				for(var j = 0; j < len; j++)
+					dots[j].className = imgs[j].className = '';
+				index++;
+				if(index >= len) {
+					index = 0;
+				}
+				dots[index].className =  imgs[index].className = 'active';
+			},3000);
+		}
+	</script>
+</body>
+</html>

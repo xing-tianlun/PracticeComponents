@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body {
+      background: #000;
+    }
+    .main {
+      width: 1000px;
+      height: 100px;
+      margin: 200px auto;
+      position: relative;
+    }
+    .main p {
+      width: 1000px;
+      height: 100px;
+      font-size: 50px;
+      font-weight: 1000;
+      line-height: 100px;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .main .top {
+      color: transparent;
+      background: linear-gradient(to right,#f00,#f60,#ff0,#0f0,#00f,#0ff,#f0f);
+      -webkit-background-clip: text;
+      clip-path: circle(50px at 0% 50%);
+      animation: a 5s ease infinite;
+      z-index: 2;
+    }
+    @keyframes a {
+      0% {
+        clip-path: circle(50px at 0% 50%);
+      }
+      50% {
+        clip-path: circle(50px at 100% 50%);
+      }
+      100% {
+        clip-path: circle(50px at 0% 50%);
+      }
+    }
+    .main .btm {
+      color: #666;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <p class="top">你站在桥上看风景，看风景的人在楼上看你。</p>
+    <p class="btm">你站在桥上看风景，看风景的人在楼上看你。</p>
+  </div>
+</body>
+</html>

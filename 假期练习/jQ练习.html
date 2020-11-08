@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jQ.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            background: red;
+            height: 100px;
+            line-height: 100px;
+            font-size: 48px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <button id="hide">隐藏</button>
+    <button id="show">显示</button>
+    <p>如果你点击“隐藏” 按钮，我将会消失。</p>
+    <script>
+        // $(document).ready(function() {
+        //     $('#hide').click(function() {
+        //         $('p').hide();
+        //     })
+        //     $('#show').click(function() {
+        //         $('p').show();
+        //     })
+        // });
+
+        $(document).ready(function() {
+            $("#hide").click(function() {
+                $("p").fadeToggle();// 隐藏
+            });
+            $("#show").click(function() {
+                $("p").slideToggle("slow");// 滑动
+            });
+            $('p').click(function() {
+                $("p").animate({// 动画
+                    top: "300px",
+                    left: "200px",
+                    width: "1000px",
+                    height: "150px"
+                });
+            });
+        })
+    </script>
+</body>
+</html>

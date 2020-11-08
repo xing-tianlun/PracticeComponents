@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    ul,ol {
+      list-style: none;
+    }
+    #main {
+      width: 740px;
+      margin: 100px auto;
+      position: relative;
+      background: #282828;
+      overflow: hidden;
+    }
+    #main>video {
+      width: 500px;
+      float: left;
+    }
+    #main .videoBox {
+      float: left;
+      width: 500px;
+      height: 280px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #main .pause {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.3);
+      position: absolute;
+      top: 110px;
+      left: 225px;
+    }
+    #main .pause.active {
+      display: none;
+    }
+    #main .pause img {
+      width: 50px;
+      height: 50px;
+    }
+    #main .start {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0,0,0,.3);
+      position: absolute;
+      top: 110px;
+      left: 225px;
+    }
+    #main .start img {
+      width: 30px;
+      height: 30px;
+      margin: 10px 13px;
+    }
+    #main .start.active {
+      display: none;
+    }
+    ul {
+      float: left;
+      width: 200px;
+      height: 280px;
+      padding: 0 20px;
+      overflow: hidden;
+			overflow-y: auto;
+    }
+    ul video {
+      float: left;
+      width: 200px;
+      margin: 20px 0;
+    }
+    ul::-webkit-scrollbar {/*滚动条整体样式*/
+			width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+			height: 1px;
+		}
+		ul::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+			border-radius: 10px;
+			background-color: #555;
+		}
+		ul::-webkit-scrollbar-track {/*滚动条里面轨道*/
+			-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+			background: #282828;
+		}
+  </style>
+</head>
+<body>
+  <div id="main">
+    <video src="video/拆西厢-岳云鹏.mp4" controls loop></video>
+    <div class="pause active">
+      <img src="img/pause.png" alt="">
+    </div>
+    <div class="start">
+      <img src="img/start.png" alt="">
+    </div>
+    <ul>
+      <li class="video-show-con">
+        <video src="video/拆西厢-岳云鹏.mp4"></video>
+      </li>
+      <li class="video-show-con">
+        <video src="video/热爱祖国.mp4"></video>
+      </li>
+      <li class="video-show-con">
+        <video src="video/蓝天白云.mp4"></video>
+      </li>
+      <li class="video-show-con">
+        <video src="video/五星红旗.mp4"></video>
+      </li>
+    </ul>
+  </div>
+  <script>
+    var pause = document.querySelector('.pause');
+    var start = document.querySelector('.start');
+    var video = document.querySelector('video');
+    var list = document.querySelectorAll('li');
+    start.onclick = function() {
+      video.play();
+      start.className = 'start active';
+      pause.className = 'pause';
+    }
+    pause.onclick = function() {
+      video.pause();
+      start.className = 'start';
+      pause.className = 'pause active';
+    }
+    function Vover() {
+      if(video.paused == false) {
+        pause.className = 'pause';
+        start.className = 'start active';
+      }
+      if(video.paused == true) {
+        pause.className = 'pause active';
+        start.className = 'start';
+      }
+    }
+    function Vleave() {
+      if(video.paused == false) {
+        pause.className = 'pause active';
+        start.className = 'start active';
+      }
+      if(video.paused == true) {
+        pause.className = 'pause active';
+        start.className = 'start';
+      }
+    }
+    video.onmouseover = function() {
+      Vover();
+    }
+    pause.onmouseover = function () {
+      Vover();
+    }
+    video.onmouseleave = function() {
+      Vleave();
+    }
+    video.onmousemove = function() {
+      Vover();
+    }
+    for(let i of list) {
+      i.onclick = function() {
+        video.src = i.children[0].src;
+        console.log(i.children[0].src);
+        Vover();
+      }
+    }
+  </script>
+</body>
+</html>

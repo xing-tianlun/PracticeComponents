@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+		}
+		img {
+			vertical-align: middle;
+		}
+		#main {
+			width: 590px;
+			height: 470px;
+			border:1px solid #000;
+			margin:50px auto;
+			position: relative;
+		}
+		#main #ul li {
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity:0;
+			transition: .5s;
+		}
+		#main #ul li.active {
+			opacity:1;
+		}
+		#main #left {
+			width:30px;
+			height:30px;
+			font-size:20px;
+			line-height: 30px;
+			position: absolute;
+			top:50%;
+			left:0px;
+			background: rgba(0,0,0,.5);
+			border-top-right-radius: 30px;
+			border-bottom-right-radius: 30px;
+			color:white;
+			cursor: pointer;
+		}
+		#main #left a {
+			display: block;
+			width: 30px;
+			height: 30px;
+			border-top-left-radius: 30px;
+			border-bottom-left-radius: 30px;
+			text-indent: 5px;
+			color: #fff;
+		}
+		#main #right {
+			width:30px;
+			height:30px;
+			font-size:20px;
+			line-height: 30px;
+			position: absolute;
+			top:50%;
+			right:0px;
+			background: rgba(0,0,0,.5);
+			border-top-left-radius: 30px;
+			border-bottom-left-radius: 30px;
+			color:white;
+			cursor: pointer;
+		}
+		#main #right a {
+			display: block;
+			width: 30px;
+			height: 30px;
+			border-top-left-radius: 30px;
+			border-bottom-left-radius: 30px;
+			text-indent: 10px;
+			color: #fff;
+		}
+		#main #right span {
+			float:right;
+		}
+		#main #ol {
+			position: absolute;
+			top: 400px;
+			left: 50px;
+		}
+		#main #ol li {
+			width:10px;
+			height:10px;
+			float: left;
+			margin-right: 10px;
+			border-radius: 50%;
+			padding:3px;
+			background: rgba(255,255,255,.3);
+		}
+		#main #ol li span {
+			display: block;
+			width:10px;
+			height:10px;
+			border-radius: 50%;
+			background: rgba(255,255,255,.3);
+		}
+		#main #ol li.active span {
+			background:rgb(255,255,255)
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id="ul">
+			<li class="active"><a href="#"><img src="img/1.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/2.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/3.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/4.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/5.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/6.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/7.jpg" alt=""></a></li>
+			<li><a href="#"><img src="img/8.jpg" alt=""></a></li>
+		</ul>
+		<div id="left"><a href='javascript:;'>&lt;</a></div>
+		<div id="right"><a href='javascript:;'>&gt;</a></div>
+		<ol id="ol">
+			<li class="active"><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+			<li><span></span></li>
+		</ol>
+	</div>
+	<script>
+		var oUl = document.getElementById('ul'),
+			oOl = document.getElementById('ol'),
+			uli = oUl.getElementsByTagName('li'),
+			oli = oOl.getElementsByTagName('li'),
+			oleft = document.getElementById('left'),
+			oright = document.getElementById('right'),
+			omain = document.getElementById('main'),
+			index = 0;
+		for(var i = 0,len = oli.length;i < len;i++) {
+			oli[i].dex1 = i;
+			console.dir(oli[i]);
+			oli[i].onmouseenter = function() {
+				for(j = 0;j < len;j++) {
+					oli[j].className = "";
+					uli[j].className = "";
+				}
+				this.className = uli[this.dex1].className = "active";
+				index = this.dex1;
+			}
+		}
+		oleft.onclick = function() {
+			index--;
+			for(i = 0;i < len;i++) {
+				oli[i].className = uli[i].className = "";
+			}	
+			if(index < 0) index = 7;
+			oli[index].className = uli[index].className = "active";
+		}
+		oright.onclick = function() {
+			selfplay();
+ 		}
+ 		var timer = setInterval(function() {
+ 			selfplay();
+ 		},2000);
+ 		omain.onmouseenter = function() {
+ 			clearInterval(timer);
+ 		}
+ 		omain.onmouseleave = function() {
+ 			timer = setInterval(function() {selfplay();},2000);
+ 		}
+ 		function selfplay() {
+ 			index++;
+			for(i = 0;i < len;i++) oli[i].className = uli[i].className = "";
+			if(index > 7) index = 0;
+			oli[index].className = uli[index].className = "active";
+ 		}
+ 	</script>
+
+</body>
+</html>

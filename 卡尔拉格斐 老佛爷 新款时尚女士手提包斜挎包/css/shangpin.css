@@ -1,0 +1,360 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ul,ol {
+	list-style: none;
+}
+img {
+	vertical-align: middle;
+}
+a {
+	text-decoration: none;
+}
+#main {
+	width: 1022px;
+	height:500px;
+	border: 1px solid black;
+	margin: 33px auto;
+	position: relative;
+}
+#main #left {
+	width: 352px;
+	height:460px;
+	float: left;
+	margin-left:36px;
+}
+#main #left #win {
+	width: 350px;
+	height: 350px;
+	border: 1px solid #eeeeee;
+	margin: 10px 0 20px 0;
+}
+#main #left #win li {
+	display: none;
+}
+#main #left #win li.active {
+	display: block;
+	
+}
+#main #left #glass {
+	position: absolute;
+	top: 331px;
+	left: 357px;
+}
+#main #left #bottom {
+	width: 350px;
+	height: 54px;
+	margin-bottom: 20px;
+}
+#main #left #bottom #tableft {
+	float: left;
+	margin-right: 6px;
+	margin-top: 12px;
+}
+#main #left #bottom #tabright {
+	float: left;
+	margin-left: 6px;
+	margin-top: 12px;
+}
+#main #left #bottom #tab li {
+	float:left;
+	border: 2px solid white;
+	display: none;
+	margin-right:5px;
+}
+#main #left #bottom #tab li.active {
+	display: block;
+}
+#main #left #bottom #tab li.act {
+	border: 2px solid #e63d40;
+}
+#main #left #bot {
+	width: 350px;
+	height: 20px;
+}
+#main #left #bot span {
+	font-size: 11px;
+	color: #74687c;
+}
+#main #left #bot [src="img/img12.png"] {
+	margin-right: 5px;
+}
+#main #left #bot [src="img/img13.png"] {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#main #left #bot .span2 {
+	float:right;
+}
+
+
+
+
+#main #right {
+	width: 590px;
+	height: 440px;
+	float:left;
+	margin-left: 30px;
+}
+#main #right .title {
+	margin-top: 25px;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: bold;
+	margin-bottom: 17px;
+}
+#main #right .title [src="img/logo.png"] {
+	margin-right: 5px;
+}
+#main #right .title span {
+	line-height: 16px;
+	vertical-align: middle;
+}
+#main #right .discount {
+	font-size: 11px;
+	color: #da413b;
+	margin-bottom: 8px;
+}
+#main #right .discount a {
+	text-decoration: underline;
+}
+#main #right .price {
+	width: 590px;
+	height: 72px;
+	background: #f3f3f3;
+}
+#main #right .price .prileft {
+	width:510px;
+	float: left;
+}
+#main #right .price .prileft .pri {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#main #right .price .prileft .pri .sp1 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #9b9b9b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .price .prileft .pri .sp2 {
+	font-size: 17px;
+	line-height: 17px;
+	color: #d8402b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .price .prileft .pri a {
+	font-size: 11px;
+}
+#main #right .price .prileft .discounts {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#main #right .price .prileft .discounts .sp1 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #9b9b9b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .price .prileft .discounts .juan1,.juan2 {
+	display: inline-block;
+	padding: 3px 9px;
+	font-size: 12px;
+	line-height: 12px;
+	color: #d8402b;
+	border: 1px solid #d8402b;
+	cursor: pointer;
+}
+#main #right .price .priright {
+	width: 67px;
+	height: 32px;
+	border-left: 1px solid #e5e5e5;
+	float:left;
+	text-align: center;
+	color: #9e9f9a;
+	font-size: 12px;
+	line-height: 15px;
+	margin-top: 10px;
+}
+#main #right .price .priright span {
+	color: #1154a5;
+}
+#main #right .site {
+	margin-top: 2px;
+	margin-left: 10px;
+}
+#main #right .site .sp1 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #9b9b9b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .site .sit {
+	font-size: 12px;
+	color: #6a6965;
+	display: inline-block;
+	padding: 6px 4px;
+	border: 1px solid #cbcbcb;
+}
+#main #right .site .sp2 {
+	font-size: 12px;
+	line-height: 25px;
+	display: inline-block;
+	margin-right: 16px;
+	color: #a29d99;
+}
+#main #right .site .sp3 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #665963;
+	display: inline-block;
+	margin-right: 10px;
+}
+#main #right .site a {
+	font-size: 12px;
+	line-height: 17px;
+	color: #5b6fae;
+	display: inline-block;
+	margin-right: 10px;
+}
+#main #right .sit:hover {/*选项外框变红*/
+	border: 1px solid #df3035;
+}
+#main #right .sp4 {/*问号样式*/
+	font-size: 12px;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 50%;
+	background: #b0b2c1;
+	color: white;
+	margin-right: 10px;
+}
+#main #right .shop {
+	width: 586px;
+	font-size: 12px;
+	color: #9d999a;
+	line-height: 37px;
+	text-indent: 70px;
+	border-bottom: 1px dotted #e4e4e4;
+}
+#main #right .shop .shoping {
+	color: #d83b28;
+}
+#main #right .safe {
+	margin-top: 15px;
+	margin-left: 10px;
+}
+#main #right .safe .sp1 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #9b9b9b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .sit {
+	font-size: 12px;
+	color: #6a6965;
+	display: inline-block;
+	padding: 6px 4px;
+	border: 1px solid #cbcbcb;
+	cursor: pointer;
+}
+#main #right .stages {
+	margin-top: 9px;
+	margin-left: 10px;
+}
+#main #right .stages .sp1 {
+	font-size: 12px;
+	line-height: 17px;
+	color: #9b9b9b;
+	display: inline-block;
+	margin-right: 16px;
+}
+#main #right .stages .child5 {
+	margin-left: 68px;
+	margin-top: 4px;
+}
+#main #right .sp5 {/*问号样式*/
+	font-size: 12px;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 50%;
+	background: #fe3b03;
+	color: white;
+	margin-right: 5px;
+}
+#main #right #car {
+	margin-top: 15px;
+	margin-left: 10px;
+}
+#main #right #car #num {
+	width: 58px;
+	height: 44px;
+	border: 1px solid #cbcbcb;
+	float: left;
+	margin-right: 10px;
+}
+#main #right #car #num #number {
+	width: 41px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	float: left;
+}
+#main #right #car #num #add_sub {
+	width: 16px;
+	height: 44px;
+	text-align: center;
+	float: left;
+	border-left: 1px solid #cbcbcb;
+	background: #f6f2ef;
+}
+#main #right #car #num #add_sub #add {
+	border-bottom: 1px solid #cbcbcb;
+	cursor: pointer;
+}
+#main #right #car #num #add_sub #sub {
+	cursor: pointer;
+}
+#main #right #car #btn {
+	width: 142px;
+	height: 46px;
+	font-size: 18px;
+	color: #fff;
+	font-weight: bold;
+	background: #e03234;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#main #right .hint {
+	margin-top: 23px;
+	margin-left: 10px;
+	font-size: 12px;
+	color: #9e9e9e;
+}
+#main #right .hint span {
+	display: inline-block;
+	margin-right: 18px;
+}
+
+
+
+
+
+
+
+
+
+

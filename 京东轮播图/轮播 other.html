@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#banner{
+			width: 590px;
+			height: 470px;
+			position: relative;
+			margin: 50px auto;
+		}
+		#picList>li{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;left: 0;
+			opacity: 0;
+			transition: .8s;
+		}
+		#picList>li.active{
+			opacity: 1;
+		}
+		#tabList{
+			position: absolute;
+			left: 20px;bottom: 30px;
+		}
+		#tabList>li{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			float: left;
+			margin-right: 2px;
+			background: rgba(255,255,255,.3);
+		}
+		#tabList>li.active{
+			background: rgb(255,255,255);
+		}
+		.ctrls{
+			width: 100%;
+			height: 60px;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.ctrls>div{
+			width: 30px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+			background: #000;
+			color: #fff;
+		}
+		.ctrls .prev{
+			float: left;
+		}
+		.ctrls .next{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<ul id="picList">
+			<li class="active"><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+		</ul>
+		<ol id="tabList">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+		<div class="ctrls">
+			<div class="prev">&lt;</div>
+			<div class="next">&gt;</div>
+		</div>
+	</div>
+	<script>
+		var tab=document.querySelectorAll('#tabList>li'), 
+		 	lis=document.querySelectorAll('#picList>li'),
+			prev=document.querySelector('.prev'),
+			next=document.querySelector('.next'),
+		 	banner=document.getElementById('banner');
+		var len=tab.length, pos=0,timer;
+		for(var i=0;i<len;i++){
+			tab[i].title=i;
+			tab[i].onclick=function(){
+				clearClassName();
+				this.className=lis[this.title].className='active';
+			}
+		}
+		prev.onclick=function(){
+			clearClassName();
+			pos--;
+			if(pos<0)pos=len-1;
+			tab[pos].className=lis[pos].className='active';
+		}
+		next.onclick=handleRight;
+		autoPlay();
+		banner.onmouseenter=function(){
+			clearInterval(timer);
+		}
+		banner.onmouseleave=function(){
+			autoPlay();
+		}
+		function handleRight(){
+			clearClassName();
+			pos++;
+			if(pos>len-1)pos=0;
+			tab[pos].className=lis[pos].className='active';
+		}
+		function autoPlay(){
+			timer=setInterval(handleRight,2000);
+		}
+		function clearClassName(){
+			for(var j=0;j<len;j++) tab[j].className=lis[j].className='';
+		}
+	</script>
+</body>
+</html>

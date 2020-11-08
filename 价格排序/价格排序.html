@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		img {
+			vertical-align: middle;
+			width:180px;
+			height:180px;
+		}
+		[src="img/10.jpg"] {
+			width:52px;
+			height:52px; 
+		}
+		#main {
+			width:1270px;
+			height:688px;
+			margin:0 auto;
+			background: #dfdfdf;
+			overflow:hidden;
+		}
+		#main #ul1 {
+			width:1000px;
+			height:40px;
+			border:1px solid gray;
+			background:#dadada;
+			margin-top:22px;
+			margin-left:77px;
+		}
+		#main #ul1>li {
+			float:left;
+			width:100px;
+			height:40px;
+			font-size:16px;
+			line-height:40px;
+			text-align:center;
+		}
+		#main #ul1 #pr {
+			position: relative;
+		}
+		#main #ul1 #pr #subul {
+			border:1px solid #000;
+			border-top:none;
+			position:absolute;
+			top:0;
+			left:0;
+			z-index: 1;
+		}
+		#main #ul1 #pr #subul li {
+			display: none;
+			cursor: pointer;
+		}
+		#main #ul1 #pr:hover #subul li {
+			display: block;
+			background: #dfdfdf;
+		}
+		#main #ul1 #pr #subul li:hover {
+			display: block;
+			background: #dfdfdf;
+		}
+		#ul2 {
+			margin-left:77px;
+		}
+		#ul2 li {
+			width:220px;
+			height:250px;
+			border:1px solid #cec6c4;
+			margin:14px;
+			float:left;
+			position: relative;
+		}
+		#ul2 li .img {
+			margin:18px;
+		}
+		#ul2 li [src="img/10.jpg"] {
+			position: absolute;
+			right:0;
+			bottom:0;
+		}
+		#ul2 li .price {
+			position: absolute;
+			right:9px;
+			bottom:20px;
+			color:#f0cd19;
+			font-size:12px;
+			font-weight:bold;
+		}
+		#ul2 li .sp {
+			font-size:12px;
+			line-height:20px;
+			text-indent: 5px;
+			display: inline-block;
+			margin-bottom:10px;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="main">
+		<ul id="ul1">
+			<li>流行</li>
+			<li>热销</li>
+			<li>上新</li>
+			<li id="pr">价格
+				<ul id="subul">
+					<li id="up">价格从高到低</li>
+					<li id="down">价格从低到高</li>
+					<li id="random">价格随机</li>
+				</ul>
+			</li>
+		</ul>
+		<ul id="ul2">
+			<li><img src="img/1.jpg" alt="" class="img" /> <span class="sp">粉色玫瑰浪漫系列</span><img src="img/10.jpg" alt=""><span class="price">￥500</span></li>
+			<li><img src="img/2.jpg" alt="" class="img" /> <span class="sp">深红色经典玫瑰</span><img src="img/10.jpg" alt=""><span class="price">￥100</span></li>
+			<li><img src="img/3.jpg" alt="" class="img" /> <span class="sp">清淡优雅百年百合</span><img src="img/10.jpg" alt=""><span class="price">￥300</span></li>
+			<li><img src="img/4.jpg" alt="" class="img" /> <span class="sp">紫色冷艳系列系列</span><img src="img/10.jpg" alt=""><span class="price">￥700</span></li>
+			<li><img src="img/5.jpg" alt="" class="img" /> <span class="sp">经典红色我的最爱</span><img src="img/10.jpg" alt=""><span class="price">￥130</span></li>
+			<li><img src="img/6.jpg" alt="" class="img" /> <span class="sp">甜美七分袖荷叶边条纹</span><img src="img/10.jpg" alt=""><span class="price">￥215</span></li>
+			<li><img src="img/7.jpg" alt="" class="img" /> <span class="sp">甜美七分袖荷叶边条纹</span><img src="img/10.jpg" alt=""><span class="price">￥97</span></li>
+			<li><img src="img/8.jpg" alt="" class="img" /> <span class="sp"> 甜美七分袖荷叶边条纹</span><img src="img/10.jpg" alt=""><span class="price">￥99.5</span></li>
+		</ul>
+	</div>
+
+	<script>
+		var ul2 = document.getElementById('ul2'),
+			up = document.getElementById('up'),
+			down = document.getElementById('down'),
+			random = document.getElementById('random'),
+			liList = ul2.getElementsByTagName('li'),
+			flower = [];
+		for(var i = 0;len = liList.length,i < len;i++) {
+			var imgUrl = liList[i].getElementsByTagName('img')[0].getAttribute('src');
+			var span1 = liList[i].getElementsByTagName('span')[0].innerText;
+			var price = Number(liList[i].getElementsByTagName('span')[1].innerText.slice(1));
+			flower.push({
+				imgUrl:imgUrl,
+				span1:span1,
+				price:price
+			});
+		}
+		console.log(flower);
+		down.onclick = function() {
+			flower.sort(function(f1,f2) {
+				return f1.price - f2.price;
+			});
+			HTML();
+		}
+		up.onclick = function() {
+			flower.sort(function(f1,f2) {
+				return f2.price - f1.price;
+			});
+			HTML();
+		}
+		random.onclick = function() {
+			flower.sort(function() {
+				return Math.random() - 0.5;
+			});
+			HTML();
+		}
+		var HTML = function() {
+			var html = "";
+			for(i = 0;i < len;i++) {
+				html += '<li><img src='+ flower[i].imgUrl +' alt="" class="img" /> <span class="sp"> '+ flower[i].span1 +'</span><img src="img/10.jpg" alt=""><span class="price">￥' + flower[i].price + '</span></li>';
+			}
+			ul2.innerHTML = html;
+		}
+	</script>
+
+	<!-- <script>
+		var oUp = document.getElementById('up'),
+			oDown = document.getElementById('down'),
+			price = document.getElementsByClassName('price'),
+			liList = document.getElementById('ul2').getElementsByTagName('li'),
+			pri = [];
+		oUp.onclick = function() {
+			for(var i = 0;i < price.length;i++) {
+				var arr = price[i].innerHTML.split("");
+				var arr1 = arr.shift();
+				var str = arr.join('');
+				price[i].innerHTML = str;
+			}
+			for(var k = 0;k < price.length;k++) {
+				for(var j = k + 1;j < price.length;j++) {
+					console.log(price[j].Pr,typeof price[j].Pr);
+					if(Number(price[k].innerHTML) < Number(price[j].innerHTML)) {
+						var temp = liList[k].innerHTML;
+						liList[k].innerHTML = liList[j].innerHTML;
+						liList[j].innerHTML = temp;
+					}
+				}
+			}
+			for(var i = 0;i < price.length;i++) {
+				price[i].innerHTML = "￥ " + price[i].innerHTML;
+			}
+		}
+		oDown.onclick = function() {
+			for(var i = 0;i < price.length;i++) {
+				var arr = price[i].innerHTML.split("");
+				var arr1 = arr.shift();
+				var str = arr.join('');
+				price[i].innerHTML = str;
+			}
+			for(var k = 0;k < price.length;k++) {
+				for(var j = k + 1;j < price.length;j++) {
+					console.log(price[j].Pr,typeof price[j].Pr);
+					if(Number(price[k].innerHTML) > Number(price[j].innerHTML)) {
+						var temp = liList[k].innerHTML;
+						liList[k].innerHTML = liList[j].innerHTML;
+						liList[j].innerHTML = temp;
+					}
+				}
+			}
+			for(var i = 0;i < price.length;i++) {
+				price[i].innerHTML = "￥ " + price[i].innerHTML;
+			}
+		}
+	</script> -->
+</body>
+</html>

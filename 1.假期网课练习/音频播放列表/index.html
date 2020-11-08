@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    ul,ol {
+      list-style: none;
+    }
+    .main {
+      width: 500px;
+      /* border: 1px dashed #000; */
+      margin: 100px auto;
+    }
+    .main [src="img/img1.png"] {
+      width: 500px;
+    }
+    .main .song {
+      font-size: 26px;
+      line-height: 40px;
+      padding: 0 20px;
+    }
+    .main .audiobox {
+      width: 500px;
+    }
+    .main audio {
+      float: left;
+      width: 450px;
+      background: #f1f3f4;
+    }
+    .main .list {
+      float: left;
+      width: 50px;
+      height: 54px;
+      position: relative;
+    }
+    .main .list span {
+      display: inline-block;
+      width: 50px;
+      font-size: 22px;
+      line-height: 54px;
+      text-align: center;
+    }
+    .main .list ul {
+      width: 145px;
+      position: absolute;
+      top: 54px;
+      right: 0;
+      background: rgba(0,0,0,.3);
+    }
+    .main .list ul li {
+      color: #fff;
+      height: 40px;
+      padding: 0 0 0 20px;
+      font-size: 20px;
+      line-height: 40px;
+      border-bottom: 1px solid #999;
+    }
+    </style>
+</head>
+<body>
+  <div class="main">
+    <img src="img/img1.png" alt="">
+    <p class="song">当前正在播放：<span id="song">白安-bird</span></p>
+    <div class="audiobox">
+      <audio src="audio/白安-bird.mp3" controls autoplay id="music"></audio>
+      <div class="list">
+        <span>列表</span>
+        <ul class="listcon" style='display: none;'>
+          <li>白安-bird</li>
+          <li>白安-安慰</li>
+          <li>白安-斑马线</li>
+          <li>白安-离开后</li>
+          <li>白安-妈妈</li>
+        </ul>
+      </div>
+    </div>
+    <div class="audioControl">
+      <button id="up">上一曲</button>
+      <button id="play">播放/暂停</button>
+      <button id="down">下一曲</button>
+      <button id="stop">停止</button>
+      <button id="one">正常倍速</button>
+      <button id="two">2倍速</button>
+      <button id="half">0.5倍速</button>
+    </div>
+    
+  </div>
+  <script>
+    var list = document.querySelector('.list'),
+        listcon = document.querySelector('.listcon'),
+        lists = listcon.querySelectorAll('li'),
+        up = document.getElementById('up'),
+        down = document.getElementById('down'),
+        play = document.getElementById('play'),
+        stop = document.getElementById('stop'),
+        one = document.getElementById('one'),
+        two = document.getElementById('two'),
+        half = document.getElementById('half');
+    var audio = document.querySelector('audio'),
+        song = document.getElementById('song');
+
+    list.onclick = function() {
+      // console.log(listcon.style.display)
+      if(listcon.style.display == 'none') {
+        listcon.style.display = 'block';
+      }else {
+        listcon.style.display = 'none';
+      }
+    }
+    play.onclick = function() {
+      if(music.paused) {
+        music.play();
+      }else {
+        music.pause();
+      }
+    }
+    stop.onclick = function() {
+      music.pause();
+      music.currentTime = 0;
+    }
+    one.onclick = function() {
+      music.playbackRate = 1;
+    }
+    two.onclick = function() {
+      music.playbackRate = 2;
+    }
+    half.onclick = function() {
+      music.playbackRate = .5;
+    }
+    var dex = 0;
+    for(var i = 0;i < lists.length;i++) {
+      lists[i].index = i;
+      lists[i].onclick = function() {
+        audio.src = 'audio/' + lists[this.index].innerText + '.mp3';
+        song.innerText = lists[this.index].innerText;
+        dex = this.index;
+      }
+    }
+    function next() {
+      for(var m = 0;m < lists.length;m++) {
+        lists[m].index = m;
+        audio.src = 'audio/' + lists[dex].innerText + '.mp3';
+        song.innerText = lists[dex].innerText;
+      }
+    }
+    down.onclick = function() {
+      dex++;
+      console.log(dex);
+      if(dex >= lists.length) {
+        dex = 0;
+      }
+      next();    }
+    up.onclick = function() {
+      dex--;
+      console.log(dex);
+      if(dex < 0) {
+        dex = lists.length - 1;
+      }
+      next();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#simg {
+			width: 350px;
+			height: 350px;
+			background-image: url("small.jpg");
+			/*border: 1px solid #000;*/
+			float: left;
+			position: relative;
+		}
+		#simg #sbox {
+			width: 175px;
+			height: 175px;
+			background: rgba(0,255,255,.5);
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+			cursor: move ;
+		}
+		#bimg {
+			width: 400px;
+			height: 400px;
+			/*border: 1px solid #000;*/
+			float: left;
+			margin-left: 5px;
+			overflow: hidden;
+			position: relative;
+			display: none;
+		}
+		#bimg img {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="simg">
+		<div id="sbox"></div>
+	</div>
+	<div id="bimg">
+		<img src="big.jpg" alt="" id="img">
+	</div>
+	<script>
+		var sbox = document.getElementById('sbox'),
+			simg = document.getElementById('simg'),
+			oimg = document.getElementById('img'),
+			bimg = document.getElementById('bimg');
+		simg.onmouseenter = function() {
+			sbox.style.display = "block";
+			bimg.style.display = "block";
+			simg.onmousemove = function(e) {
+				var nleft = e.clientX - sbox.offsetWidth/2;
+				var ntop = e.clientY - sbox.offsetHeight/2;
+				if(nleft <= 0) {
+					nleft = 0;
+				}else if(nleft >= simg.offsetWidth - sbox.offsetWidth) {
+					nleft = simg.offsetWidth - sbox.offsetWidth;
+				}
+				if(ntop <= 0) {
+					ntop = 0;
+				}else if(ntop >= simg.offsetHeight - sbox.offsetHeight) {
+					ntop = simg.offsetHeight - sbox.offsetHeight;
+				}
+				sbox.style.left = nleft + "px";
+				sbox.style.top = ntop + "px";
+				oimg.style.left = -(parseInt(800 / 350 * nleft)) + 'px';
+				oimg.style.top = -(parseInt(800 / 350 * ntop)) + 'px';
+				return false; 
+			}
+			return false;
+		}
+		simg.onmouseleave = function() {
+			sbox.style.display = "none";
+			bimg.style.display = "none";
+		}
+	</script>
+</body>
+</html>
