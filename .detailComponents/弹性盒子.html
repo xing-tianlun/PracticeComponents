@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			font-size: 12px;
+		}
+		a{
+			color: #999;
+			text-decoration: none;
+		}
+		.flex-container{
+			display: -webkit-flex;
+		    display: flex;
+		    -webkit-flex-direction: column;
+    		flex-direction: column;
+		    width: 1195px;
+		    height: 250px;
+		    margin: auto;
+		}
+		.flex-item{
+			display: -webkit-flex;
+		    display: flex;
+		    -webkit-justify-content: center;
+		    justify-content: center;
+		}
+		.flex-item li{
+			color: #999;
+			padding: 10px 10px 0;
+		}
+		.divs li {
+			position: relative;
+		}
+		.divs li+li::before{
+			content: "";
+			display: block;
+			width: 1px;
+			height: 12px;
+			background: #999;
+			position: absolute;
+			top: 12px;left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="flex-container">
+		<ul class="flex-item divs">
+			<li>
+				<a href="#">关于我们</a>
+			</li>
+			<li>
+				<a href="#">联系我们</a>
+			</li>
+			<li>
+				<a href="#">联系客服</a>
+			</li>
+			<li>
+				<a href="#">合作招商</a>
+			</li>
+			<li>
+				<a href="#">商家帮助</a>
+			</li>
+			<li>
+				<a href="#">营销中心</a>
+			</li>
+			<li>
+				<a href="#">手机京东</a>
+			</li>
+			<li>
+				<a href="#">友情链接</a>
+			</li>
+			<li>
+				<a href="#">销售联盟</a>
+			</li>
+			<li>
+				<a href="#">京东社区</a>
+			</li>
+			<li>
+				<a href="#">风险监测</a>
+			</li>
+			<li>
+				<a href="#">隐私政策</a>
+			</li>
+			<li>
+				<a href="#">京东公益</a>
+			</li>
+			<li>
+				<a href="#">English Site</a>
+			</li>
+			<li>
+				<a href="#">Media & IR</a>
+			</li>
+		</ul>
+		<ul class="flex-item divs">
+			<li>
+				<a href="#">京公网安备 11000002000088</a>
+			</li>
+			<li>京ICP证070359号</li>
+			<li>
+				<a href="#">互联网药品信息服务资格证编号（京）-经营性-2014-0008</a>
+			</li>
+			<li>新出发京零 字第大120007号</li>
+		</ul>
+		<ul class="flex-item divs">
+			<li>互联网出版许可证编号新出网证（京）字150号</li>
+			<li>
+				<a href="#">出版物经营许可证</a>
+			</li>
+			<li>
+				<a href="#">网络文化经营许可证京网文[2014]2148-348号</a>
+			</li>
+			<li>违法和不良信息举报电话：4006561155</li>
+		</ul>
+		<ul class="flex-item divs">
+			<li>
+				<img src="img/foreign_1.png" alt="">
+				<a href="#">
+					Global Site
+				</a>
+			</li>
+			<li>
+				<img src="img/foreign_2.png" alt="">
+				<a href="#">
+					Сайт России
+				</a>
+			</li>
+			<li>
+				<img src="img/foreign_3.png" alt="">
+				<a href="#">
+					Situs Indonesia
+				</a>
+			</li>
+			<li>
+				<img src="img/foreign_4.png" alt="">
+				<a href="#">
+					Sitio de España
+				</a>
+			</li>
+			<li>
+				<img src="img/foreign_5.png" alt="">
+				<a href="#">
+					เว็บไซต์ประเทศไทย
+				</a>
+			</li>
+		</ul>
+		<ul class="flex-item divs">
+			<li>京东旗下网站：<a href="#">京东钱包</a></li>
+			<li><a href="#">京东云</a></li>
+		</ul>
+		<ul class="flex-item divs"></ul>
+		<ul class="flex-item"></ul>
+	</div>
+</body>
+</html>

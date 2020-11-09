@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.date{
+			width:200px;
+			height:20px;
+			margin:9px auto;
+		}
+	</style>
+</head>
+<body>	
+<div class="date">0</div>
+</body>
+<script>
+		var odate=document.querySelector(".date");
+		var y = new Date(),str="",array=[];
+		y.setHours(y.getHours()+8);
+		setInterval(function(){ 
+			var x = new Date(),num = y.getTime()-x.getTime();
+			x.setHours(0,0,0,0);
+			x.setMilliseconds(num);
+			str= x.getHours()+":"+x.getMinutes()+":"+x.getSeconds();
+			odate.innerText=str;
+	},1000);
+</script>
+</html>

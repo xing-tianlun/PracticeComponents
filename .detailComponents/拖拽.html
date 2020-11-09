@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			width: 33px;
+			height: 33px;
+			background: red;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+	<script>
+		var box = document.getElementById('box');
+
+		box.onmousedown = function(e) {
+			// 获取鼠标到元素边缘的距离
+			var oleft = e.clientX - this.offsetLeft;
+			var otop = e.clientY - this.offsetTop;
+			var maxleft = document.documentElement.clientWidth - this.offsetLeft;
+			var maxtop = document.documentElement.clientHeight - this.offsetTop;
+			document.onmousemove =function(e) {
+				
+				var mouseX = e.clientX;// 获取鼠标在可视窗口的横坐标
+				var mouseY = e.clientY;// 获取鼠标在可视窗口的纵坐标
+				var nleft = e.clientX - oleft;
+				var ntop = e.clientY - otop;
+				if(nleft <= 0 ) {
+					nleft = 0;
+				}else if(nleft >= maxleft) {
+					nleft = maxleft;
+				}
+				if(ntop <= 0 ) {
+					ntop = 0;
+				}else if(ntop >= maxtop) {
+					ntop = maxtop;
+				}
+				box.style.top = ntop + 'px';
+				box.style.left = nleft+ 'px';
+			}
+			document.onmouseup = function() {
+				// 鼠标抬起时，注销移动事件。当抬起鼠标时，元素不会跟着鼠标移动。
+				document.onmousemove = null;
+				// 标抬起时，注销抬起事件。
+				document.onmouseup = null;
+			}
+		}
+
+	</script>
+</body>
+</html>

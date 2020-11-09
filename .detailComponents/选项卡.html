@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		div {
+			width:400px;
+			height:400px;
+			margin: 0 auto;
+			border: 1px solid black;
+			position: relative;
+		}
+		div ul li {
+			width:98px;
+			height:30px;
+			background: black;
+			color: white;
+			line-height: 30px;
+			text-align: center;
+			border:1px solid white;
+			float: left;
+			cursor: pointer;
+		}
+		div ul li.active {
+			background: blue;
+		}
+		div ol li {
+			width:400px;
+			height: 350px;
+			font-size: 48px;
+			border:1px solid black;
+			text-align: center;
+			line-height: 350px;
+			position: absolute;
+			top:30px;
+			left:0;
+			display: none;
+		}
+		div ol li.active {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="warp">
+		<ul id="ul">
+			<li class="active">第一项</li>
+			<li>第二项</li>
+			<li>第三项</li>
+			<li>第四项</li>
+		</ul>
+		<ol id="ol">
+			<li class="active">内容一</li>
+			<li>内容二</li>
+			<li>内容三</li>
+			<li>内容四</li>
+		</ol>
+	</div>
+	<script>
+		var ul = document.getElementById('ul'),
+			tabs = ul.getElementsByTagName('li'),
+			ol = document.getElementById('ol'),
+			con = ol.getElementsByTagName('li');
+		for(var i = 0;i < tabs.length;i++) {
+			tabs[i].index = i;
+			tabs[i].onclick = function() {
+				for(i = 0;i < tabs.length;i++) {
+					tabs[i].className = con[i].className = "";
+				}
+				this.className = con[this.index].className = "active";
+			}
+		}
+		console.log(document.body);
+		console.log(ul.nodeName);
+		console.log(ul.nodeType);
+		console.log(ul.nodeValue);
+		console.log(ul.attributes[0].nodeName);
+		console.log(ul.attributes[0].nodeType);
+		console.log(ul.attributes[0].nodeValue);
+		console.log(ul.childNodes[0].nodeName);
+		console.log(ul.childNodes[0].nodeType);
+		console.log(ul.childNodes[0].nodeValue);
+
+	</script>
+</body>
+</html>

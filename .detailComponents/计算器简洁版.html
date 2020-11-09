@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="" id="ipt1"/>
+	<select name="" id="oper">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+		<option value="%">%</option>
+		<option value="**">**</option>
+	</select>
+	<input type="text" value="" id="ipt2"/>
+	<button id="btn">=</button>
+	<input type="text" value="" id="ipt3"/>
+	<span id="msg"></span>
+	<script>
+		var oIpt1 = document.getElementById('ipt1'),
+			oIpt2 = document.getElementById('ipt2'),
+			oIpt3 = document.getElementById('ipt3'),
+			oOper = document.getElementById('oper'),
+			oBtn = document.getElementById('btn'),
+			oMsg = document.getElementById('msg'),
+			isoper = "+";
+		oOper.onchange = function() {
+			isoper = this.value;
+		}
+		oBtn.onclick = function() {
+			var x = oIpt1.value,y = oIpt2.value;
+			if(x === "" || y === "") {
+				oIpt3.value = "";
+				oMsg.style.color = "#f00";
+				oMsg.innerText = "输入框不能为空";
+			}else if(isNaN(x) || isNaN(y)) {
+				oIpt3.value = "";
+				oMsg.style.color = "#f00";
+				oMsg.innerText = "输入框必须输入数字";
+			}else {
+				oIpt3.value = "";
+				oMsg.innerText = "";
+				oIpt3.value = eval(x + isoper + y);
+				/*if(String(isoper) === "+") {
+					oIpt3.value = parseFloat(x) + parseFloat(y);
+				}else if( String(isoper) === "-") {
+					oIpt3.value = parseFloat(x) + parseFloat(y);
+				}else if( String(isoper) === "*") {
+					oIpt3.value = parseFloat(x) * parseFloat(y);
+				}else if( String(isoper) === "/") {
+					oIpt3.value = parseFloat(x) / parseFloat(y);
+				}else if( String(isoper) === "%") {
+					oIpt3.value = parseFloat(x) % parseFloat(y);
+				}else {
+					oIpt3.value = parseFloat(x) ** parseFloat(y);
+				}*/
+			}
+		}
+	</script>
+</body>
+</html>

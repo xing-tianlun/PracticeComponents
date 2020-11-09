@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<select name="" id="test">
+		<option value="red">红色</option>
+		<option value="blue">蓝色</option>
+		<option value="green">绿色</option>
+	</select>
+	<p id="p1">2019年终结JavaScript</p>
+	<script>
+		var sel = document.getElementById('test'),
+			oP = document.getElementById('p1');
+		oP.style.color = "red";
+		sel.onchange = function() {
+			oP.style.color = this.value;
+		}
+	</script>
+	<!-- <select id="pid" onchange="gradeChange()">
+	        <option value="1">选项一</option>
+	        <option value="2">选项二</option>
+	    </select>
+	
+	    <script type="text/JavaScript">
+	        function gradeChange() {
+	            var objS = document.getElementById("pid");
+	            var grade = objS.options[objS.selectedIndex].value;
+	            alert(grade);
+	        }
+	    </script> -->
+</body>
+</html>

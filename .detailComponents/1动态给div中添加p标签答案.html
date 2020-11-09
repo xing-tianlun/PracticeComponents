@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<div id="box">
+	
+	</div>
+	<script>
+		var oBtn = document.getElementById("btn"),
+			oDiv = document.getElementById("box"),
+			ps = document.getElementsByTagName("p");
+		oBtn.onclick = function() {
+			var ascii = getRandom(65,122);
+			while(ascii >= 91 && ascii <= 96) {
+				ascii = getRandom(65,122);
+			}
+			var c = String.fromCharCode(ascii);
+			oDiv.innerHTML += '<p>'+ c +'</p>';
+			for(var i = 0; i < ps.length; i++) {
+				ps[i].style.background = i % 2 ? 'red': 'green';
+			}
+		};
+
+		// 'A' - 'Z'  65 - 90
+		// 'a' - 'z'  97 - 122 
+		function getRandom(min,max){
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        getTime()
+        setInterval(getTime,1000);
+        function getTime() {
+            //获取系统当前时间
+            var now = new Date();
+            //找到过年时间
+            var future = new Date('2020-1-25');
+            var date = future - now;
+            var day = date / 1000 / 60 / 60 / 24;
+
+            //取整的天数
+            var D = parseInt(day); //17天
+            //求不满一天的时间转成小时描述
+            var hour = (day - D) * 24;
+            //取整的小时
+            var H = parseInt(hour);
+            //不满一小时的时间转成分钟描述
+            var min = (hour - H) * 60;
+            //取整的分钟
+            var M = parseInt(min);
+            //不满一分钟的转成秒描述
+            var sec = (min - M) * 60;
+            var S = parseInt(sec);
+            console.log("距离过年还有" + addZero(D) + "天" + addZero(H) + "时" + addZero(M) + "分" + addZero(S) + "秒")
+        }
+        function addZero(num){
+            /* if(num>9){
+                return num;
+            }else{
+                return "0"+num;
+            } */
+            return num>9?num:'0'+num;
+        }
+
+    </script>
+</body>
+
+</html>

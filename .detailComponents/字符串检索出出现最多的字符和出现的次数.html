@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var str = "asdfasasaddsaaf",
+			obj = {},
+			max = 0;
+		for(var i = 0;i < str.length;i++) {
+			obj[str.charAt(i)] = obj[str.charAt(i)] ? ++obj[str.charAt(i)] : 1;
+		}
+		var maxkey = "";
+		for(var key in obj) {
+			if(max < obj[key]) {
+				max = obj[key];
+				maxkey = key;
+			}
+		}
+		console.log("出现次数最多的是" + maxkey + ",出现了" + max + "次。");
+	</script>
+</body>
+</html>

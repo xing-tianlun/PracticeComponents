@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#box  {
+			width: 100px;
+			height: 100px;
+			background: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		var bod = document.documentElement;
+		var numtop = 0;
+		var numleft = 0;
+		var stepX = Math.floor(Math.random() * 10 + 1);
+		var stepY = Math.floor(Math.random() * 10 + 1);
+		var otop = bod.clientHeight - box.offsetHeight;
+		var oleft = bod.clientWidth - box.offsetWidth;
+		console.log(otop,box.offsetHeight,oleft,box.offsetWidth);
+		console.log(numtop,numleft);
+		setInterval(function() {
+			numtop += stepY;
+			numleft += stepX;
+			console.log(numtop,numleft);
+			if(numtop >= otop) {
+				stepY = Math.floor(Math.random() * 10 + 1);
+				stepY = -stepY;
+			}else if(numtop <= 0) {
+				stepY = Math.floor(Math.random() * 10 + 1);
+			}
+			if(numleft >= oleft ) {
+				stepX = Math.floor(Math.random() * 10 + 1);
+				stepX = -stepX;
+			}else if(numleft <= 0) {
+				stepX = Math.floor(Math.random() * 10 + 1);
+			}
+			
+			box.style.top = numtop + 'px';
+			box.style.left = numleft + 'px';
+		},1);
+	</script>
+</body>
+</html>

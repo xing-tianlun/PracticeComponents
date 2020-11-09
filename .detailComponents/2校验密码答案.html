@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		span#msg.error{
+			color: #f00;
+		}
+		span#msg.right{
+			color: #0f0;
+		}
+		b {
+			display: inline-block;
+			width: 30px;
+			height: 20px;
+			background: gray;
+			font-size: 12px;
+			color: #fff;
+		}
+		b.strong {
+			background: #0f0;
+		}
+		b.medium {
+			background: #ff0;
+		}
+		b.weak {
+			background: #f00;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="ipt">
+	<span id="msg"></span>
+	<br/>
+	<b id="strong">强</b>
+	<b id="medium">中</b>
+	<b id="weak">弱</b>
+	<script>
+		var oIpt = document.getElementById("ipt"),
+			oMsg = document.getElementById("msg"),
+			oStrong = document.getElementById("strong"),
+			oMedium = document.getElementById("medium"),
+			oWeak = document.getElementById("weak");
+			bs = document.getElementsByTagName("b");
+
+
+		// 监听密码框失焦事件
+		oIpt.onblur = function() {
+			// 获取input的值
+			var v = this.value;
+
+			// 检测 
+			if(!v) {
+				oMsg.innerText = "密码不能为空";
+				oMsg.className = 'error';
+				// oMsg.setAttribute('class','error');
+			}else if(v.length < 6 || v.length > 16) {
+				oMsg.innerText = "密码长度必须在6-16之间";
+				oMsg.className = 'error';
+			}else {
+
+				oMsg.innerText = "输入正确";
+				oMsg.className = 'right';
+				// 强：字母，数字，特殊字符都有
+				// 中：有字母，数字，特殊字符其中的两种
+				// 弱：要么全是数字，要么全是字母，要么全是特殊字符
+
+				// 清空b标签的所有样式 
+				for(var i = 0; i < bs.length; i++) {
+					bs[i].className = '';
+				}
+
+
+				if(hasNumber(v) && hasLetter(v) && hasSpecial(v)) {
+					// 强
+					oStrong.className = 'strong';
+
+				}else if(isAllNumber(v) || isAllLetter(v) || isAllSpecial(v)){
+					// 弱
+					oWeak.className = 'weak';
+				}else {
+					// 中
+					// console.log('medium');
+					oMedium.className = 'medium';
+				}
+
+
+
+
+				/*df_+234@$
+
+				dsf23435
+
+				fdsffd+__@$#
+
+				2432**^*^*
+
+
+				4234234423
+
+				sdsadsfsdaf
+
+				+@%&#%&^*@*/
+			}
+
+		};
+
+		// 检测一个字符串是否全是数字
+		function isAllNumber(s) {
+			return !isNaN(Number(s))
+		}
+		// 检测一个字符串是否全是字母
+		function isAllLetter(s) {
+			// 假设字符中全是字母 只要发现有一个不是字母，那么假设不成立
+			var flag = true;
+			for(var i = 0; i < s.length; i++) {
+				var c = s.charAt(i);
+				if(!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+		// 检测一个字符串是否全是特殊字符
+		function isAllSpecial(s) {
+			var flag = true;
+			for(var i =  s.length - 1; i >= 0; i--) {
+				var c = s.charAt(i);
+				if(c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z'){
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+		// 检测一个字符串是否有数字
+		function hasNumber(s) {
+			for(var i = 0; i < s.length; i++) {
+				var c = s.charAt(i);
+				if(c >= '0' && c <= '9') {
+					return true;
+				}
+			}
+			return false;
+		}
+
+
+		// 检测一个字符串是否有字母
+		function hasLetter(s) {
+			for(var i = 0; i < s.length; i++) {
+				var c = s.charAt(i);
+				if(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z') {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		// 检测一个字符串是否有特殊字符
+		function hasSpecial(s) {
+			for(var i = 0; i < s.length; i++) {
+				var c = s.charAt(i);
+				if(!(c >= '0' && c <= '9' || c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')){
+					return true;
+				}
+			}
+			return false;
+		}
+	</script>
+</body>
+</html>

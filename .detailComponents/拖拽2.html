@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		#box {
+			width: 100px;
+			height: 100px;
+			background: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		box.onmousedown = function(e) {
+			var oleft = e.clientX - this.offsetLeft;
+			var otop = e.clientY - this.offsetTop; 
+			document.onmousemove = function(e) {
+				var nleft = e.clientX - oleft;
+				var ntop = e.clientY - otop;
+				var maxleft = document.documentElement.clientWidth - box.offsetWidth;
+				var maxtop = document.documentElement.clientHeight - box.offsetHeight;
+				//console.log(document.documentElement.clientWidth,document.documentElement.clientHeight,box.offsetWidth);
+				if(nleft <= 0 ) {
+					nleft = 0;
+				}else if(nleft >= maxleft) {
+					nleft = maxleft;
+				}
+				if(ntop <= 0 ) {
+					ntop = 0;
+				}else if(ntop >= maxtop) {
+					ntop = maxtop;
+				}
+				box.style.top = ntop + 'px';
+				box.style.left = nleft + 'px';
+			}
+			document.onmouseup = function() {
+				// 鼠标抬起时，注销移动事件。当抬起鼠标时，元素不会跟着鼠标移动。
+				document.onmousemove = null;
+				// 标抬起时，注销抬起事件。
+				document.onmouseup = null;
+			}
+		}
+	</script>
+</body>
+</html>

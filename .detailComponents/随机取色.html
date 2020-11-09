@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width:333px;
+			height:333px;
+			margin:33px auto;
+			border:1px solid black;
+		}
+		input {
+			display: inline-block;
+			margin-left:630px;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" id="btn" value="切换颜色" />
+	<div id="box"></div>
+	<script>
+		var box = document.getElementById('box'),
+			btn = document.getElementById('btn');
+		btn.onclick = function() {
+			var arr = [];
+			for(var i = 0;i < 3;i++) {
+				var num = Math.floor(Math.random() * 256);
+				arr.push(num); 
+			}
+			var str = "rgb(" + arr[0] + "," + arr[1] + "," + arr[2] + ")";
+			box.style.background = str;
+			console.log(arr);		
+		}
+	</script>
+</body>
+</html>

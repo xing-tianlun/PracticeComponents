@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定时器</title>
+</head>
+<body>
+	  <span id="time"></span>
+  	<script>	
+        var timer=document.getElementById('time');
+        var now = new Date();
+        var future = new Date('2020/1/7');
+        var djTime = future - now; 
+         setInterval(function(){
+           djTime -= 1000;
+          var totalDay=djTime/(24*60*60*1000);
+          var day = parseInt(djTime/(24*60*60*1000));
+
+          var totalHours=(totalDay-day)*24;
+          var hour = parseInt((totalDay-day)*24);
+
+          var totalMinutes=(totalHours-hour)*60;
+          var minute = parseInt((totalHours-hour)*60);
+
+          var second = parseInt((totalMinutes-minute)*60);
+          timer.innerText=day+'天'+toDouble(hour)+'时'+toDouble(minute)+'分'+toDouble(second)+'秒';
+         },1000)
+
+         function toDouble(n){
+              n = n<10 ? '0'+n :n;
+              return n;
+         }
+  	</script>
+</body>
+</html>

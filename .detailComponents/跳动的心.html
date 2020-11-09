@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跳动的心</title>
+	<script src="base.js"></script>
+    <style>
+       #heart{
+
+           width:323px;
+           height:305px;
+           /*border:1px solid blue;*/
+           position:relative;
+           margin:100px auto;
+           transition:all .6s ease;
+       }
+       #a1,#a2{
+        width:200px;
+        height:200px;
+        background:red;
+        border-radius:100px;
+       }
+       #a2{
+        position:absolute;
+        top:0px;
+        left:120px;
+       }
+       #a3{
+        width:200px;
+        height:200px;
+        background:red;
+        transform:rotate(45deg);
+        position:absolute;
+        top:59px;
+        left:60px;
+       }
+    </style>
+</head>
+<body>
+	
+      <div id="heart">
+           <div id="a1"></div>
+           <div id="a2"></div>
+           <div id="a3"></div>
+      </div>
+
+<script>
+	
+     var heart = document.getElementById('heart');
+     var state = true;
+     setInterval(function(){
+        if(state){
+            heart.style.transform = 'scale(1.5)';
+            state = false;
+        } else {
+            heart.style.transform = 'scale(1)';
+            state = true;
+        }
+      },600);
+
+
+</script>
+
+
+</body>
+</html>

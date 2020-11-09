@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .content {
+      width: 600px;
+      height: 170px;
+      border: 1px solid red;
+      margin: 0 auto;
+    }
+    .content .top {
+      width: 600px;
+      height: 80px;
+      border-bottom: 20px solid #f6f6f6;
+      display: flex;
+    }
+    .content .top .item {
+      flex: 1;
+      margin: 10px 7px 0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: #fff;
+      color: #fb3434;
+      text-align: center;
+      position: relative;
+    }
+    .content .top .item.active::after {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      margin-left: -8px;
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 8px solid #fb3434;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+    .content .top .item.active {
+      background: #fb3434;
+      color: #fff;
+    }
+    .content .top .item .itemTime {
+      font-size: 20px;
+      line-height: 39px;
+      font-weight: 700;
+    }
+    .content .top .item .stage {
+      font-size: 12px;
+    }
+
+    .content .bottom {
+      width: 600px;
+      height: 66px;
+    }
+    .content .bottom .endTime {
+      font-size: 16px;
+      line-height: 28px;
+      margin-top: 20px;
+      padding-right: 20px;
+      text-align: right;
+    }
+    .content .bottom .endTime span {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      background: #000;
+      color: #fff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="top">
+      <div class="item active">
+        <p class="itemTime">00:00场</p>
+        <p class="stage">疯抢中</p>
+      </div>
+      <div class="item">
+        <p class="itemTime">10:00场</p>
+        <p class="stage">未开始</p>
+      </div>
+      <div class="item">
+        <p class="itemTime">15:00场</p>
+        <p class="stage">未开始</p>
+      </div>
+      <div class="item">
+        <p class="itemTime">19:00场</p>
+        <p class="stage">未开始</p>
+      </div>
+      <div class="item">
+        <p class="itemTime">22:00场</p>
+        <p class="stage">未开始</p>
+      </div>
+    </div>
+    <div class="bottom">
+      <p class="endTime">距离本场结束还有 <span>00</span> : <span>00</span> : <span>00</span> : <span>00</span></p>
+    </div>
+  </div>
+  <script>
+
+    window.addEventListener('load',countDown);// 倒计时
+      function countDown() {
+      var span = document.getElementById('countdown'),
+          session = document.getElementById('session'),
+          item = document.querySelectorAll('.item');
+      var endTime = document.querySelector('.endTime');
+      var spanlist = endTime.querySelectorAll('span');
+      var stage = document.querySelectorAll('.stage');
+      var dateFu;
+      var timeNow = new Date();
+      function clearstyle() {
+        for(var i = 0;i < item.length;i++) {
+          item[i].className = 'item'
+        }
+      }
+      console.log(timeNow.getHours());
+      if(timeNow.getHours() >= 0 && timeNow.getHours() < 10) {
+        clearstyle();
+        item[0].className = 'item active';
+        dateFu = new Date(timeNow.getFullYear(), timeNow.getMonth(), timeNow.getDate(),10);
+        stage[0].innerText = "疯抢中";
+        stage[1].innerText = "未开始";
+        stage[2].innerText = "未开始";
+        stage[3].innerText = "未开始";
+        stage[4].innerText = "未开始";
+      }else if(timeNow.getHours() >= 10 && timeNow.getHours() < 15) {
+        clearstyle();
+        item[1].className = 'item active';
+        dateFu = new Date(timeNow.getFullYear(), timeNow.getMonth(), timeNow.getDate(),15);
+        console.log(dateFu);
+        stage[0].innerText = "已开始";
+        stage[1].innerText = "疯抢中";
+        stage[2].innerText = "未开始";
+        stage[3].innerText = "未开始";
+        stage[4].innerText = "未开始";
+      }else if(timeNow.getHours() >= 15 && timeNow.getHours() < 19) {
+        clearstyle();
+        item[2].className = 'item active';
+        dateFu = new Date(timeNow.getFullYear(), timeNow.getMonth(), timeNow.getDate(),19);
+        stage[0].innerText = "已开始";
+        stage[1].innerText = "已开始";
+        stage[2].innerText = "疯抢中";
+        stage[3].innerText = "未开始";
+        stage[4].innerText = "未开始";
+      }else if(timeNow.getHours() >= 19 && timeNow.getHours() < 22) {
+        clearstyle();
+        item[3].className = 'item active';
+        dateFu = new Date(timeNow.getFullYear(), timeNow.getMonth(), timeNow.getDate(), 22);
+        stage[0].innerText = "已开始";
+        stage[1].innerText = "已开始";
+        stage[2].innerText = "已开始";
+        stage[3].innerText = "疯抢中";
+        stage[4].innerText = "未开始";
+      }else if(timeNow.getHours() >= 22) {
+        clearstyle();
+        item[4].className = 'item active';
+        dateFu = new Date(timeNow.getFullYear(), timeNow.getMonth(), timeNow.getDate()+1, 0);
+        stage[0].innerText = "已开始";
+        stage[1].innerText = "已开始";
+        stage[2].innerText = "已开始";
+        stage[3].innerText = "已开始";
+        stage[4].innerText = "疯抢中";
+      }
+      var counttime = function() {
+        var dateNow = new Date();
+        var time = dateFu - dateNow;
+        var day = parseInt(time / (24 * 60 * 60 * 1000));
+        // console.log(day);
+        var hour = parseInt((time - day * (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+        // console.log(hour);
+        var minute = parseInt((time - day * (24 * 60 * 60 * 1000) - hour * (60 * 60 * 1000)) / (60 * 1000));
+        // console.log(minute);
+        var second = parseInt((time - day * (24 * 60 * 60 * 1000) - hour * (60 * 60 * 1000) - minute * (60 * 1000)) /  1000); 
+        // console.log(second);
+        day = day < 10 ? "0" + day : day;
+        hour = hour < 10 ? "0" + hour : hour;
+        minute = minute < 10 ? "0" + minute : minute;
+        second = second < 10 ? "0" + second : second;
+        spanlist[1].innerText = hour;
+        spanlist[2].innerText = minute;
+        spanlist[3].innerText = second;
+      }
+        counttime();
+      setInterval(function() {
+        counttime();
+      },1000);
+    }
+  </script>
+</body>
+</html>

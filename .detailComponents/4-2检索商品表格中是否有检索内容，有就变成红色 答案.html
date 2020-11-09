@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		#wrap {
+			width: 800px;
+			margin: 100px auto;
+		}
+		input[type=text] {
+			width: 200px;
+			height: 28px;
+			vertical-align: middle;
+			border: 1px solid #000;
+			text-indent: 10px;
+		}
+		input[type=button] {
+			width: 40px;
+			height: 30px;
+			margin-left: -8px;
+			vertical-align: middle;
+			border: 1px solid #000;
+			cursor: pointer;
+		}
+		table tbody {
+			text-align: center;
+		}	
+		span {
+			color: red;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<input type="text" placeholder="请输入检索的关键字" id="search_text">
+		<input type="button" value="搜索" id="btn_search">
+		<table border="1" cellspacing="0" width="800" >
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>名称</th>
+					<th>价格</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>10001</td>
+					<td class="goods_name">小米手机</td>
+					<td>3499</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10002</td>
+					<td class="goods_name">iPhone11手机</td>
+					<td>10000</td>
+					<td>删除|修改</td>
+				</tr>
+
+				<tr>
+					<td>10003</td>
+					<td class="goods_name">羽绒服</td>
+					<td>499</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10004</td>
+					<td class="goods_name">JavaScript高级程序设计</td>
+					<td>45.0</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10005</td>
+					<td class="goods_name">Java编程思想</td>
+					<td>69</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10006</td>
+					<td class="goods_name">Deep Learning</td>
+					<td>78</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10007</td>
+					<td class="goods_name">啊哈算法</td>
+					<td>40</td>
+					<td>删除|修改</td>
+				</tr>
+				<tr>
+					<td>10008</td>
+					<td class="goods_name">华为Mate30Pro手机</td>
+					<td>6499</td>
+					<td>删除|修改</td>
+				</tr>
+			</tbody>
+		</table>
+	</div> 
+
+	<script>
+		
+
+		var oBtn = document.getElementById("btn_search"),
+			oText = document.getElementById("search_text"),
+			goodsNames = document.getElementsByClassName("goods_name");
+
+
+		oBtn.onclick = function() {
+			// 1. 获取输入的内容
+			var v = oText.value.trim();
+			if(v) {
+				// 2. 遍历 
+				for(i = 0; i < goodsNames.length; i++) {
+					var goodsName = goodsNames[i].innerText;
+					// 3. 检索
+					if(goodsName.indexOf(v) !== -1) {
+						goodsNames[i].innerHTML = goodsName.split(v).join('<span>'+v+'</span>');
+					}
+				}
+			}
+		};
+
+		
+
+		// 需求： 把“完美”两个变红色 
+
+		// var oBox = document.getElementById("box");
+		// var array = oBox.innerText.split("完美");
+		// // ["2019年最后一月了，我要给自己一个", "的收尾，不能虚度光阴"]
+		// array.join("<b>完美</b>");
+		// oBox.innerHTML = "2019年最后一月了，我要给自己一个<b>完美</b>的收尾，不能虚度光阴"
+
+		
+
+
+
+
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+</body>
+</html>

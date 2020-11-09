@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#box  {
+			width: 100px;
+			height: 100px;
+			background: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		var numy = 0;
+		var stepy = 1;
+		var numx = 0;
+		var stepx = 1;
+		var otop = document.documentElement.clientHeight - box.offsetHeight;
+		var oleft = document.documentElement.clientWidth - box.offsetWidth;
+		
+		setInterval(function() {
+			numx += stepx;
+			numy += stepy;
+			if(numx >= oleft || numx <= 0) {
+				stepx = -stepx;
+			}
+			if(numy >= otop || numy <= 0) {
+				stepy = -stepy;
+			}
+			box.style.left = numx + 'px';
+			box.style.top = numy + 'px';
+		},1);
+	</script>
+</body>
+</html>

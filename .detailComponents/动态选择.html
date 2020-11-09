@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 150px;
+			border: 1px solid black;
+			float: left;
+			margin: 0 10px 0 10px;
+		}
+		div.active {
+			border: 2px solid red;
+		}
+		span {
+			display: none;
+		}
+		span.active {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<button id="open">开始</button>
+	<div><span>奖励 苹果11 Pro 一台</span></div>
+	<div><span>奖励 BMW 一辆</span></div>
+	<div><span>奖励 MacBook Pro 一台</span></div>
+	<div><span>奖励 小米10 一台</span></div>
+	<div><span>奖励 谢谢</span></div>
+	<script>
+		var open = document.getElementById('open'),
+			boxs = document.getElementsByTagName('div'),
+			spans = document.getElementsByTagName('span'),
+			index = 0,num = 0,
+			timer;
+			open.onclick = function() {
+				num++;
+				if(num % 2) {
+					timer = setInterval(function() {
+						for(var j = 0;j < boxs.length;j++) {
+							boxs[j].className = "";
+							spans[j].className = "";
+						}
+						index++;
+						if(index > boxs.length - 1) {
+							index = 0;
+						}
+						boxs[index].className = "active";
+						open.innerText = "停止";
+					},1000/10);
+				}else {
+					clearInterval(timer);
+					spans[index].className = "active";
+					open.innerText = "开始";
+				}
+				
+			}
+	</script>
+</body>
+</html>

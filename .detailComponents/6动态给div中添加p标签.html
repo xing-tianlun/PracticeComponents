@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		p {
+			height:16px;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" id="btn" value="添加"/>
+	<div id="main">
+	</div>
+	<script>
+		var btn = document.getElementById('btn');
+			omain = document.getElementById('main'),
+			op = document.getElementsByTagName('p');
+			btn.onclick = function() {
+				var str = "";
+				for(var i = 0;str.length < 1;i++) {
+					var num = Math.floor(Math.random() * 58 + 65);
+					if(num >= 41 && num <= 90 || num >= 97 && num <= 122) {
+						str = String.fromCharCode(num);
+					}
+				}
+				omain.innerHTML += "<p>" + str + "</p>";
+				// var p = document.createElement("p");
+				// var text = document.createTextNode(str);
+				// p.appendChild(text);
+				// omain.appendChild(p);
+				for(var i = 0;i < op.length;i++) {
+					op[i].style.background = i % 2 ? "#f00":"#00f";	
+				}
+			}
+	</script>
+</body>
+</html>

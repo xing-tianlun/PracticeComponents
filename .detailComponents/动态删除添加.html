@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ul {
+			list-style: none;
+		}
+		h3 {
+			height: 50px;
+			line-height: 50px;
+			background: #000;
+			color: #fff;
+		}
+		ul>li {
+			height: 30px;
+			line-height: 30px;
+			border-bottom: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<h3 id="title">班级人员名单</h3>
+	<ul id="list">
+		<li>小明 <button class="del">删除</button></li>
+	</ul>
+	<button id="add">添加人员</button>
+	<script>
+		var ul = document.getElementById('list'),
+			add = document.getElementById('add'),
+			del = document.getElementsByClassName('del');
+			add.onclick = function() {
+				var text = prompt("请输入姓名：");
+				var li = document.createElement('li');
+				li.innerHTML = text + '<button class="del">删除</button>';
+				ul.appendChild(li);
+				fn();
+			}
+			fn();
+			function fn() {
+				for(var i = 0;i < del.length;i++) {
+					del[i].index = i;
+					del[i].onclick = function() {
+						console.log(del.length);
+						this.parentNode.parentNode.removeChild(this.parentNode);
+					}
+				}
+			}
+	</script>
+</body>
+</html>

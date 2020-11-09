@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="ipt" />
+	<span id="msg"></span>
+	<script>
+		var oIpt = document.getElementById('ipt'),
+			oMsg = document.getElementById('msg');
+		oIpt.onblur = function() {
+			var str = this.value;
+			if(str === "") {
+				oMsg.style.color = "#f00"
+				oMsg.innerHTML = "密码不能为空";
+			}else if(str.length < 6 || str.length > 16) {
+				oMsg.style.color = "#f00"
+				oMsg.innerHTML = "密码长度为6-16之间";
+			}else {
+				var letter = 0,num = 0,special = 0;
+				for(var i = 0;i < str.length;i++) {
+					if(str[i] >= "0" && str[i] <= "9") {
+						num++;
+					}else if(str[i] >= "A" && str[i] <= "Z" || str[i] >= "a" && str[i] <= "z") {
+						letter++;
+					}else {
+						special++;
+					}
+				}
+				var number = 0;
+				if(letter !== 0) {
+					number++;
+				}
+				if(num !== 0) {
+					number++;
+				}
+				if(special !== 0) {
+					number++;
+				}
+				console.log(number);
+				if(number === 1) {
+					oMsg.style.color = "#f00";
+					oMsg.innerHTML = "密码强度：弱";
+				}else if(number === 2) {
+					oMsg.style.color = "#f00";
+					oMsg.innerHTML = "密码强度：中";
+				}else if(number === 3) {
+					oMsg.style.color = "#0f0";
+					oMsg.innerHTML = "密码强度：强";
+				}
+			}
+
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密码强度</title>
+</head>
+<body>
+    <input type="text" class="psw_box">
+</body>
+<script>
+    var psw_box=document.querySelector(".psw_box");
+
+
+    psw_box.onblur=function(){
+    	var password_str=psw_box.value;
+        judge_passworld(password_str);
+    }
+    function judge_passworld(psd_str0){
+        console.log(psd_str0);
+        if(psd_str0==undefined||psd_str0.length<=6||psd_str0.length>=16){
+            console.log("密码不合法");
+        }else{
+            if(all_number(psd_str0)||all_letter(psd_str0)||all_character(psd_str0)){
+                console.log("低");
+            }else if(has_number(psd_str0)&&has_letter(psd_str0)&&has_character(psd_str0)){
+                console.log("高");
+            }else{
+                console.log("中");
+            }
+        }
+        function all_number(psd_str){
+            var t=true;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if(isNaN(psd_str)){
+                    t=false;
+                }
+            }
+            return t;
+        }  
+        function all_letter(psd_str){
+            var t=true;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if(!("a"<=psd_str[i]&&psd_str[i]<="z"||"A"<=psd_str[i]&&psd_str[i]<="Z")){
+                    t=false;
+                }
+            }
+            return t;
+        } 
+        function all_character(psd_str){
+            var t=true;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if(!(psd_str.charCodeAt(i)==46)){
+                    t=false;
+                }
+            }
+            return t;
+        }
+        function has_number(psd_str){
+            var t=false;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if(!isNaN(psd_str[i])){
+                    t=true;
+                }
+            }
+            return t;
+        }
+        function has_letter(psd_str){
+            var t=false;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if("a"<=psd_str[i]&&psd_str[i]<="z"||"A"<=psd_str[i]&&psd_str[i]<="Z"){
+                    t=true;
+                }
+            }
+            return t;
+        }
+        function has_character(psd_str){
+            var t=false;
+            for(var i=0 ; i<psd_str.length ; i++){
+                if(psd_str.charCodeAt(i)==46){
+                    t=true;
+                }
+            }
+            return t;
+        }
+    }
+</script>
+</html>

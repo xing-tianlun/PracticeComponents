@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [];
+        //把所有可能放进同一数组
+        for(var i=48;i<=122;i++){
+            if(i>=48 && i<=57 || i>=65 && i<=90 ||i>=97 && i<=122){
+                arr.push(String.fromCharCode(i))
+            }
+        }  
+        //抽取4次组成验证码
+        var str = '';
+        for(var i=0;i<4;i++){
+            //找随机下标
+            var r = Math.floor(Math.random()*arr.length);
+            str += arr[r];
+        } 
+        console.log(str);
+    </script>
+</body>
+</html>

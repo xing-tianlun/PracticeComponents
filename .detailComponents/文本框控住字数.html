@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <p>请输入您的留言</p>
+    <textarea name="text" id="text" cols="30" rows="10"></textarea>
+    <p id="p">还能输入<span id="num">50</span></p>
+    <script>
+        window.onload = function() {
+            var text = document.getElementById('text');
+                num = document.getElementById('num');
+            text.oninput = function() {
+                if(this.value.length >= 50) {
+                    num.innerText = 0;
+                    text.value = text.value.slice(0,50);
+                } else {
+                    num.innerText = 50 - this.value.length;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

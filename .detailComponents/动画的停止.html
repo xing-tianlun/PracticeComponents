@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box  {
+			width: 100px;
+			height: 100px;
+			background: #000;
+			position: absolute;
+			top: 20px;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<button id="off">开始</button>
+	<button id="stop">停止</button>
+
+	<div id="box">
+
+	</div>
+	<script>
+		var box = document.getElementById('box');
+		var off = document.getElementById('off');
+		var stop = document.getElementById('stop');
+
+		var bod = document.documentElement;
+		var numtop = 10;
+		var numleft = 0;
+		var stepX = Math.floor(Math.random() * 10 + 1);
+		var stepY = Math.floor(Math.random() * 10 + 1);
+		var otop = bod.clientHeight - box.offsetHeight;
+		var oleft = bod.clientWidth - box.offsetWidth;
+		var timer;
+		off.onclick = function() {
+			if(timer) clearInterval(timer);
+			timer = setInterval(function() {
+				numtop += stepY;
+				numleft += stepX;
+				if(numtop >= otop) {
+					stepY = Math.floor(Math.random() * 10 + 1);
+					stepY = -stepY;
+				}else if(numtop <= 0) {
+					stepY = Math.floor(Math.random() * 10 + 1);
+				}
+				if(numleft >= oleft ) {
+					stepX = Math.floor(Math.random() * 10 + 1);
+					stepX = -stepX;
+				}else if(numleft <= 0) {
+					stepX = Math.floor(Math.random() * 10 + 1);
+				}
+				
+				box.style.top = numtop + 'px';
+				box.style.left = numleft + 'px';
+			},1);
+		}
+		stop.onclick = function() {
+			clearInterval(timer);
+		}
+		
+		
+	</script>
+</body>
+</html>

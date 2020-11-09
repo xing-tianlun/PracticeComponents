@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	距离2020年还有：<span id="times"></span>
+	<script>
+		var times = document.getElementById('times');
+		var dateFu = new Date("2020/1/7 17:0:0");
+		var countDown = function() {
+			var dateNow = new Date();
+			var time = dateFu - dateNow;
+			var day = parseInt(time / (24 * 60 * 60 * 1000));
+			console.log(day);
+			var hour = parseInt((time - day * (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+			console.log(hour);
+			var minute = parseInt((time - day * (24 * 60 * 60 * 1000) - hour * (60 * 60 * 1000)) / (60 * 1000));
+			console.log(minute);
+			var second = parseInt((time - day * (24 * 60 * 60 * 1000) - hour * (60 * 60 * 1000) - minute * (60 * 1000)) /  1000); 
+			console.log(second);
+			day = day < 10 ? "0" + day : day;
+			hour = hour < 10 ? "0" + hour : hour;
+			minute = minute < 10 ? "0" + minute : minute;
+			second = second < 10 ? "0" + second : second;
+			var str = day + '天 ' + hour + ':' + minute + ':' + second;
+			return str;
+		}
+		times.innerText = countDown();
+		setInterval(function() {
+			times.innerText = countDown();
+		},1000);
+	</script>
+</body>
+</html>
