@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #box {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000000;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+    }
+
+    #list {
+      position: relative;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #list li {
+      width: 1px;
+      height: 5px;
+      background: #000000;
+      position: absolute;
+      top: 0;
+      left: 100px;
+      transform-origin: center 100px;
+    }
+
+    #list li:nth-of-type(5n+1) {
+      width: 2px;
+      height: 10px;
+    }
+
+    #ico,
+    #hour,
+    #min,
+    #sec {
+      position: absolute;
+      background: black;
+    }
+
+    #ico {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    #hour {
+      height: 50px;
+      width: 5px;
+      left: 98px;
+      top: 49px;
+      transform-origin: bottom;
+    }
+
+    #min {
+      height: 60px;
+      width: 3px;
+      background: blue;
+      top: 39px;
+      left: 99px;
+      transform-origin: bottom;
+    }
+
+    #sec {
+      height: 80px;
+      width: 1px;
+      background: red;
+      top: 19px;
+      left: 100px;
+      transform-origin: bottom;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <ul id="list"></ul>
+    <div id="hour"></div>
+    <div id="min"></div>
+    <div id="sec"></div>
+    <div id="ico"></div>
+  </div>
+  <li style="transform: rotate(30deg);"></li>
+  <script>
+    window.onload = function () {
+      let list = document.getElementById('list'); // 表盘
+      let hour = document.getElementById('hour'); // 时针
+      let min = document.getElementById('min'); // 分针
+      let sec = document.getElementById('sec'); // 秒针
+      let ico = document.getElementById('ico');
+      let css = document.getElementById('css');
+
+      let lis = '';
+      for (let i = 0; i < 60; i++) { // 生成表盘上的刻度
+        lis += '<li style="transform:rotate('+ (i * 6)+ 'deg)"><li>';
+          // list.innerHTML += "#list li:nth-of-type(" + (i + 1) + "){transform:rotate(" + i * 6 + "deg)}"
+      }
+      list.innerHTML = lis;
+      time();
+      setInterval(function() {
+        time()
+      }, 1000);
+      function time() {
+        let data = new Date();
+        let s = data.getSeconds();
+        let m = data.getMinutes() + s / 60;
+        let h = data.getHours() + m / 60;
+        hour.style.transform = "rotate(" + h * 30 + "deg)";
+        min.style.transform = "rotate(" + m * 6 + "deg)";
+        sec.style.transform = "rotate(" + s * 6 + "deg)";
+      }
+    }
+  </script>
+</body>
+
+</html>

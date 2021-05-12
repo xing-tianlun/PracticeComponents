@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    .odiv {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      border: 1px solid #000;
+      padding: 4px;
+      margin: 20px auto;
+      overflow: hidden;
+    }
+
+    .odiv .con {
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    ul {
+      width: 3600px;
+      height: 400px;
+      overflow: hidden;
+      position: absolute;
+    }
+
+    ul li {
+      float: left;
+    }
+
+    ul li img {
+      width: 600px;
+      height: 400px;
+    }
+
+    a {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, .5);
+      position: absolute;
+      top: 50%;
+      margin-top: -25px;
+      font-size: 38px;
+      line-height: 50px;
+      text-align: center;
+      color: #000;
+      cursor: pointer;
+    }
+
+    a[name="left"] {
+      left: 10px;
+    }
+
+    a[name="right"] {
+      right: 10px;
+    }
+
+    ol {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    ol li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin: 0 5px;
+      background: #fff;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    ol li.active {
+      background: #f00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="odiv">
+    <div class="con">
+      <ul>
+        <li><img src="./img/aa.jpg" alt=""></li>
+        <li><img src="./img/bb.jpg" alt=""></li>
+        <li><img src="./img/cc.jpg" alt=""></li>
+        <li><img src="./img/dd.jpg" alt=""></li>
+        <li><img src="./img/ee.jpg" alt=""></li>
+        <li><img src="./img/aa.jpg" alt=""></li>
+      </ul>
+    </div>
+    <a href="javascript:;" name="left">&lt;</a>
+    <a href="javascript:;" name="right">&gt;</a>
+    <ol>
+      <li class="active">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ol>
+  </div>
+  <!-- <script src="./js/move.js"></script> -->
+  <script>
+    (function () {
+      function $qS(css, el = document) {
+        return el.querySelector(css)
+      }
+      function $qSA(css, el = document) {
+        return el.querySelectorAll(css)
+      }
+      let odiv = $qS('.odiv')
+      let img = $qS('ul')
+      let imgs = $qSA('ul li')
+      let tabs = $qSA('ol li')
+      let left = $qS('a[name=left]')
+      let right = $qS('a[name=right]')
+      let w = imgs[0].offsetWidth
+      let nowIndex = 0, timer = null
+      function getStyle(obj, name) {
+        if(obj.currentStyle) {
+          return obj.currentStyle[name];
+        }else {
+          return getComputedStyle(obj, false)[name]
+        }
+      }
+      function starMove(el, obj, fn) {
+        clearInterval(el.time)
+        el.time = setInterval(function () {
+          let now = 0
+          for (const attr in obj) {
+            now = parseInt(getStyle(el, attr))
+            let speed = (obj[attr] - now) / 6;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+            el.style[attr] = now + speed + 'px'
+            if(now == obj[attr]) {
+              clearInterval(el.time)
+            }
+          }
+        }, 30)
+      }
+      function next() {
+        nowIndex++
+        if(nowIndex > imgs.length - 1) {
+          img.style.left = "0px"
+          nowIndex = 1
+        }
+        starMove(img, {
+          left: -(nowIndex * w)
+        })
+        changeClass(tabs, 'active')
+      }
+      function prev() {
+        nowIndex--
+        if(nowIndex < 0) {
+          img.style.left = "-3000px"
+          nowIndex = imgs.length - 2
+        }
+        starMove(img, {
+          left: -(nowIndex * w)
+        })
+        changeClass(tabs, 'active')
+      }
+      right.onclick = function () {
+        next()
+      }
+      left.onclick = function () {
+        prev()
+      }
+      tabs.forEach((item, index) => {
+        item.onmouseover = function () {
+          nowIndex = index
+          changeClass(tabs, 'active')
+          tabs[nowIndex].className = 'active'
+          starMove(img, {
+            left: -(w * nowIndex)
+          })
+        }
+      })
+      function changeClass(lists, css) {
+        lists.forEach((item, index) => {
+          item.className = ""
+        })
+        let dex = nowIndex
+        if(dex == imgs.length - 1) dex = 0
+        tabs[dex].className = 'active'
+      }
+      function autoPlay() {
+        timer = setInterval(function () {
+          next()
+        }, 3000)
+      }
+      autoPlay()
+      odiv.onmouseover = function () {
+        clearInterval(timer)
+      }
+      odiv.onmouseout = function () {
+        autoPlay()
+      }
+    })();
+  </script>
+</body>
+
+</html>

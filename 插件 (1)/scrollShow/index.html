@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>热门新闻公告左右滚动</title>
+	
+    <link rel="stylesheet" href="css/style.css" />
+	
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide2.js"></script>
+	
+</head>
+<body>
+
+    <div style="height:100px;"></div>
+	
+    <div class="rolling">
+        <div class="roll-title roll-title clearfix">
+            <h2>最新公告</h2>
+            <a href="#" class="rolling-more">更多</a>
+            <a class="next">
+                <img src="img/arrow-fr.png" alt="">
+            </a>
+            <a class="prev">
+                <img src="img/arrow-fl.png" alt="">
+            </a>
+        </div>
+        <div class="content">
+            <ul class="roll-list">
+                <li>
+                    <a href="#" target="_blank">新闻号头条平台持续打击违规帐号的公告新闻号头条平台持续打击违规帐号的公告</a>
+                    <span>2018年6月12日</span>
+                </li>
+                <li>
+                    <a href="#" target="_blank">关系我们每个人！700字读懂新闻号头条平台3·15资讯打假报告自媒体账号公告</a>
+                    <span>2018年3月01日</span>
+                </li>
+                <li>
+                    <a href="#" target="_blank">资讯消费如何打假才能保护合法权利？新闻号头条平台首次披露反谣言技术路线图</a>
+                    <span>2018年2月22日</span>
+                </li>
+                <li>
+                    <a href="#" target="_blank">国医·新闻号头条平台！“天堂学堂”网站发布的“北中医自主招生夏令营”资讯是假的！</a>
+                    <span>2018年2月02日</span>
+                </li>
+                <li>
+                    <a href="#" target="_blank">工信部下架“新闻号头条平台”等 46 款不良手机应用，，第一时间更新相关内容资料</a>
+                    <span>2018年1月12日</span>
+                </li>
+                <li>
+                    <a href="#" target="_blank">今闻号头条平台与内蒙古网信办战略合作伙伴 将用新闻号向世界推介亮丽内蒙古大草原</a>
+                    <span>2017年12月21日</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+	
+    <script type="text/javascript">
+
+        jQuery(".rolling").slide({titCell:".roll-title ul",mainCell:".content ul",autoPage:true,effect:"leftLoop",autoPlay:true,scroll:1,vis:1,delayTime:1000,trigger:"click"});
+
+    </script>
+
+</body>
+</html>

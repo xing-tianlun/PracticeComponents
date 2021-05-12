@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery合作伙伴左右滚动特效</title>
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide2.js"></script>
+
+</head>
+<body>
+
+<div style="width:685px;margin:40px auto 0 auto">
+
+	<div class="mr_t1">
+		<div class="mr_t1name"><img src="img/mt_ico6.jpg" />合作伙伴</div>
+	</div>
+	
+	<div class="mr_frbox">
+		<img class="mr_frBtnL prev" src="img/mfrL.jpg" width="28" height="46" />
+		<div class="mr_frUl">
+			<ul>
+				<li><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_1.jpg" width="123" height="52" /></a><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_2.jpg" width="123" height="52" /></a></li>
+				<li><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_3.jpg" width="123" height="52" /></a><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_6.jpg" width="123" height="52" /></a></li>
+				<li><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_4.jpg" width="123" height="52" /></a><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_7.jpg" width="123" height="52" /></a></li>
+				<li><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_5.jpg" width="123" height="52" /></a><a href="http://www.17sucai.com" target="_blank"><img src="img/mfr_8.jpg" width="123" height="52" /></a></li>
+			</ul>
+		</div>
+		<img class="mr_frBtnR next" src="img/mfrR.jpg" width="28" height="46" />
+	</div>
+
+</div>
+
+
+<script type="text/javascript">
+$(".mr_frbox").slide({
+	titCell:"",
+	mainCell:".mr_frUl ul",
+	autoPage:true,
+	effect:"leftLoop",
+	autoPlay:true,
+	vis:4
+});
+</script>
+
+</body>
+</html>

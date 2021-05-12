@@ -1,0 +1,54 @@
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,address,big,cite,code,del,em,font,img,ins,small,strong,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend{margin:0;padding:0;}ol,ul{list-style:none;}:focus{outline:0;}a img{border:0;}img{vertical-align:middle;}table{empty-cells:show;}ins{text-decoration:none;}del{text-decoration:line-through;}em{font-style:normal;}a{ text-decoration:none;}
+html {overflow-y:scroll;}
+.jvectormap-label {
+    position: absolute;
+    display: none;
+    border: solid 1px #CDCDCD;
+    -moz-border-radius: 3px;
+    background: #292929;
+    color: white;
+    font-family: sans-serif, Verdana;
+    font-size: smaller;
+    padding: 8px;
+	line-height:20px;
+	max-width:300px;
+	height:auto;
+	_width:300px;
+}
+
+.jvectormap-up, .jvectormap-down, .jvectormap-left, .jvectormap-right, .jvectormap-zoomin, .jvectormap-zoomout {
+    position: absolute;
+    -moz-border-radius: 3px;
+    background: #292929;
+    padding: 3px;
+    color: white;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    line-height: 10px;
+    text-align: center;font-size:12px;
+}
+
+.jvectormap-zoomin {
+    left: 10px;
+    top: 10px;
+}
+
+.jvectormap-zoomout {
+    left: 10px;
+    top: 30px;
+}
+.jvectormap-up{ left:10px; top:50px; }
+.jvectormap-down{ left:10px; top:70px;}
+.jvectormap-left{ left:10px; top:90px;}
+.jvectormap-right{ left:10px; top:110px;}
+
+
+
+
+
+
+
+
+
+

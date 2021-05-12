@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .wrap {
+      width: 640px;
+      height: 393px;
+      margin: 50px auto;
+      border: 1px solid black;
+      position: relative;
+      overflow: hidden;
+    }
+
+    ul {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3840px;
+    }
+
+    ul li {
+      width: 640px;
+      height: 393px;
+      float: left;
+      overflow: hidden;
+    }
+
+    ul li img {
+      width: 100%;
+      height: 100%;
+    }
+
+    ol {
+      position: absolute;
+      bottom: 33px;
+      left: 410px;
+    }
+
+    ol li {
+      float: left;
+      width: 26px;
+      height: 26px;
+      margin-right: 10px;
+      background-color: white;
+      text-align: center;
+      opacity: .7;
+      line-height: 26px;
+      cursor: pointer;
+    }
+
+    .on {
+      background-color: crimson;
+      color: white;
+    }
+
+    p {
+      position: absolute;
+      top: 165px;
+      left: 0;
+      width: 640px;
+      
+    }
+
+    p span {
+      display: inline-block;
+      width: 53px;
+      height: 53px;
+      background-color: white;
+      opacity: .7;
+      text-align: center;
+      line-height: 53px;
+      user-select: none;
+    }
+
+    .next {
+      float: right;
+      margin-right: 2px;
+    }
+
+    span:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <ul>
+      <li><img src="img/aa.jpg" alt=""></li>
+      <li><img src="img/bb.jpg" alt=""></li>
+      <li><img src="img/cc.jpg" alt=""></li>
+      <li><img src="img/dd.jpg" alt=""></li>
+      <li><img src="img/ee.jpg" alt=""></li>
+      <li><img src="img/aa.jpg" alt=""></li>
+    </ul>
+    <ol>
+      <li class="on">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ol>
+    <p>
+      <span>《</span>
+      <span class="next">》</span>
+    </p>
+  </div>
+  <script src="../一/js/jq.js"></script>
+  <script>
+    let now = 0;
+    let timer;
+    $('.wrap').click((e) => {
+      let target = e.target;
+      if (target.parentNode.nodeName == 'OL' && target.nodeName == 'LI') {
+        now = $(target).index();
+        play()
+      }
+      if (target.parentNode.nodeName == 'P' && target.nodeName == 'SPAN') {
+        if ($(target).index()) {
+          now++;
+          if (now > 5) {
+            $('ul').css('left', 0);
+            now = 1;
+          }
+          play();
+        } else {
+          now--;
+          if (now < 0) {
+            $('ul').css('left', -3200)
+            now = 4;
+          }
+          play();
+        }
+      }
+    })
+
+
+    playMove();
+    $('.wrap').mouseenter(() => {
+      clearInterval(timer);
+    }).mouseleave(() => {
+      playMove();
+    })
+
+    function playMove() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        now++;
+        if (now > 5) {
+          $('ul').css('left', 0);
+          now = 1;
+        }
+        play();
+      }, 1000)
+
+    }
+
+    function play() {
+      let c = now;
+      if (c == 5) c = 0;
+      $('ol li').attr('class', '').eq(c).attr('class', 'on');
+      $('ul').animate({
+        left: now * -640
+      }, 200)
+    }
+  </script>
+</body>
+
+</html>
