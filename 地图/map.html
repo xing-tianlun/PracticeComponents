@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body,
+    #allMap {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <title>地图</title>
+</head>
+
+<body>
+  <div id="allMap"></div>
+  <script src="https://api.map.baidu.com/api?v=2.0&ak=Tsysj1oxCFHwq527G3H58C7gydhFeLhU"></script>
+  <script>
+    // // 百度地图API功能
+    // let longitude = 0;
+    // let latitude = 0;
+    // if (navigator.geolocation) {
+    //   console.log('支持地理定位');
+    //   navigator.geolocation.getCurrentPosition(function (res) {
+    //     console.log(res);
+    //     // 获取经纬度
+    //     // res.coords.longitude // 经度
+    //     // res.coords.latitude // 纬度
+    //     longitude = res.coords.longitude
+    //     latitude = res.coords.latitude
+    //     console.log(longitude);
+    //     // map(longitude, latitude)
+
+    //   }, function (error) { // 失败时回调函数
+    //     console.log(error);
+    //   }, {
+    //     enableHighAccuracy: false, // 高精度模式，谨慎使用
+    //     timeout: 10000, // 设置超时
+    //     // maximumAge: 1000 // 浏览器重新计算位置的时间间隔  单位ms
+    //   })
+    // } else {
+    //   console.log('不支持地理定位');
+    // }
+
+    function map(longitude, latitude) {
+      var map = new BMap.Map("allMap");
+      var point = new BMap.Point(longitude, latitude);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker); // 将标注添加到地图中
+      map.centerAndZoom(point, 15);
+      var opts = {
+        width: 600, // 信息窗口宽度
+        height: 140, // 信息窗口高度
+        color: "#fff",
+        enableMessage: true, //设置允许信息窗发送短息
+        message: ""
+      }
+      var infoWindow = new BMap.InfoWindow("", opts); // 创建信息窗口对象 
+      marker.addEventListener("click", function () {
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+      });
+      map.enableScrollWheelZoom(true);
+    }
+    map(116.370125, 39.764925)
+
+    // if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+    //   $('.M-cont-header').css("background-image", "url(../images/5logo_02.jpg)");
+    // } else if (navigator.userAgent.match(/(ipad)/i)) {
+    //   $('.M-cont-header').css("background-image", "url(../images/5logo.jpg)");
+    // } else {
+    //   $('.M-cont-header').css("background-image", "url(../images/5logo.jpg)");
+    // }
+  </script>
+</body>
+
+</html>

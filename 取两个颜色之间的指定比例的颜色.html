@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+  <script>
+    (function () {
+      function $qS(css, el = document) {
+        return el.querySelector(css)
+      }
+      function $qSA(css, el = document) {
+        return el.querySelectorAll(css)
+      }
+      function getLinearColor(colormin, colormax, colorvalue) {
+        if (!colorvalue) colorvalue = 0;
+        colorvalue = Math.min(1, Math.max(0, colorvalue));
+        var min_rgba = parseInt(colormin.substr(1, 2), 16),
+          max_rgba = parseInt(colormax.substr(1, 2), 16),
+          min_rgbb = parseInt(colormin.substr(3, 2), 16),
+          max_rgbb = parseInt(colormax.substr(3, 2), 16),
+          min_rgbc = parseInt(colormin.substr(5, 2), 16),
+          max_rgbc = parseInt(colormax.substr(5, 2), 16),
+          colorArr = ['#'],
+          colorStr = null;
+        colorStr = parseInt(min_rgba + (max_rgba - min_rgba) * colorvalue).toString(16);
+        colorArr.push(colorStr.length == 1 ? '0' + colorStr : colorStr);
+
+        colorStr = parseInt(min_rgbb + (max_rgbb - min_rgbb) * colorvalue).toString(16);
+        colorArr.push(colorStr.length == 1 ? '0' + colorStr : colorStr);
+
+        colorStr = parseInt(min_rgbc + (max_rgbc - min_rgbc) * colorvalue).toString(16);
+        colorArr.push(colorStr.length == 1 ? '0' + colorStr : colorStr);
+        return colorArr.join('');
+      }
+      $qS('div').style.backgroundColor = getLinearColor('#f56501', '#decb4d', '.4')
+    })();
+  </script>
+</body>
+
+</html>

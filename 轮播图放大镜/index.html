@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+    }
+
+    .wrap {
+      width: 1200px;
+      height: 800px;
+      border: 1px solid #fff;
+      border-radius: 10px;
+      margin: 50px auto;
+      padding: 100px;
+    }
+
+    .carousel {
+      width: 800px;
+      height: 600px;
+      margin: auto;
+      display: none;
+      position: relative;
+    }
+
+    .wrap-top {
+      width: 800px;
+      display: flex;
+      justify-content: space-between;
+      margin: auto;
+    }
+
+    .carousel-item {
+      width: 800px;
+      height: 600px;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: url(./img/01.png) no-repeat;
+      background-size: 1600px 1200px;
+      background-position: 0 0;
+      border-radius: 50%;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="wrap-top">
+      <p>轮播图开关</p>
+      <div class="form-switch form-check-inline">
+        <input type="checkbox" class="form-check-input">
+      </div>
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./img/01.png" class="d-block" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./img/02.png" class="d-block" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="./img/03.png" class="d-block" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      <div class="box"></div>
+    </div>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script>
+    $('.form-check-input').on('change', function () {
+      $('.form-check-input').toggleClass('active');
+      if ($(this).hasClass('active')) {
+        $('#carouselExampleIndicators').css({
+          display: 'block'
+        })
+      } else {
+        $('#carouselExampleIndicators').css({
+          display: 'none'
+        })
+      }
+    })
+    $('.carousel').on('mouseenter', function (e) {
+      let t = $('.carousel')[0].offsetTop;
+      let l = $('.carousel')[0].offsetLeft;
+      $(document).on('mousemove', function (e) {
+        let imgsrc = $('.carousel-item.active img').attr('src');
+        $('.box').css("background", "url("+imgsrc+") no-repeat")
+        $('.box').css("background-position", "0 0")
+        $('.box').css("background-size", "1600px 1200px")
+        let x = e.pageX - l;
+        let y = e.pageY - t;
+        if (x > 50 && y > 50 && x < $('.carousel')[0].offsetWidth - 50 && y < $('.carousel')[0].offsetHeight -
+          50) {
+          $('.box').css('display', 'block');
+        } else {
+          $('.box').css('display', 'none');
+        }
+        $('.box').css(
+          "backgroundPosition", -(x * 2 - 50) + 'px ' + -(y * 2 - 50) + 'px')
+        $('.box').css({
+          left: x - 50,
+          top: y - 50
+        })
+      })
+      $('.carousel').on('mouseleave', function () {
+        $('.box').css('display', 'none');
+      })
+    })
+  </script>
+</body>
+
+</html>
